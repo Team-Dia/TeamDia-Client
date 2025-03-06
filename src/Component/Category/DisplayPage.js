@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
+import ProductSidebar from "../ProductSidebar";
 import './DisplayPage.css';
 
+// ✅ 카테고리 ID 및 서브 카테고리 설정
 const categoryConfig = {
-    ring: { id: 1, subCategories: ["전체", "커플링", "심플", "큐빅", "골드", "실버"] },
-    necklace: { id: 2, subCategories: ["전체", "일체형", "메달형", "펜던트", "골드", "실버"] },
-    earRing: { id: 3, subCategories: ["전체", "피어싱", "원터치", "롱", "골드", "실버"] },
-    bracelet: { id: 4, subCategories: ["전체", "체인", "가죽", "큐빅", "골드", "실버"] }
+    ring: { id: 1, name: "반지", subCategories: ["전체", "커플링", "심플", "큐빅", "골드", "실버"] },
+    necklace: { id: 2, name: "목걸이", subCategories: ["전체", "일체형", "메달형", "펜던트", "골드", "실버"] },
+    earRing: { id: 3, name: "귀걸이", subCategories: ["전체", "피어싱", "원터치", "롱", "골드", "실버"] },
+    bracelet: { id: 4, name: "팔찌", subCategories: ["전체", "체인", "가죽", "큐빅", "골드", "실버"] }
 };
 
 const DisplayPage = () => {
-    const { category } = useParams();  // URL에서 카테고리명 가져오기
+    const { category } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
     
-    const categoryData = categoryConfig[category] || {};
+    const categoryData = categoryConfig[category] || { id: null, subCategories: [] };
+
     const [itemList, setItemList] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
     const [selectedSubCategory, setSelectedSubCategory] = useState("전체");
-    const [sortByRating, setSortByRating] = useState(false);
     const [sortBy, setSortBy] = useState("");
 
     useEffect(() => {
@@ -42,8 +44,8 @@ const DisplayPage = () => {
                     axios.get(`/api/review/getReview`, { params: { productSeq: product.productSeq } })
                         .then(res => ({
                             ...product,
-                            averageRating: res.data.averageRating || 0, // 기본값 0
-                            reviewCount: res.data.reviewCount || 0 // 기본값 0
+                            averageRating: res.data.averageRating || 0,
+                            reviewCount: res.data.reviewCount || 0
                         }))
                         .catch(() => ({
                             ...product,
@@ -62,12 +64,16 @@ const DisplayPage = () => {
                 setFilteredItems([]);
             });
         }
-    }, [location.search, category]);  // category 변경될 때마다 실행
+    }, [location.search, category]);
 
-    // ⭐ 정렬 함수
+    // ⭐ 정렬 변경 시 `searchParams` 반영
     const handleSortChange = (event) => {
         const sortOption = event.target.value;
         setSortBy(sortOption);
+
+        const searchParams = new URLSearchParams(location.search);
+        searchParams.set("sortBy", sortOption);
+        navigate(`/${category}?${searchParams.toString()}`);
 
         let sortedItems = [...filteredItems];
 
@@ -84,36 +90,15 @@ const DisplayPage = () => {
         setFilteredItems(sortedItems);
     };
 
-    const handleSubCategoryClick = (subCategory) => {
-        setSelectedSubCategory(subCategory);
-        navigate(`/${category}?subCategory=${encodeURIComponent(subCategory)}`);
-    };
-
     return (
-        <article>
-            <div className="display-sub-category-container">
-                <div className="display-sub-category-buttons">
-                    {categoryData.subCategories?.map((subCategory) => (
-                        <button
-                            key={subCategory}
-                            className={selectedSubCategory === subCategory ? "active" : ""}
-                            onClick={() => handleSubCategoryClick(subCategory)}
-                        >
-                            {subCategory}
-                        </button>
-                    ))}
-                </div>
-                {/* ⭐ 정렬 기준 선택 드롭다운 추가 */}
-                <select className="sort-dropdown" value={sortBy} onChange={handleSortChange}>
-                    <option value="">정렬 기준</option>
-                    <option value="rating">별점 높은 순</option>
-                    <option value="reviewCount">리뷰 많은 순</option>
-                    <option value="priceAsc">가격 낮은 순</option>
-                    <option value="priceDesc">가격 높은 순</option>
-                </select>
-            </div>
+        <article className="display-container">
+            <ProductSidebar category={category} /> {/* ✅ 사이드바에 `category` 전달 */}
 
-            <div className="display-container">
+            <div className="display-content">
+                <div className="display-sub-category-container">
+                    <h2 className="display-sub-category-title">{categoryData.name} 목록</h2>
+                </div>
+
                 <div className="display-product-list">
                     {filteredItems.length > 0 ? (
                         filteredItems.map((product) => (
@@ -142,8 +127,6 @@ const DisplayPage = () => {
                                     <p className="display-price">
                                         <span className="sale-price">{product.productSalePrice.toLocaleString()}원</span>
                                     </p>
-
-
                                 </div>
                             </div>
                         ))
