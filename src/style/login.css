@@ -1,0 +1,149 @@
+/* ✅ 로그인 페이지 컨테이너 */
+.login-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    background-color: #f8f8f8;
+    width: 100%;
+    max-width: 100vw;
+}
+
+/* ✅ 로그인 폼 */
+.login-page-form {
+    padding: 2rem;
+    width: 400px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* ✅ 로그인 제목 */
+.login-page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+/* ✅ 입력 필드 그룹 */
+.login-page-form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+/* ✅ 입력 필드 */
+.login-page-form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.login-page-form-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    font-size: 16px;
+    outline: none;
+    transition: border-bottom 0.3s;
+    background: transparent;
+}
+
+.login-page-form-group input:focus {
+    border-bottom: 2px solid #000;
+}
+
+/* ✅ 로그인 및 회원가입 버튼 */
+.login-page-button,
+.login-page-signup-button {
+    width: 100%;
+    height: 45px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ✅ 로그인 버튼 */
+.login-page-button {
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+}
+
+.login-page-button:hover {
+    background-color: #333;
+}
+
+/* ✅ 회원가입 버튼 */
+.login-page-signup-button {
+    background-color: transparent;
+    color: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.login-page-signup-button:hover {
+    background-color: #e6e6e6;
+}
+
+/* ✅ SNS 로그인 안내 텍스트 */
+.sns-login-text {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-top: 12px;
+}
+
+/* ✅ SNS 로그인 버튼 컨테이너 */
+.login-page-sns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+/* ✅ 카카오 로그인 버튼 */
+.kakao-button {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.kakao-button:hover {
+    transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+    .login-page-form {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .login-page-title {
+        font-size: 1.3rem;
+    }
+
+    .login-page-form-group input {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .login-page-button,
+    .login-page-signup-button {
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .kakao-button {
+        max-width: 280px;
+    }
+}

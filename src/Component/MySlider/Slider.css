@@ -1,0 +1,22 @@
+.autoplay {
+    width: 90%;
+    height: 500px;  /* 500px로 고정 */
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  
+  .slider-item {
+    width: 100%;
+    height: 500px;  /* 부모의 높이를 상속받음 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  
+  .slider-item img {
+    width: 100%;
+    height: 100%;  /* 이미지도 슬라이더 영역을 꽉 채우도록 */
+    /* object-fit: cover;  비율 유지하며 채우기 */
+  }
+  

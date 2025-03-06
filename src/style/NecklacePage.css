@@ -1,0 +1,126 @@
+/* 전체 컨테이너 */
+.necklace-container {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* 사이드바 스타일 */
+.category-sidebar {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.category-sidebar h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.category-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.category-sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s ease;
+}
+
+.category-sidebar ul li:hover,
+.category-sidebar ul li.active {
+    background: #000;
+    color: white;
+}
+
+/* 상품 리스트 */
+.product-list {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* 제품 카드 */
+.product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 제품 이미지 */
+.product-card .image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* 제품 상세 정보 */
+.product-card .details {
+    padding: 10px;
+    text-align: center;
+}
+
+.product-card .details h4 {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.product-card .price {
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* 서브 카테고리 버튼 컨테이너 (네비게이션 바 아래, 제품 리스트 위) */
+.sub-category-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    margin: 15px 0; /* 네비게이션 바와 제품 리스트 사이 여백 조정 */
+    padding: 10px 0;
+    background: rgba(255, 255, 255, 0.95); /* 반투명 배경 */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 살짝 그림자 추가 */
+}
+
+/* 서브 카테고리 버튼 스타일 */
+.sub-category-buttons {
+    display: flex;
+    gap: 10px; /* 버튼 간격 */
+}
+
+/* 버튼 크기 조정 */
+.sub-category-buttons button {
+    background: #f4f4f4;
+    border: none;
+    padding: 6px 12px; /* 버튼 크기 조정 */
+    font-size: 16px; /* 가독성 고려 */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.sub-category-buttons button:hover {
+    background: #d32f2f;
+    color: white;
+}
+
+.sub-category-buttons button.active {
+    background: #d32f2f;
+    color: white;
+    font-weight: bold;
+}
+

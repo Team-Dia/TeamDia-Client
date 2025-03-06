@@ -1,0 +1,114 @@
+/* ✅ 푸터 전체 컨테이너 */
+.footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto; /* 높이 자동 조정 */
+    margin: 0 auto;
+    background-color: #1a1a1a; /* 짙은 배경색 적용 */
+    padding: 40px 20px;
+    color: #ddd; /* 기본 텍스트 색상 변경 */
+}
+
+/* ✅ 푸터 메뉴 섹션 */
+.footer-menu {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+/* ✅ 푸터 개별 섹션 */
+.footer-box {
+    flex: 1;
+    min-width: 280px;
+    margin: 20px;
+}
+
+/* ✅ 푸터 제목 스타일 */
+.footer-box h3 {
+    font-size: 1.2rem;
+    color: #fff; /* 밝은 텍스트 */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* ✅ 구분선 (line) */
+.line {
+    width: 50px;
+    border: 2px solid #555; /* 은은한 중간 회색 */
+    margin-top: 10px;
+}
+
+/* ✅ 푸터 텍스트 스타일 */
+.footer-box p {
+    font-size: 16px;
+    color: #ccc; /* 밝은 회색으로 변경 */
+    margin-bottom: 5px;
+}
+
+/* ✅ 관리자 링크 스타일 */
+.footer-adimin {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.footer-adimin a {
+    text-decoration: none;
+    color: #00aaff; /* 밝은 블루로 포인트 */
+    font-weight: bold;
+    margin-left: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.footer-adimin a:hover {
+    transform: scale(1.1);
+    color: #0090e0; /* 살짝 진한 블루 */
+}
+
+/* ✅ 푸터 하단 바 */
+.footer-sub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    background-color: #111; /* 푸터 하단을 더욱 어둡게 */
+    padding: 15px 10px;
+}
+
+.footer-sub p {
+    color: #bbb; /* 연한 회색 */
+    font-size: 16px;
+    max-width: 90%;
+    line-height: 1.5;
+}
+
+/* ✅ 📱 반응형 스타일 */
+@media (max-width: 1024px) {
+    .footer-menu {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-box {
+        width: 90%;
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-sub {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .footer-sub p {
+        font-size: 14px;
+    }
+}

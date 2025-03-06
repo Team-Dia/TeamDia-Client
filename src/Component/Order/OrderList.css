@@ -1,0 +1,388 @@
+.order-container{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.order-header{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-header::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black; /* 선 색 */
+}
+
+.order-header-right{
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+.order-header-right p{
+    font-weight: bold;
+}
+
+.order-product-header{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.order-product-header::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.1)
+}
+
+.order-product-right{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.order-product-right p{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.order-product-info{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.order-product-info::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.1)
+}
+
+.order-image-box{
+    display: flex;
+    width: 50%;
+    justify-content: flex-start;
+    /* align-items: center; */
+}
+
+.order-image-box img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.order-product-detail{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    gap: 10px;
+}
+
+.order-info-right{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 33px;
+}
+
+.order-total-price{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 45px;
+}
+
+.order-info-detail{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    /* border: 1px solid red; */
+}
+
+.order-info-box{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.order-info-box::after {
+    content: "";
+    position: absolute;
+    top: -15px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black
+}
+
+.order-info-box h2{
+    position: relative;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.order-info-box h2::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.2);
+}
+
+.order-info-box p{
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+
+.order-delivery{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.input-wrapper-box{
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    /* border: 1px solid red; */
+}
+
+.input-delivery-box{
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 15px;
+    /* border: 1px solid red; */
+}
+
+.order-btn{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-wrapper-box button{
+    width: 50px;
+    height: 30px;
+    border: 1px solid black;
+    outline: none;
+    background: none;
+}
+
+.order-delivery h2::after {
+    content: "";
+    position: absolute;
+    top: -15px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+}
+
+.order-delivery input{
+    border: none;
+    outline: none;
+}
+
+.input-wrapper-box::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.2);
+    transition: background-color 0.3s ease; /* 부드럽게 색상 전환 */
+}
+
+
+#input-info{
+    position: relative;
+    display: flex;
+    font-weight: bold;
+}
+
+#input-info::after {
+    content: "";
+    position: absolute;
+    top: -30px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.2);
+}
+
+
+
+
+.order-final-price{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 350px;
+    border: 1px solid black;
+    margin-left: 30px;
+    padding: 20px;
+}
+
+.order-final-price h3{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.final-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.final-detail{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.final-purchase{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.final-purchase::after {
+    content: "";
+    position: absolute;
+    top: -20px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.2);
+}
+
+.order-final-price h3{
+    position: relative;
+    width: 100%;
+}
+
+.order-final-price h3::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;  /* 3px 아래로 위치 조정 */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black
+}
+
+.delivery-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-top: 30px;
+  }
+
+  
+
+  /* 기본 체크박스 스타일 변경 */
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgb(229, 229, 229);
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin-top: 8px;
+  }
+  
+  /* 체크박스를 선택했을 때의 스타일 */
+  input[type="checkbox"]:checked {
+    background-color: #ca64f4;
+    border-color: #ca64f4;
+  }
+
+  .delivery-request-container {
+    width: 100%;
+  }
+  
+  .dropdown {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    margin-top: 30px;
+    border: 1px solid rgba(125, 125, 125, 0.2);
+  }
+  
+  .custom-input-container {
+    margin-top: 10px;
+  }
+  
+  .custom-input-container input {
+    padding: 8px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .selected-request {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  
+  select:focus {
+    outline: none;  /* 포커스 시 나타나는 테두리 제거 */
+}
+

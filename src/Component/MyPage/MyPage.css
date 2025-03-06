@@ -1,0 +1,160 @@
+
+/* MyPage 본문 컨테이너 */
+.mypage-container {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    min-height: 100vh;
+    width: 85%;
+    max-width: 1600px;
+    margin: 0 auto;
+    justify-content: center;
+    height: auto;
+    /* border: 1px solid red; */
+}
+
+
+/* 마이페이지 컨텐츠 박스 */
+.mypage-box {
+    display: flex;
+    width: 100%;
+    max-width: 1600px;
+    min-height: 1200px;
+    /* border: 1px solid blue; */
+    border-right: 1px solid #ddd;
+}
+/* 메인 콘텐츠 영역 */
+.mypage-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 300px;
+    height: auto;
+    overflow: visible;
+}
+
+/* 메인 콘텐츠 영역 */
+.mypage-content h3{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* MyPage 전체 컨테이너 */
+.mypage-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.mypage-section {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.mypage-section h3 {
+    font-size: 24px;
+    font-weight: bold; 
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* 내 활동 */
+.mypage-activity {
+    margin-top: 30px;
+}
+
+.mypage-activity {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.mypage-activity .wishlist-items-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* ✅ 한 줄에 4개씩 정렬 */
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1800px;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 좋아요 상품 아이템 스타일 */
+.mypage-activity .wishlist-item {
+    width: 100%;
+    max-width: 300px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 12px;
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
+    background-color: #fff;
+    overflow: hidden;
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+.view-more-btn {
+    display: inline-block;
+    font-size: 16px;
+    color: #666; 
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s ease-in-out;
+}
+
+.view-more-btn:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+
+/* 모바일에서 사이드바 숨기고 전체 너비로 조정 */
+@media (max-width: 1024px) {
+    .mypage-content {
+        margin-left: 0;
+    }
+    .sidebar.desktop {
+        display: none; 
+    }
+}
+.confirm-button {
+    background-color: #ff6600;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.confirm-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.review-button {
+    background-color: #008CBA;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.review-button:hover {
+    background-color: #0073a7;
+}

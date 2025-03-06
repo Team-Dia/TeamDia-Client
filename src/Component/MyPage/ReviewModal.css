@@ -1,0 +1,88 @@
+.review-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* ✅ 어두운 배경 처리 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* ✅ 사이드바보다 높은 값으로 설정 */
+}
+
+.review-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 600px;
+}
+
+.review-product-list {
+    list-style: none;
+    padding: 0;
+    max-height: 500px; /* ✅ 스크롤 가능하도록 최대 높이 설정 */
+    overflow-y: auto; /* ✅ 내부에서 스크롤 가능하게 설정 */
+    margin-bottom: 10px;
+    margin-top: 30px;
+
+    /* ✅ 스크롤바 스타일 적용 */
+    scrollbar-width: thin; /* ✅ Firefox에서 얇은 스크롤바 적용 */
+    scrollbar-color: #ccc transparent; /* ✅ Firefox에서 스크롤 색상 지정 */
+}
+
+/* ✅ Chrome, Edge, Safari에서 스크롤바 스타일 변경 */
+.review-product-list::-webkit-scrollbar {
+    width: 6px; /* ✅ 얇은 스크롤바 */
+}
+
+.review-product-list::-webkit-scrollbar-thumb {
+    background-color: #bbb; /* ✅ 스크롤바 색상 */
+    border-radius: 3px; /* ✅ 둥근 모서리 */
+}
+
+.review-product-list::-webkit-scrollbar-track {
+    background: transparent; /* ✅ 스크롤바 배경 투명 */
+}
+
+.review-product-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.review-product-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.review-write-button {
+    background-color: #ff6600;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.review-write-button:disabled {  /* ✅ 버튼 비활성화 스타일 */
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.review-close-button {
+    background-color: #ccc;
+    color: black;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}

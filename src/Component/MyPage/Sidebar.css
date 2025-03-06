@@ -1,0 +1,105 @@
+/* ✅ 기본 사이드바 스타일 (데스크톱 전용) */
+.sidebar {
+    width: 300px; /* 사이드바 너비 */
+    background-color: #f8f8f8;
+    padding: 20px 10px;
+    border-right: 1px solid #ddd;
+    position: absolute;
+    left: 0;
+    top: 0;
+    min-height: 100%;
+    z-index: 900;
+    transition: left 0.3s ease-in-out;
+}
+
+/* ✅ 1024px 이하에서는 사이드바 숨김 (햄버거 버튼으로 열기) */
+@media (max-width: 1024px) {
+    .sidebar {
+        left: -300px; /* 화면에서 숨김 */
+        position: fixed;
+    }
+    .sidebar.open {
+        left: 0; /* 햄버거 버튼 클릭 시 나타남 */
+    }
+}
+
+/* ✅ 햄버거 버튼 (헤더 아래로 이동) */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 10px; /* ✅ 헤더 높이에 맞춰 조정 (필요 시 값 변경 가능) */
+    left: 10px;
+    background-color: #888;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 22px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 1200;
+}
+
+/* ✅ 1024px 이하에서는 햄버거 버튼 표시 */
+@media (max-width: 1024px) {
+    .sidebar-toggle {
+        display: block;
+    }
+}
+
+/* ✅ 마이페이지 제목 */
+.sidebar-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 16px;
+}
+
+/* ✅ 각 섹션 스타일 */
+.sidebar-section {
+    margin-bottom: 16px;
+}
+
+.sidebar-section h3 {
+    font-size: 22px;
+    margin-bottom: 6px;
+    color: #333;
+    font-weight: bold;
+}
+
+.sidebar-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-section li {
+    margin-bottom: 10px;
+}
+
+/* ✅ 네비게이션을 위한 sidebar-link 스타일 */
+.sidebar-link {
+    display: block;
+    text-decoration: none;
+    color: #666;
+    font-size: 19px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.sidebar-link:hover {
+    color: #000;
+    font-weight: bold;
+    background-color: #e9ecef;
+}
+
+/* ✅ 선택된 메뉴 스타일 (테이블과 조화로운 색상) */
+.sidebar-link.active {
+    background-color: #e4e8ec; /* 테이블 배경색과 동일한 라이트 그레이 */
+    color: #1a2838; /* 더 진한 네이비 (추천 색상) */
+    font-weight: bold;
+    border-left: 6px solid #2c3e50; /* 테이블 글자색보다 더 진한 포인트 컬러 */
+    padding-left: 12px;
+}
+
+

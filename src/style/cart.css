@@ -1,0 +1,173 @@
+/* 전체 레이아웃 */
+.cartList {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 테이블 스타일 */
+.tb {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* 행(row) 스타일 */
+.row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    justify-content: center;
+}
+
+/* 테이블 헤더 스타일 */
+.coltitle {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    background-color: #1a1a1a;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    margin: 2px;
+}
+
+/* ✅ 컬럼 크기 맞춤 */
+.col-image {
+    flex: 1.5;  /* 이미지 칸을 넓게 설정 */
+}
+
+.col-name {
+    flex: 1;  /* 상품명이 길어질 수 있으므로 넓게 */
+}
+
+.col-option, .col-quantity, .col-price, .col-select {
+    flex: 1;  /* 동일한 비율 */
+}
+
+/* 데이터 컬럼 스타일 */
+.col {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin: 2px;
+    color: #333;
+    font-size: 18px;
+}
+
+/* ✅ 상품 이미지 스타일 */
+.cart-product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* ✅ 상품명 스타일 */
+.product-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    flex: 1;
+    padding: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin: 2px;
+    font-size: 18px;
+}
+
+.product-link:hover {
+    text-decoration: underline;
+}
+
+/* 체크박스 스타일 */
+input[type="checkbox"] {
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+/* 버튼 스타일 */
+.btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn button {
+    flex: 1;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn button:first-child {
+    background: #1a1a1a;
+    color: white;
+}
+
+.btn button:first-child:hover {
+    background: #333;
+}
+
+.btn button:last-child {
+    background: #28a745;
+    color: white;
+}
+
+.btn button:last-child:hover {
+    background: #218838;
+}
+
+/* ✅ 총 가격 스타일 */
+.totalPrice {
+    text-align: right;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding-right: 10px;
+    color: #333;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .cartList {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .btn {
+        flex-direction: column;
+    }
+
+    .btn button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .coltitle, .col {
+        width: 100%;
+    }
+}

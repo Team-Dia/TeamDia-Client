@@ -1,0 +1,387 @@
+
+.product-detail{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 100vh;
+  /* border: 1px solid red; */
+  margin: 0 auto;
+  margin-top: 60px;
+}
+
+.product-allcontainer{
+  width: 100%;
+  display: flex;
+  height: auto;
+}
+
+.product-info{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  margin-left: 40px;
+  /* border: 1px solid blue; */
+}
+
+
+
+.swiper-container {
+    width: 50%; /* 화면의 50% 크기 */
+    height: 100%; /* 원하는 높이 */
+    margin: 0 auto; /* 가운데 정렬 */
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .swiper-wrapper {
+    display: flex;
+    width: 100%;
+    height: auto;
+    /* border: 1px solid green; */
+    /* margin: 0 !important; */
+
+  }
+
+  .swiper-container .mySwiper2 img {
+    width: 100%; /* 이미지의 width를 부모의 100%로 설정 */
+    height: auto; /* 비율에 맞게 자동 조정 */
+    object-fit: contain; /* 이미지가 잘리거나 왜곡되지 않도록 설정 */
+  }
+
+  
+  
+  .wrapper2 {
+    width: 100%;
+    display: flex;
+    margin-top: 20px; 
+    justify-content: center;
+    overflow: hidden; 
+    align-items: center;
+  }
+
+/* .swiper-wrapper 스타일 (썸네일 전용) */
+.wrapper2 .swiper-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 28px;
+}
+
+
+
+
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+  }
+
+  
+  
+  .mySwiper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+
+  
+
+
+  /* 썸네일 이미지 기본 스타일 */
+.mySwiper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease; /* 스타일 전환 효과 */
+  cursor: pointer; /* 클릭 가능하게 만들기 */
+}
+
+/* 썸네일에 활성화된 이미지 강조 */
+.mySwiper .swiper-slide.swiper-slide-active img {
+  opacity: 1; /* 활성화된 썸네일에 대한 opacity */
+  transform: scale(1.1); /* 활성화된 썸네일을 강조 */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+
+  
+  /* 썸네일 사이 간격 */
+  .mySwiper .swiper-slide {
+    margin-right: 10px;
+  }
+  
+ 
+
+  /* 화살표 버튼 스타일 */
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #dee2e6;
+  color: black; /* 화살표 색 */
+  width: 40px; /* 버튼 크기 */
+  height: 40px; /* 버튼 크기 */
+  border-radius: 50%; /* 둥근 모양 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute; /* 위치 고정 */
+  top: 50%;
+  transform: translateY(-50%); /* 중앙 정렬 */
+  z-index: 1000; /* 다른 요소 위에 표시 */
+  transition: background-color 0.3s, transform 0.3s; /* 부드러운 효과 */
+  opacity: 0.7;
+  font-size: 0;
+  font-weight: bold;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 22px; /* 화살표 크기 */
+}
+
+
+/* 비활성화 상태 */
+.swiper-button-disabled {
+  opacity: 0.3;  /* 비활성화 상태에서 투명도 낮추기 */
+  pointer-events: none; /* 클릭 불가 */
+  background-color: rgba(0, 0, 0, 0.2); /* 비활성화 상태 배경색 */
+}
+
+.brandname{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* .brandlogo {
+  position: relative;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 100%;
+  height: 50px;
+} */
+
+.interest {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+}
+
+.interest-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  /* border: 1px solid red; */
+}
+
+.interest-info img {
+  font-size: 22px;
+  border-radius: 50%;
+}
+
+/* .brandlogo::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; 
+  width: 100%;
+  height: 1px; 
+  background-color: rgb(229, 229, 229); 
+} */
+
+#btn1{
+  width: 70px;
+  height: 30px;
+  border: 1px solid rgb(229, 229, 229);
+  background-color: rgb(255, 255, 255);
+  outline: none;
+}
+
+.logo-and-name {
+  display: flex;
+  align-items: center;
+}
+
+.logo-and-name img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.stars {
+  display: flex;
+}
+
+.stars span {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+
+.delivery-info{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.delivery-icon{
+  width: 100%;
+  display: flex;
+  margin-top: 5px;
+}
+
+.size-select {
+  width: 100%;
+  padding: 10px 15px; /* 안쪽 여백 (상하 10px, 좌우 15px) */
+  border: 1px solid #ccc; /* 테두리 설정 (연한 회색) */
+  font-size: 18px; /* 글자 크기 */
+  font-weight: bold; /* 글자 굵기 */
+  color: #333; /* 글자 색상 */
+  cursor: pointer; /* 커서 모양을 포인터로 변경 (클릭할 수 있음을 표시) */
+  outline: none; /* 포커스 시 외곽선 제거 */
+  margin-top: 20px;
+  appearance: none;
+}
+
+
+.size-select option {
+  font-size: 18px; /* 옵션 글자 크기 */
+  padding: 10px; /* 옵션의 패딩 */
+}
+
+.size-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  background: rgb(248, 248, 248);
+}
+
+.quantity-info {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgb(248, 248, 248);
+}
+
+.quantity-btn {
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(248, 248, 248);
+  border: 1.5px solid #000000;
+  width: 25px;
+  height: 25px;
+  font-size: 27px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+
+.quantity-input {
+  width: 40px;
+  text-align: center;
+  margin: 0 10px;
+  padding: 5px;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  font-weight: bold;
+  background: none;
+}
+
+
+.price-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+  /* border: 1px solid red; */
+}
+
+/* 기본적인 숫자 입력 필드에서 숫자 조정 화살표(스핀박스) 숨기기 */
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+.quantity-detail{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+.shopping-select{
+  width: 100%;
+  display: flex;
+  margin-top: 15px;
+}
+
+.shopping-select button{
+  width: 50%;
+  height: 40px;
+  /* margin: 5px; */
+  border: none;
+  outline: none;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Return-info{
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgb(229, 229, 229);
+  margin-top: 20px;
+}
+
+.swiper-container .mySwiper2 img{
+  width: 550px;
+  height: 450px;
+  object-fit: cover;
+}

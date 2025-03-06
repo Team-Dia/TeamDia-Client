@@ -1,0 +1,89 @@
+.header{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.header-content{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    /* background-color: #ff6200; */
+    align-items: center;
+    margin: 0 auto;
+}
+
+.header-img {
+    width: 90%;  
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 0 auto;
+    margin-top: 20px;
+    overflow: hidden;
+    position: relative;
+    filter: brightness(0.4);
+}
+
+
+
+.header-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+}
+
+
+.header-menu{
+    position: absolute; /* 텍스트를 이미지 위에 배치 */
+    top: 50%; /* 이미지 세로 중앙에 텍스트 배치 */
+    left: 50%; /* 이미지 가로 중앙에 텍스트 배치 */
+    transform: translate(-50%, 160%); /* 정확한 중앙 정렬 */
+}
+
+.header-text{
+    position: absolute; /* 텍스트를 이미지 위에 배치 */
+    top: 50%; /* 이미지 세로 중앙에 텍스트 배치 */
+    left: 50%; /* 이미지 가로 중앙에 텍스트 배치 */
+    transform: translate(-50%, -20%); /* 정확한 중앙 정렬 */
+    text-align: center;
+    color: white;
+}
+
+.header-text h1{
+    font-size: 52px;
+    font-weight: bold;
+}
+
+.header-text h2{
+    margin-top: 10px;
+    font-size: 32px;
+}
+
+#header-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    color: white;
+    border: 3px solid white;
+    margin-bottom: 40px;
+    font-size: 20px;
+    font-weight:500
+}
+
+#header-link:hover{
+    background-color: white;
+    color: #000000;
+    border-color: #000000;
+    transition: 0.3s;
+}

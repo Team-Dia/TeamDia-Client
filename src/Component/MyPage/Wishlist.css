@@ -1,0 +1,138 @@
+.mypage-wishlist {
+    text-align: left;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    
+}
+
+.wishlist-container {
+    width: 100%;
+    max-width: 1400px; /* ✅ 기존 1000px → 1400px로 확장 */
+    height: auto; /* ✅ 높이를 고정하여 리스트 박스 크기 키우기 */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+.wishlist-items-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.wishlist-items-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* ✅ 한 줄에 4개씩 정렬 */
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1800px; /* ✅ 최대 너비 설정 */
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    /* border: 1px solid purple; */
+}
+
+
+.wishlist-item {
+    width: 100%;
+    max-width: 300px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 12px;
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
+    background-color: #fff;
+    overflow: hidden;
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+.wishlist-image-wrapper {
+    position: relative; /* ✅ 부모 기준점 설정 */
+    width: 100%;
+    aspect-ratio: 1 / 1; /* ✅ 정사각형 비율 유지 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff;
+}
+
+.wishlist-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.wishlist-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+.wishlist-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.wishlist-heart {
+    position: absolute;
+    bottom: 5px;  /* ✅ 위치 조정 */
+    right: 5px;   /* ✅ 부모 기준으로 정렬 */
+    font-size: 24px; /* ✅ 크기 조정 */
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.wishlist-heart.liked {
+    color: red;
+}
+
+/* ✅ 반응형 스타일 개선 */
+@media (max-width: 1024px) {
+    .wishlist-items-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .wishlist-item {
+        width: calc(33.33% - 20px);
+        max-width: 260px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wishlist-items-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .wishlist-item {
+        width: calc(50% - 20px);
+        max-width: 240px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wishlist-items-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .wishlist-item {
+        width: 100%;
+        max-width: 100%;
+    }
+}

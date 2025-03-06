@@ -1,0 +1,280 @@
+#register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(120vh - 120px);
+    background-color: #f9f9f9;
+}
+
+#register-article {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 800px;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#register-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.register-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.register-input:focus {
+    border-color: #1a1a1a;
+    outline: none;
+}
+
+.register-error {
+    color: #dc3545;
+    font-size: 16px;
+    text-align: left;
+    margin-left: 5px;
+}
+
+#register-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#register-button:hover {
+    background-color: #333;
+}
+
+/* 아이디 입력 필드 + 중복 확인 버튼 */
+.id-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.id-input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.id-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.check-btn {
+    padding: 10px 15px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    white-space: nowrap;
+}
+
+.check-btn:hover {
+    background-color: #333;
+}
+
+/* 오류 메시지 및 중복 확인 메시지 */
+.message-container {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 16px;
+    margin-top: 3px;
+}
+
+.register-message.success {
+    color: #28a745;
+    font-size: 16px;
+    margin-top: 3px;
+}
+
+.register-message.error {
+    color: #dc3545;
+    font-size: 16px;
+    margin-top: 3px;
+}
+
+/* 비밀번호 입력 필드 + 아이콘 버튼 */
+.password-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.toggle-password-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.toggle-password-btn:hover {
+    color: #333;
+}
+
+/* 이메일 입력 */
+.email-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.email-id {
+    width: 40%;
+}
+
+.email-at {
+    font-size: 20px;
+}
+
+.email-select, .email-custom {
+    width: 35%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+}
+
+/* 이메일 인증 버튼 */
+.verification-btn {
+    padding: 8px 10px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.verification-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.verification-btn.verified {
+    background-color: #28a745;
+    cursor: default;
+}
+
+/* 우편번호 입력 필드 + 버튼 */
+.zip-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.zip-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-btn {
+    padding: 10px 15px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.search-btn:hover {
+    background-color: #333;
+}
+
+/* 이메일 인증 코드 입력 */
+.email-verification-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.email-code-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register-success-message {
+    font-size: 14px;
+    color: #28a745;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+/* 회원가입 페이지에서만 적용되는 레이블 스타일 */
+.member-register-label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.birthdate-banner {
+    background-color: #ffeb99;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.birthdate-banner button {
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.birthdate-banner button:hover {
+    background-color: #333;
+}
+

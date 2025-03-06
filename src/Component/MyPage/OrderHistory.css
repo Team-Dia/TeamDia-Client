@@ -1,0 +1,100 @@
+/*.mypage-container {*/
+/*    display: flex;*/
+/*    width: 100%;*/
+/*}*/
+
+/*.mypage-wrapper {*/
+/*    display: flex;*/
+/*    width: 100%;*/
+/*}*/
+
+/*.mypage-content {*/
+/*    flex-grow: 1;*/
+/*    padding: 20px;*/
+/*}*/
+
+/*.section-title {*/
+/*    font-size: 24px;*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/* 📌 주문 내역 테이블 스타일 */
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ thead가 항상 보이도록 보장 */
+.order-table thead {
+    display: table-header-group; /* ✅ thead가 항상 보이도록 수정 */
+}
+
+.order-section {
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ✅ 포인트 리스트와 동일한 그림자 적용 */
+}
+
+
+.order-table th, 
+.order-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.order-table th {
+    background: #e4e8ec; /* 부드럽고 차분한 라이트 그레이 */
+    font-weight: bold;
+    color: #2c3e50; /* 가독성을 위한 다크 네이비 */
+}
+
+
+
+
+.order-status {
+    font-weight: bold;
+    color: #000;
+}
+
+/* .order-status.completed {
+    color: #2ecc71;
+}
+
+.order-status.pending {
+    color: #f39c12;
+}
+
+.order-status.canceled {
+    color: #e74c3c;
+} */
+
+
+/* 📌 주문 내역이 없을 때 스타일 */
+.no-order {
+    text-align: center;
+    color: #888;
+    padding: 15px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+}
+
+/* 🔹 반응형 디자인 (모바일 최적화) */
+@media (max-width: 768px) {
+    .order-table {
+        font-size: 14px;
+    }
+
+    .order-table th, 
+    .order-table td {
+        padding: 8px;
+    }
+}

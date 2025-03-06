@@ -1,0 +1,43 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .modal-overlay {
+    position: fixed;   /* 화면에 고정 */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);  /* 반투명 배경 */
+    display: flex;       /* 플렉스를 사용하여 중앙 정렬 */
+    justify-content: center;  /* 가로 중앙 정렬 */
+    align-items: center;      /* 세로 중앙 정렬 */
+    z-index: 9999;       /* 모달이 다른 요소들 위에 오도록 */
+    height: 100%;        /* 화면 전체 높이를 차지 */
+  }
+  
+  .modal-con {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+  
+  #modal-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #modal-btn:hover {
+    background-color: #333;
+  }
+  

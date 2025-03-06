@@ -1,0 +1,148 @@
+/* ✅ 최근 본 상품 목록을 한 줄에 6개 정렬 */
+.recently-viewed-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* ✅ 한 줄에 6개 정렬 */
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px; /* ✅ 최대 너비 설정 */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ✅ 상품 개별 박스 */
+.recently-viewed-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 12px;
+    width: 180px;
+    height: 270px;
+    background-color: #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* ✅ 상품 박스 클릭 시 약간 확대 효과 */
+.recently-viewed-item:hover {
+    transform: scale(1.02);
+}
+
+/* ✅ 삭제 버튼을 상품 박스 오른쪽 상단에 배치 + 상품 클릭과 분리 */
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    color: #888;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; /* ✅ 상품 클릭과 완전히 분리 */
+}
+
+/* ✅ 삭제 버튼 마우스 오버 효과 */
+.remove-btn:hover {
+    color: red;
+    background: rgba(255, 255, 255, 1);
+}
+
+/* ✅ 상품 이미지 스타일 */
+.recently-viewed-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* ✅ 상품 정보 정렬 */
+.recently-viewed-info {
+    text-align: center;
+    margin-top: 8px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recently-viewed-name {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    max-width: 100%;
+    padding: 0 5px;
+}
+
+.recently-viewed-price {
+    font-size: 15px;
+    color: #555;
+    font-weight: bold;
+    margin-top: 3px;
+}
+
+/* ✅ 반응형 적용 */
+@media (max-width: 1200px) {
+    .recently-viewed-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .recently-viewed-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .recently-viewed-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 400px) {
+    .recently-viewed-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* ✅ 전체 삭제 버튼 스타일 */
+.clear-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff4d4d; /* ✅ 강렬한 빨간색 배경 */
+    color: white; /* ✅ 글자색 흰색 */
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px; /* ✅ 둥근 버튼 */
+    padding: 12px 20px;
+    margin: 20px auto; /* ✅ 중앙 정렬 */
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    width: 200px; /* ✅ 버튼 크기 조정 */
+}
+
+/* ✅ 마우스 오버 시 색상 변경 */
+.clear-btn:hover {
+    background-color: #cc0000; /* ✅ 더 짙은 빨간색 */
+    transform: scale(1.05); /* ✅ 약간 확대 효과 */
+}
+
+/* ✅ 반응형에서 버튼 크기 조정 */
+@media (max-width: 600px) {
+    .clear-btn {
+        width: 100%;
+        max-width: 250px;
+    }
+}
