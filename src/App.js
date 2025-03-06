@@ -11,6 +11,7 @@ import Navbar from "./Component/Navbar/Navbar";
 import Heading from "./Component/Heading/Heading";
 import Footing from "./Component/Footing/Footing";
 import MySlider from "./Component/MySlider/Slider";
+import BestProduct from "./Component/product/BestProduct";
 
 // 로그인
 import Login from "./Component/Login";
@@ -35,10 +36,11 @@ import QnaView from './Component/Customer/QnaView'
 import WriteQna from './Component/Customer/WriteQna'
 
 // 제품
-import RingPage from "./Component/Category/RingPage";
-import EarRingPage from "./Component/Category/EarRingPage";
-import NecklacePage from "./Component/Category/NecklacePage";
-import BraceletPage from "./Component/Category/BraceletPage";
+// import RingPage from "./Component/Category/RingPage";
+// import EarRingPage from "./Component/Category/EarRingPage";
+// import NecklacePage from "./Component/Category/NecklacePage";
+// import BraceletPage from "./Component/Category/BraceletPage";
+import DisplayPage from "./Component/Category/DisplayPage";
 import SearchResults from "./Component/Search/SearchResults";
 
 // 제품 상세
@@ -60,6 +62,7 @@ import jaxios from "./util/jwtUtil";
 
 
 function App() {
+    
     const dispatch = useDispatch();
     const loginUser = useSelector((state) => state.user);
     useEffect(() => {
@@ -95,6 +98,7 @@ function App() {
 
                 {/* 메인 */}
                 <Route path="/" element={<><Navbar/><Heading /><MySlider /><Index /><Footing/></>} />
+                <Route path="/bestProduct" element={<><Navbar/><BestProduct /></>} /> 
 
                 {/* 로그인 및 회원가입 */}
                 <Route path="/login" element={<><Navbar/> <Login/><Footing/></>} />
@@ -113,15 +117,16 @@ function App() {
                 <Route path="/mypage/recentlyViewedPage" element={<><Navbar/><RecentlyViewedPage /><Footing/></>} />
 
                 {/* 제품 및 카테고리 */}
+                <Route path="/:category" element={<><Navbar/><DisplayPage /><Footing/></>} />
 
                 {/* 반지 제품 카테고리 페이지*/}
-                <Route path="/ring" element={<><Navbar/><RingPage /><Footing/></>} />
+                {/* <Route path="/ring" element={<><Navbar/><RingPage /><Footing/></>} /> */}
                 {/* 목걸이 제품 카테고리 페이지*/}
-                <Route path="/necklace" element={<><Navbar/><NecklacePage /><Footing/></>} />
+                {/* <Route path="/necklace" element={<><Navbar/><NecklacePage /><Footing/></>} /> */}
                 {/* 귀걸이 제품 카테고리 페이지*/}
-                <Route path="/earRing" element={<><Navbar/><EarRingPage /><Footing/></>} /> 
+                {/* <Route path="/earRing" element={<><Navbar/><EarRingPage /><Footing/></>} />  */}
                 {/* 팔찌 제품 카테고리 페이지*/}
-                <Route path="/bracelet" element={<><Navbar/><BraceletPage /><Footing/></>} />
+                {/* <Route path="/bracelet" element={<><Navbar/><BraceletPage /><Footing/></>} /> */}
                 {/* 검색 결과 페이지 */}
                 <Route path="/search" element={<><Navbar/><SearchResults /><Footing/></>} /> 
 

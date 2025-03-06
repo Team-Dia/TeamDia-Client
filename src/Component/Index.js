@@ -71,6 +71,15 @@ const Index = () => {
     axios.get('/api/product/newPro')
       .then((result) => {
         setNewProduct(result.data.newProduct);
+
+        // ✅ newProduct가 배열인지 확인
+        if (Array.isArray(result.data.newProduct)) {
+          console.log("✅ [프론트] newProduct 개수:", result.data.newProduct.length);
+          setNewProduct(result.data.newProduct);
+      } else {
+          console.error("❌ [프론트] newProduct가 배열이 아님:", result.data.newProduct);
+      }
+
       })
       .catch((err) => {
         console.error("❌ 신상품 가져오기 실패:", err);
@@ -82,12 +91,12 @@ const Index = () => {
     <div className='main-container'>
 
         <div className='main-category'>
-            <Link to='/best' id='best-link'>
+            <Link to='/bestProduct' id='best-link'>
                 <img src='./imgs/a.jpg'/>
                 <p>베스트</p>
             </Link>
 
-            <Link to='/new' id='best-link'>
+            <Link to='/newProduct' id='best-link'>
                 <img src='./imgs/e.jpg'/>
                 <p>신상품</p>
             </Link>
@@ -111,7 +120,7 @@ const Index = () => {
       <h1>&nbsp;BEST PRODUCT&nbsp;</h1>
 
     <div className='itemlist'>
-        {bestProduct ? (
+        {bestProduct.length > 0 ? (
             bestProduct.map((product, idx) => {
                 return (
                     <div className='item' key={idx}>
@@ -135,7 +144,7 @@ const Index = () => {
                             </Link>
                             <div className='name' style={{marginLeft:'10px'}}>{product.productName}</div>&nbsp;
                             <div className='pro-price' style={{marginLeft:'10px'}}>
-                              {new Intl.NumberFormat('ko-KR').format(product.productCostPrice)}원
+                              {new Intl.NumberFormat('ko-KR').format(product.productSalePrice)}원
                             </div>&nbsp;
                         </div>
                     </div>
@@ -150,7 +159,7 @@ const Index = () => {
     <h1>&nbsp;NEW PRODUCT&nbsp;</h1>
 
     <div className='itemlist'>
-        {newProduct ? (
+        {newProduct.length > 0 ? (
             newProduct.map((product, idx) => {
                 return (
                     <div className='item' key={idx}>
@@ -174,7 +183,7 @@ const Index = () => {
                             </Link>
                             <div className='name' style={{marginLeft:'10px'}}>{product.productName}</div>&nbsp;
                             <div className='pro-price' style={{marginLeft:'10px'}}>
-                              {new Intl.NumberFormat('ko-KR').format(product.productCostPrice)}원
+                              {new Intl.NumberFormat('ko-KR').format(product.productSalePrice)}원
                             </div>&nbsp;
                         </div>
                     </div>
