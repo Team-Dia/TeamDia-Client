@@ -1,0 +1,260 @@
+/* 전체 컨테이너 */
+.display-box {
+    /* display: flex; */
+    max-width: 2000px;
+    margin: auto;
+    /* padding: 20px; */
+    border: 1px solid red;
+}
+
+/* 전체 컨테이너 */
+.display-container {
+    display: flex;
+    margin-left: 200px;
+    max-width: 1600px;
+    margin: auto;
+    /* padding: 20px; */
+    border: 1px solid red;
+}
+
+/* 사이드바 스타일 */
+.display-sidebar {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.display-sidebar h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.display-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.display-sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s ease;
+}
+
+.display-sidebar ul li:hover,
+.display-sidebar ul li.active {
+    background: #000;
+    color: white;
+}
+
+/* 상품 리스트 */
+.display-product-list {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* 제품 카드 */
+.display-product-card {
+    background: white;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.display-product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 제품 이미지 */
+.display-product-card .display-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* 제품 상세 정보 */
+.display-product-card .display-details {
+    padding: 10px;
+    text-align: center;
+}
+
+.display-product-card .display-details h4 {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.display-product-card .display-price {
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* 서브 카테고리 버튼 컨테이너 */
+.display-sub-category-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+    padding: 10px 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 서브 카테고리 버튼 스타일 */
+.display-sub-category-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.display-sub-category-buttons button {
+    background: #f4f4f4;
+    border: none;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+}
+
+.display-sub-category-buttons button:hover {
+    background: #d32f2f;
+    color: white;
+}
+
+.display-sub-category-buttons button.active {
+    background: #d32f2f;
+    color: white;
+    font-weight: bold;
+}
+
+/* 별점 스타일 */
+.display-rating {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.display-rating .star {
+    color: #FFD700; /* 별 색상 */
+    font-size: 18px;
+    margin-right: 2px;
+}
+
+.display-rating .star.empty {
+    color: #ccc; /* 빈 별 색상 */
+}
+
+.review-count {
+    font-size: 14px;
+    color: #555;
+    margin-left: 5px;
+}
+
+/* ⭐ 정렬 드롭다운 스타일 */
+.sort-dropdown {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: border 0.3s ease;
+}
+
+.sort-dropdown:hover {
+    border-color: #888;
+}
+
+/* 별점 스타일 */
+.display-rating {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.display-rating .star {
+    color: #FFD700;
+    font-size: 18px;
+    margin-right: 2px;
+}
+
+.display-rating .star.empty {
+    color: #ccc;
+}
+
+.review-count {
+    font-size: 14px;
+    color: #555;
+    margin-left: 5px;
+}
+
+.price-filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.price-filter-container button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.price-filter-container button:hover {
+    background-color: #a52a2a;
+}
+
+.price-graph-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.price-graph-modal button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.price-graph-modal button:first-of-type {
+    background-color: #28a745;
+    color: white;
+}
+
+.price-graph-modal button:first-of-type:hover {
+    background-color: #218838;
+}
+
+.price-graph-modal button:last-of-type {
+    background-color: #dc3545;
+    color: white;
+}
+
+.price-graph-modal button:last-of-type:hover {
+    background-color: #c82333;
+}

@@ -1,100 +1,73 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux"; // ✅ Redux에서 로그인 상태 가져오기
+import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import SearchItem from "./SearchItem"; // ✅ 검색된 상품을 보여줄 공통 컴포넌트
-import "./SearchResults.css"; // ✅ 스타일 적용
+import SearchItem from "./SearchItem"; // ✅ 개별 검색 아이템
+import ProductSidebar from "../ProductSidebar"; // ✅ 사이드바 필터 유지
+import "../Category/DisplayPage.css"; // ✅ `DisplayPage.css` 스타일 유지
 
 const SearchResults = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const keyword = searchParams.get("keyword") || ""; // ✅ 최신 URL에서 검색어 가져오기
+    const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
-    const user = useSelector(state => state.user); // ✅ 로그인된 사용자 정보 가져오기
+    const user = useSelector(state => state.user);
 
-    // ✅ 추가: 가격 범위 상태 관리
-    const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || ""); // ✅ 최신 URL에서 가져온 가격 필터 적용
-    const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") || "");
+    // ✅ 검색어, 가격 필터, 정렬 값 가져오기
+    const keyword = searchParams.get("keyword") || "";
+    const minPrice = searchParams.get("minPrice");
+    const maxPrice = searchParams.get("maxPrice");
+    const sortBy = searchParams.get("sortBy");
 
     useEffect(() => {
-        if (keyword) {
-            sessionStorage.setItem("searchKeyword", keyword);
-            const encodedKeyword = encodeURIComponent(keyword);
-            const memberIdParam = user?.memberId ? `&memberId=${user.memberId}` : "";
-            
-            const priceParams = (minPrice && maxPrice) ? `&minPrice=${minPrice}&maxPrice=${maxPrice}` : "";
+        if (!keyword) return; // 검색어가 없으면 요청하지 않음
 
-            console.log(`📡 검색 요청: keyword=${keyword}, minPrice=${minPrice}, maxPrice=${maxPrice}, memberId=${user?.memberId || "없음"}`);
+        // ✅ 검색 API 호출 (빈 값 제거)
+        const params = { keyword };
+        if (minPrice && minPrice !== "null") params.minPrice = minPrice;
+        if (maxPrice && maxPrice !== "null") params.maxPrice = maxPrice;
+        if (sortBy) params.sortBy = sortBy;
 
-            axios.get(`/api/product/search?keyword=${encodedKeyword}${memberIdParam}${priceParams}`)
-                .then((response) => {
-                    if (response.data.length === 0) {
-                        console.log("❌ 검색 결과 없음");
-                        setProducts([]); 
-                    } else {
-                        console.log("✅ 검색 결과 응답:", response.data);
-                        setProducts(response.data);
-                    }
-                })
-                .catch((error) => {
-                    console.error("❌ 검색 실패:", error);
-                    setProducts([]); 
-                });
-        }
-    }, [keyword, minPrice, maxPrice, user?.memberId]);
+        console.log(`📡 검색 요청: keyword=${keyword}, minPrice=${minPrice}, maxPrice=${maxPrice}, sortBy=${sortBy}`);
+
+        axios.get(`/api/product/search`, { params })
+            .then(async (response) => {
+                const productList = response.data || [];
+
+                // ⭐ 각 상품의 별점 및 리뷰 개수 가져오기
+                const productPromises = productList.map(product =>
+                    axios.get(`/api/review/getReview`, { params: { productSeq: product.productSeq } })
+                        .then(res => ({
+                            ...product,
+                            averageRating: res.data.averageRating || 0,
+                            reviewCount: res.data.reviewCount || 0
+                        }))
+                        .catch(() => ({
+                            ...product,
+                            averageRating: 0,
+                            reviewCount: 0
+                        }))
+                );
+
+                const updatedProducts = await Promise.all(productPromises);
+                setProducts(updatedProducts);
+                console.log("✅ 별점 및 리뷰 포함된 최종 상품 리스트:", updatedProducts);
+            })
+            .catch((error) => {
+                console.error("❌ 검색 실패:", error);
+                setProducts([]);
+            });
+    }, [searchParams]); // ✅ `searchParams`가 변경될 때마다 실행
 
     return (
         <article>
-            <h2 className="search-results-title">🔍 "{keyword}" 검색 결과</h2>
-
-             {/* ✅ 가격 필터링 UI 추가 */}
-            <div className="price-filter">
-                <label>가격 범위:</label>
-                <input 
-                    type="number" 
-                    placeholder="최소 가격" 
-                    value={minPrice} 
-                    onChange={(e) => setMinPrice(e.target.value)} 
-                />
-                <span>~</span>
-                <input 
-                    type="number" 
-                    placeholder="최대 가격" 
-                    value={maxPrice} 
-                    onChange={(e) => setMaxPrice(e.target.value)} 
-                />
-                <button
-                onClick={() => {
-                    const newParams = new URLSearchParams();
-                    newParams.set("keyword", keyword); // ✅ 키워드 유지
-                    if (minPrice !== "" && minPrice !== null) newParams.set("minPrice", minPrice);
-                    if (maxPrice !== "" && maxPrice !== null) newParams.set("maxPrice", maxPrice);
-                    setSearchParams(newParams); // ✅ URL 업데이트
-                    console.log("📡 [DEBUG] URL 업데이트: ", newParams.toString()); // ✅ 디버깅용 로그 추가
-                }}
-                >
-                적용
-                </button>
-
-                {/* ✅ 적용 취소 버튼 */}
-                <button
-                    onClick={() => {
-                        setMinPrice("");
-                        setMaxPrice("");
-                        const newParams = new URLSearchParams();
-                        newParams.set("keyword", keyword); // ✅ 키워드는 유지
-                        newParams.delete("minPrice");
-                        newParams.delete("maxPrice");
-                        setSearchParams(newParams);
-                        console.log("🛑 [DEBUG] 가격 필터링 취소");
-                    }}
-                >
-                    적용 취소
-                </button>
+            <div className="display-sub-category-container">
+                <h2 className="display-sub-category-title">🔍 "{keyword}" 검색 결과</h2>
             </div>
-
-            <div className="search-container">
-                <div className="searchProduct-list">
+            <div className="display-box"></div>
+            {/* <div className="display-container"> */}
+                <ProductSidebar /> {/* ✅ 기존 사이드바 유지 (가격 필터 포함) */}
+                <div className="display-container">
+                <div className="display-product-list">
                     {products.length > 0 ? (
                         products.map((product) => (
                             <SearchItem key={product.productSeq} product={product} />

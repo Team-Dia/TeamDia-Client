@@ -26,6 +26,7 @@ const ProducDetail = () => {
   const [categoryId, setCategoryId] = useState(null); // ✅ categoryId 상태 추가
   const [reviewCount, setReviewCount] = useState(0);
   const [averageRating, setAverageRating] = useState(0); // 평균 별점 상태 추가
+  const [totalLikes, setTotalLikes] = useState(0); // 총 좋아요 수 가져오기
   
   const categoryOptions = {
     1: ["10호", "11호", "12호"], // 반지 (category_id: 1)
@@ -255,6 +256,10 @@ const ProducDetail = () => {
             
             // 서버 응답 후 likeList에 새로운 아이템 추가
             setLikeList(prevList => [...prevList, { memberId: loginUser.memberId, productSeq }]);
+
+            // 로컬 상태에서 totalLikes 수를 1 증가시킴
+            setTotalLikes(prevTotalLikes => prevTotalLikes + 1);
+
         } else {
             // 좋아요 취소 - 서버에 요청 (색칠된 상태일 때 취소)
             const response = await jaxios.delete(`/api/post/removeLike?memberId=${loginUser.memberId}&productSeq=${productSeq}`);
@@ -262,7 +267,14 @@ const ProducDetail = () => {
             
             // 서버 응답 후 likeList에서 해당 아이템 제거
             setLikeList(prevList => prevList.filter(product_like => product_like.memberId !== loginUser.memberId));
+
+            // 로컬 상태에서 totalLikes 수를 1 감소시킴
+            setTotalLikes(prevTotalLikes => prevTotalLikes - 1);
+
         }
+
+        
+        
     } catch (error) {
         console.error('좋아요 처리 중 오류 발생:', error);
     }
@@ -351,17 +363,48 @@ const ProducDetail = () => {
   }, [productSeq]);
 
   useEffect(() => {
-      jaxios.get(`/api/review/getReview`, {params:{productSeq}})
-        .then((result) => {
-          console.log("Loaded reviews:", result.data.review); // 로드된 댓글 확인
-          setReview(result.data.review);
-          setReviewCount(result.data.reviewCount); // 리뷰 갯수 설정
-          setAverageRating(result.data.averageRating); // 평균 별점 설정
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+    axios.get(`/api/review/getReview`, { params: { productSeq } })
+      .then((result) => {
+        console.log("Loaded reviews:", result.data.review); // 로드된 댓글 확인
+  
+        // 리뷰가 없을 경우 빈 배열로 설정
+        const reviews = result.data.review || [];
+        const reviewCount = result.data.reviewCount || 0;
+        const averageRating = result.data.averageRating || 0;
+  
+        setReview(reviews); // 리뷰 설정
+        setReviewCount(reviewCount); // 리뷰 갯수 설정
+        setAverageRating(averageRating); // 평균 별점 설정
+      })
+      .catch((err) => {
+        console.error(err);
+        // 에러가 발생했을 때에도 기본값을 설정
+        setReview([]); // 빈 배열로 설정
+        setReviewCount(0); // 리뷰 갯수 0으로 설정
+        setAverageRating(0); // 평균 별점 0으로 설정
+      });
   }, [productSeq]); // productSeq가 변경될 때마다 호출
+  
+
+  useEffect(() => {
+    // 서버에서 총 좋아요 수를 받아오는 API 호출
+    const fetchLikes = async () => {
+        try {
+            const response = await axios.get(`/api/post/getLikesCount?productSeq=${productSeq}`);
+            console.log('서버에서 받은 총 좋아요 수:', response.data);  // 서버에서 받은 좋아요 수 확인
+            setTotalLikes(response.data);  // 서버에서 받은 총 좋아요 수를 상태에 설정
+        } catch (error) {
+            console.error('좋아요 수 가져오기 오류:', error);
+        }
+    };
+
+    if (productSeq) {
+        fetchLikes();
+    }
+
+}, [productSeq]);  // productSeq가 변경될 때마다 호출
+
+
 
 
 console.log('Product Seq:', productSeq); // productSeq 값 확인
@@ -636,28 +679,35 @@ const { productId } = useParams(); // URL에서 productId 가져오기
           <div className='brandname'>
 
             
-            <div className='interest-info'>
-              <span style={{display:'flex', justifyContent:'center',alignItems:'center', width:'65px', height:'30px', background:'black',color:'white',fontWeight:'bold',fontSize:'13px'}}>무료배송</span>
-              <div className='like'>
-                {
-                  likeList.some(product_like => loginUser.memberId === product_like.memberId) ? (
-                    <img
-                      src={`http://localhost:8070/product_images/delike.png`}  
-                      onClick={() => { onLike() }} 
-                      alt="Like"
-                    />
-                  ) : (
-                    <img 
-                      src={`http://localhost:8070/product_images/like.png`} 
-                      onClick={() => { onLike() }} 
-                      alt="Like" 
-                    />
-                  )
-                }
-              </div>
-
-
+          <div className='interest-info'>
+                <span style={{display:'flex', justifyContent:'center', alignItems:'center', width:'65px', height:'30px', background:'black', color:'white', fontWeight:'bold', fontSize:'13px'}}>
+                    무료배송
+                </span>
+                <div className='like' style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ marginRight: '15px', fontSize: '18px', fontWeight: 'bold' }}>
+                        {totalLikes !== null ? totalLikes : '로딩 중...'}  {/* 좋아요 수 또는 로딩 중 표시 */}
+                    </span>
+                    {
+                        likeList.some(product_like => loginUser.memberId === product_like.memberId) ? (
+                            <img
+                                src={`http://localhost:8070/product_images/delike.png`}  
+                                onClick={() => { onLike() }} 
+                                alt="Like"
+                            />
+                        ) : (
+                            <img 
+                                src={`http://localhost:8070/product_images/like.png`} 
+                                onClick={() => { onLike() }} 
+                                alt="Like" 
+                            />
+                        )
+                    }
+                </div>
             </div>
+
+
+
+
 
           <div className='product-content'>
             <span style={{ fontSize:'25px',fontWeight:'bold'}}>{product.productName}</span>

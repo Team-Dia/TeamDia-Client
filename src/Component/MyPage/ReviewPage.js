@@ -15,9 +15,11 @@ const ReviewPage = () => {
     const [reviewContent, setReviewContent] = useState("");
     const [reviewRating, setReviewRating] = useState(5);
     const [reviewImages, setReviewImages] = useState([]);
+    const [uploadedImageUrls, setUploadedImageUrls] = useState([]);
     const [productInfo, setProductInfo] = useState(null);
     const [error, setError] = useState(null);
     const memberId = useSelector(state => state.user.memberId);
+    
 
 
 
@@ -31,7 +33,7 @@ const ReviewPage = () => {
             return;
         }
     
-        axios.get(`http://localhost:8070/product/${productSeq}`)
+        axios.get(`/api/product/${productSeq}`)
 
             .then(response => setProductInfo(response.data))
             .catch(error => {
@@ -42,12 +44,12 @@ const ReviewPage = () => {
     
     // ✅ 리뷰 이미지 업로드 처리
     const handleImageUpload = (event) => {
-        const files = Array.from(event.target.files);
-        if (files.length > 3) {
-            alert("최대 3개의 이미지만 업로드할 수 있습니다.");
-            return;
+        const files = event.target.files;
+        if (files) {
+            // files를 Array로 변환하여 상태에 넣기
+            const fileArray = Array.from(files);
+            setReviewImages(fileArray); // 이 시점에서 TypeScript가 파일 배열을 추론
         }
-        setReviewImages(files);
     };
 
     // ✅ 리뷰 작성 API 요청
@@ -59,38 +61,49 @@ const ReviewPage = () => {
     
         const validOrderSeq = orderSeq && !isNaN(Number(orderSeq)) ? Number(orderSeq) : null;
         const validProductSeq = productSeq && !isNaN(Number(productSeq)) ? Number(productSeq) : null;
-
+    
         if (!validOrderSeq) {
-            console.error("🚨 orderSeq가 유효하지 않음!", orderSeq);
+            console.error("orderSeq가 유효하지 않음!", orderSeq);
             alert("올바른 주문 정보를 찾을 수 없습니다.");
-            navigate("/mypage"); // 문제 발생 시 마이페이지로 이동
+            navigate("/mypage");
+            return;
         }
-        
-        const requestData = {
-            orderSeq: validOrderSeq,  
-            productSeq: validProductSeq,  
-            reviewContent: reviewContent.trim(),
-            reviewRating: Number(reviewRating),  
-            memberId: String(memberId)
-        };
-
-        console.log("🚀 서버로 보낼 리뷰 데이터:", requestData);
-        
+    
+        // FormData 객체로 리뷰 데이터 및 이미지를 포함
+        const formData = new FormData();
+        formData.append("orderSeq", validOrderSeq);
+        formData.append("productSeq", validProductSeq);
+        formData.append("reviewContent", reviewContent.trim());
+        formData.append("reviewRating", Number(reviewRating));
+        formData.append("memberId", String(memberId));
+    
+        // 이미지 파일들 추가
+        reviewImages.forEach((file) => {
+            formData.append("reviewImages", file);  // 여러 이미지를 배열로 전송
+        });
+    
         try {
-            const response = await jaxios.post("/api/review/save", requestData, {
+            const response = await jaxios.post("/api/review/save", formData, {
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "multipart/form-data", // 이 부분을 `multipart/form-data`로 설정
                 }
             });
-    
-            console.log("✅ 리뷰 저장 성공:", response.data);
+
+            const imageUrls = response.data.imageUrls;  // 서버에서 반환된 이미지 URL들
+
+                // 서버에서 받은 이미지 URL 배열을 상태에 저장
+                setUploadedImageUrls(imageUrls);
+
+        
+            console.log("리뷰 저장 성공:", response.data);
             alert("리뷰가 등록되었습니다!");
             navigate("/mypage");
         } catch (error) {
-            console.error("🚨 리뷰 작성 실패:", error.response?.data || error.message);
+            console.error("리뷰 작성 실패:", error.response?.data || error.message);
             alert("리뷰 작성 중 오류가 발생했습니다.");
         }
     };
+    
     
     const handleStarClick = (rating) => {
         setReviewRating(rating);
@@ -162,6 +175,8 @@ const ReviewPage = () => {
             <button className="submit-review-button" onClick={submitReview}>
                 리뷰 등록
             </button>
+
+
         </div>
         </div>
         </div>
