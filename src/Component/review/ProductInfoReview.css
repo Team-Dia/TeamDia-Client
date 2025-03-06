@@ -166,7 +166,7 @@
 
 .review-review{
     display: flex;
-    align-items: flex-start; /* 텍스트를 왼쪽으로 정렬 */
+    align-items: center; /* 텍스트를 왼쪽으로 정렬 */
     width: 80%; /* 이 추가로 영역을 100% 차지하게 설정 */
     margin-top: 100px;
 }
@@ -191,8 +191,9 @@
 .review-checkbox {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 20px;
+    margin-bottom: 20px;
     margin-left: 15px;
   }
   

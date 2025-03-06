@@ -171,7 +171,7 @@ function moveSlide(step) {
             });
           }}
         >
-          상품 후기
+          상품 후기&nbsp;{review.length > 0 && `(${review.length})`}
         </div>
       </div>
 
@@ -283,6 +283,7 @@ function moveSlide(step) {
 
       <div className='review-review' id='reviews-section'>
         <p>상품 구매후기</p>
+        <p style={{marginBottom:'5px'}}>{review.length > 0 && `(${review.length})`}</p>
       </div>
 
       <div className='review-container'>
@@ -294,7 +295,7 @@ function moveSlide(step) {
           checked={showPhotoReviewsOnly} // 체크박스 상태
           onChange={handleCheckboxChange} // 체크박스 상태 변경 함수
         />
-        <label htmlFor='option1'>포토후기만 보기</label>
+        <label htmlFor='option1' style={{marginTop:'7px'}}>포토후기만 보기</label>
       </div>
 
 
@@ -380,7 +381,7 @@ function moveSlide(step) {
                   image ? (
                     <img
                       key={index}  // 각 이미지마다 고유한 key
-                      src={`http://localhost:8070/product_images/${image}`}
+                      src={`http://localhost:8070/product_images/${image}?t=${new Date().getTime()}`}
                       alt={`Review Image ${index + 1}`}
                       onClick={() => handleImageClick(image, index, item)} // 이미지 클릭 시 해당 함수 실행
                       style={{ cursor: 'pointer' }} // 클릭할 수 있다는 것을 표시

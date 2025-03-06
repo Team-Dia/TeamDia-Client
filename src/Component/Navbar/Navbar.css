@@ -7,6 +7,22 @@
     border: 1px solid #ddd;
 }
 
+/* ✅ 네비게이션 전체 래퍼 */
+.nav-wrapper {
+    position: relative;
+    width: 100%;
+    transition: height 0.3s ease-in-out;
+}
+
+/* ✅ 드롭다운이 활성화되면 전체 높이가 늘어남 */
+.nav-wrapper.expanded {
+    height: auto; /* ✅ 드롭다운을 포함하여 자동 조정 */
+}
+
+.nav-wrapper:not(.expanded) {
+    height: 150px; /* ✅ 기본 네비게이션 높이 */
+}
+
 
 .nav-bar{
     margin: 0 auto;
@@ -155,36 +171,80 @@
     letter-spacing: 5px;
 }
 
-.search{
-    width: 300px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 20px;
-}
-
-.search i{
-    font-size: 32px;
-    margin-left: 30px;
-}
-
-#search-text{
-    width: 100%;
+/* ✅ 기본 검색창 스타일 */
+.search {
     position: relative;
-    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    max-height: 80px;
+    background-color: transparent;
+    border-radius: 15px;
+    padding: 8px 12px;
+}
+
+/* ✅ 입력 필드 */
+.search input {
+    width: 100%;
+    background: transparent;
     border: none;
     outline: none;
-    padding: 8px;
-    font-size: 20px;
+    font-size: 18px;
+    padding: 8px 35px 8px 10px;
+    color: #333;
 }
 
-.search:hover::after {
-    content: "";
+/* ✅ 검색 아이콘 */
+.search i {
     position: absolute;
-    padding-bottom: 55px; /* 밑줄이 search 영역의 맨 아래에 위치하도록 */
-    width: 180px; /* search 영역의 너비와 동일하게 설정 */
-    border-bottom: 1px solid black; /* 밑줄 스타일 */
-    margin-left: 30px;
+    right: 12px;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+/* ✅ 검색 아이콘 호버 효과 */
+.search i:hover {
+    color: #000;
+}
+
+/* ✅ 반응형 미디어 쿼리 */
+@media screen and (max-width: 768px) {
+    /* ✅ 검색창 크기 조정 */
+    .search {
+        width: 100%;
+        max-width: 220px;
+        padding: 6px 10px;
+    }
+
+    .search input {
+        font-size: 16px;
+        padding: 6px 30px 6px 8px;
+    }
+
+    .search i {
+        font-size: 20px;
+    }
+
+    /* ✅ 네비게이션 반응형 */
+    .nav-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-left,
+    .nav-center,
+    .nav-right {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+    }
+
+    /* ✅ 네비게이션 아이콘 크기 조정 */
+    .nav-item i {
+        font-size: 28px;
+    }
 }
 
 
@@ -204,6 +264,26 @@
 .nav-item i {
     font-size: 34px; /* ✅ 모든 아이콘 크기 동일하게 설정 */
     color: black;
+}
+
+
+/* ✅ 작은 화면에서 아이콘 조정 */
+@media screen and (max-width: 768px) {
+    .nav-item {
+        width: 40px;
+    }
+
+    .nav-item i {
+        font-size: 24px;
+    }
+
+    .nav-center {
+        gap: 10px;
+    }
+
+    .nav-right {
+        gap: 10px;
+    }
 }
 
 /* ✅ 아이콘 텍스트 정렬 */
@@ -258,7 +338,7 @@
 }
 
 /* 첫 번째 드롭다운 */
-.dropdown-menu {
+/* .dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -269,20 +349,20 @@
     z-index: 1000;
     display: flex;
     flex-direction: column;
-}
+} */
 
 /* 첫 번째 드롭다운 항목 */
-.dropdown-item {
+/* .dropdown-item {
     padding: 12px 16px;
     text-decoration: none;
     color: black;
     font-size: 16px;
     transition: background 0.2s;
     position: relative;
-}
+} */
 
 /* 두 번째 드롭다운 (목걸이 하위 메뉴) */
-.sub-dropdown-menu {
+/* .sub-dropdown-menu {
     position: absolute;
     top: 0;
     left: 100%;
@@ -292,18 +372,78 @@
     width: 150px;
     display: flex;
     flex-direction: column;
-}
+} */
 
 /* 두 번째 드롭다운 항목 */
-.sub-dropdown-item {
+/* .sub-dropdown-item {
     padding: 10px;
     text-decoration: none;
     color: black;
     font-size: 15px;
     transition: background 0.2s;
-}
+} */
 
-.sub-dropdown-item:hover {
+/* .sub-dropdown-item:hover {
     background-color: #f5f5f5;
+} */
+/* ✅ 반응형 - 태블릿 (768px 이하) */
+@media screen and (max-width: 768px) {
+    .logo img {
+        max-width: 160px;
+        height: 60px;
+    }
+
+    .search {
+        width: 100%;
+        max-width: 240px;
+        padding: 6px 10px;
+    }
+
+    .search input {
+        font-size: 16px;
+        padding: 6px 30px 6px 8px;
+    }
+
+    .search i {
+        font-size: 20px;
+    }
+
+    /* ✅ 네비게이션 아이콘 간격 조정 */
+    .nav-right {
+        gap: 10px;
+    }
+
+    .nav-item i {
+        font-size: 24px;
+    }
 }
 
+/* ✅ 반응형 - 모바일 (480px 이하) */
+@media screen and (max-width: 480px) {
+    .logo img {
+        max-width: 140px;
+        height: 50px;
+    }
+
+    .search {
+        max-width: 200px;
+        padding: 5px 8px;
+    }
+
+    .search input {
+        font-size: 14px;
+        padding: 5px 25px 5px 6px;
+    }
+
+    .search i {
+        font-size: 18px;
+    }
+
+    .nav-right {
+        gap: 5px;
+    }
+
+    .nav-item i {
+        font-size: 22px;
+    }
+}
