@@ -1,94 +1,103 @@
-.search-results-title {
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.search-container {
+/* ✅ 전체 컨테이너를 `DisplayPage.css`와 동일하게 설정 */
+.search-results-page {
+    display: flex;
     max-width: 1200px;
-    margin: 40px auto;
+    margin: auto;
     padding: 20px;
 }
 
-.searchProduct-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    justify-content: center;
+/* ✅ 사이드바 스타일 (`ProductSidebar.css`와 통합) */
+.product-sidebar {
+    width: 200px;
+    margin-right: 20px;
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    height: auto;
 }
 
-.searchProduct-card img {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    border: 1px solid #ddd;
+/* ✅ 제품 리스트 (기존 `display-product-list`와 동일) */
+.searchProduct-list {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* ✅ 제품 카드 (기존 `display-product-card` 스타일과 동일) */
+.searchProduct-card {
+    background: white;
+    overflow: hidden;
     cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .searchProduct-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.image img {
+/* ✅ 제품 이미지 스타일 */
+.searchProduct-card .searchImage-container img {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
+    height: 300px;
+    object-fit: cover;
 }
 
-.details {
-    margin-top: 10px;
+/* ✅ 제품 상세 정보 */
+.searchProduct-card .product-details {
+    padding: 10px;
+    text-align: center;
 }
 
-.details h4 {
+.searchProduct-card .product-details h4 {
     font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
+    margin: 5px 0;
 }
 
-.price {
-    color: #e60023;
+.searchProduct-card .product-price {
+    color: #d32f2f;
+    font-weight: bold;
     font-size: 16px;
 }
 
-.no-results-message {
-    text-align: center;
-    font-size: 20px;
-    color: #555;
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-/* ✅ 가격 필터링 UI 스타일 */
-.price-filter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.price-filter input {
-    width: 100px;
-    padding: 8px;
+/* ✅ 정렬 드롭다운 스타일 */
+.sort-dropdown {
+    background: white;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.price-filter button {
-    background-color: #ff7f00;
-    color: white;
-    padding: 8px 15px;
-    border: none;
+    padding: 8px;
+    font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
+    margin-left: 15px;
+    transition: border 0.3s ease;
 }
 
-.price-filter button:hover {
-    background-color: #e66900;
+.sort-dropdown:hover {
+    border-color: #888;
+}
+
+/* ✅ 별점 스타일 */
+.display-rating {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.display-rating .star {
+    color: #FFD700;
+    font-size: 18px;
+    margin-right: 2px;
+}
+
+.display-rating .star.empty {
+    color: #ccc;
+}
+
+.review-count {
+    font-size: 14px;
+    color: #555;
+    margin-left: 5px;
 }

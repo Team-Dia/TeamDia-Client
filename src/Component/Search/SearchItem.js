@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "./SearchItem.css"; // ✅ 개별 상품 스타일 적용
+import "../Category/DisplayPage.css"; // ✅ `DisplayPage.css` 사용
 import defaultPlaceholder from "../../Component/image/default-placeholder.jpg"; // 기본 이미지
 import jaxios from "../../util/jwtUtil";
 
 const SearchItem = ({ product }) => {
     const user = useSelector(state => state.user);
-    const [isLiked, setIsLiked] = useState(product.isLiked); // ✅ 서버에서 받은 좋아요 여부 적용
+    const [isLiked, setIsLiked] = useState(false);
     const navigate = useNavigate();
+
     useEffect(() => {
         console.log(`🛒 상품명: ${product.productName} | 초기 좋아요 상태: ${product.isLiked}`);
+        setIsLiked(product.isLiked || false);
     }, [product]);
 
     const handleLikeToggle = async () => {
         if (!user?.memberId) {
-            alert("로그인이 필요합니다."); // ✅ 로그인하지 않은 사용자는 좋아요 불가
-            navigate("/login")
+            alert("로그인이 필요합니다.");
+            navigate("/login");
             return;
         }
 
@@ -41,23 +41,40 @@ const SearchItem = ({ product }) => {
 
     return (
         <div 
-            className="searchProduct-card" 
-            onClick={() => window.location.href = `/producDetail/${product.productSeq}`} // ✅ 상세 페이지 이동 유지
+            className="display-product-card" 
+            onClick={() => navigate(`/producDetail/${product.productSeq}`)}
         >
-            <div className="searchImage-container">
+            <div className="display-image">
                 <img src={product.productImage ? `http://localhost:8070/product_images/${product.productImage}` : defaultPlaceholder}
-                    alt={product.productName} className="searchProduct-image" />
-                <FaHeart 
-                    className={`product-like-heart ${isLiked ? "liked" : ""}`} 
-                    onClick={(e) => {
-                        e.stopPropagation(); // ✅ 페이지 이동 방지
-                        handleLikeToggle();
-                    }} 
-                />
+                    alt={product.productName} className="display-image" />
             </div>
-            <div className="product-details">
-                <p className="product-name">{product.productName}</p>
-                <p className="product-price">{product.productSalePrice.toLocaleString()}원</p>
+            
+            {/* 좋아요 버튼 */}
+            <FaHeart 
+                className={`product-like-heart ${isLiked ? "liked" : ""}`} 
+                onClick={(e) => {
+                    e.stopPropagation();
+                    handleLikeToggle();
+                }} 
+            />
+
+            <div className="display-details">
+                {/* ⭐ 별점 및 리뷰 개수 표시 */}
+                <div className="display-rating">
+                    {Array.from({ length: 5 }).map((_, index) => (
+                        <span 
+                            key={index} 
+                            className={`star ${index < Math.round(product.averageRating) ? "full" : "empty"}`}
+                        >
+                            ★
+                        </span>
+                    ))}
+                    <span className="review-count">({product.reviewCount})</span>
+                </div>
+                <h4>{product.productName}</h4>
+                <p className="display-price">
+                    <span className="sale-price">{product.productSalePrice.toLocaleString()}원</span>
+                </p>
             </div>
         </div>
     );

@@ -45,6 +45,8 @@ const Navbar = () => {
                     {/* 중앙 (카테고리 메뉴 + 고객센터) */}
                     <div className="nav-center">
                         <Link id="category-link">카테고리</Link>
+                        <Link to="/bracelet?subCategory=골드" id="menu-link">골드</Link>
+                        <Link to="/bracelet?subCategory=실버" id="menu-link">실버</Link>
                         <Link to="/Customer" id="menu-link">고객센터</Link>
                     </div>
 
