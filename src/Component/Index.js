@@ -84,27 +84,27 @@ const Index = () => {
         <div className='main-category'>
             <Link to='/best' id='best-link'>
                 <img src='./imgs/a.jpg'/>
-                <p>베스트</p>
+                <p>베스트11</p>
             </Link>
 
             <Link to='/new' id='best-link'>
                 <img src='./imgs/e.jpg'/>
-                <p>신상품</p>
+                <p>신상품11</p>
             </Link>
 
             <Link to='/ring' id='best-link'>
                 <img src='./imgs/d.jpg'/>
-                <p>반지</p>
+                <p>반지11</p>
             </Link>
 
             <Link to='/necklace' id='best-link'>
                 <img src='./imgs/c.jpg'/>
-                <p>목걸이</p>
+                <p>목걸이11</p>
             </Link>
 
             <Link to='/earring' id='best-link'>
                 <img src='./imgs/b.jpg'/>
-                <p>귀걸이</p>
+                <p>귀걸이11</p>
             </Link>
         </div>
       
