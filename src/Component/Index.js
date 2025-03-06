@@ -49,7 +49,7 @@ const Index = () => {
   
   // ✅ 상품 정보 가져오기
   useEffect(() => {
-    axios.get('/api/product/bestPro')
+    axios.get('/product/bestPro')
       .then((result) => {
         console.log("📌 [베스트 상품] 응답 데이터:", result.data.bestProduct);
         setBestProduct(result.data.bestProduct);
@@ -68,7 +68,7 @@ const Index = () => {
         console.error("❌ 베스트 상품 가져오기 실패:", err);
       });
 
-    axios.get('/api/product/newPro')
+    axios.get('/product/newPro')
       .then((result) => {
         setNewProduct(result.data.newProduct);
 
