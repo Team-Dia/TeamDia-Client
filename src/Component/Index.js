@@ -115,7 +115,6 @@ const Index = () => {
           <p>귀걸이</p>
         </Link>
       </div>
-
       <h1>&nbsp;BEST PRODUCT&nbsp;</h1>
 
       <div className="itemlist">
