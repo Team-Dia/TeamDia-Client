@@ -1,39 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import SearchItem from "./SearchItem"; // ✅ 개별 검색 아이템
-import ProductSidebar from "../ProductSidebar"; // ✅ 사이드바 필터 유지
-import "../Category/DisplayPage.css"; // ✅ `DisplayPage.css` 스타일 유지
+import SearchItem from "./SearchItem";
+import ProductSidebar from "../ProductSidebar";
+import LoadingScreen from "../LoadingScreen";
+import "./SearchResults.css";
 
 const SearchResults = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
-    const [products, setProducts] = useState([]);
-    const user = useSelector(state => state.user);
-
-    // ✅ 검색어, 가격 필터, 정렬 값 가져오기
+    
+    const [products, setProducts] = useState([]);  // 원본 상품 데이터
+    const [filteredProducts, setFilteredProducts] = useState([]);  // 정렬된 상품 데이터
+    const [isLoading, setIsLoading] = useState(false);
+    
+    // ✅ 검색어 및 정렬 값 가져오기
     const keyword = searchParams.get("keyword") || "";
-    const minPrice = searchParams.get("minPrice");
-    const maxPrice = searchParams.get("maxPrice");
-    const sortBy = searchParams.get("sortBy");
+    const sortBy = searchParams.get("sortBy") || "";
 
     useEffect(() => {
-        if (!keyword) return; // 검색어가 없으면 요청하지 않음
+        if (!keyword) return;
 
-        // ✅ 검색 API 호출 (빈 값 제거)
-        const params = { keyword };
-        if (minPrice && minPrice !== "null") params.minPrice = minPrice;
-        if (maxPrice && maxPrice !== "null") params.maxPrice = maxPrice;
-        if (sortBy) params.sortBy = sortBy;
+        setIsLoading(true); // ✅ 데이터 요청 시작 시 로딩 표시
 
-        console.log(`📡 검색 요청: keyword=${keyword}, minPrice=${minPrice}, maxPrice=${maxPrice}, sortBy=${sortBy}`);
-
-        axios.get(`/api/product/search`, { params })
+        axios.get(`/api/product/search`, { params: { keyword } })
             .then(async (response) => {
                 const productList = response.data || [];
 
-                // ⭐ 각 상품의 별점 및 리뷰 개수 가져오기
                 const productPromises = productList.map(product =>
                     axios.get(`/api/review/getReview`, { params: { productSeq: product.productSeq } })
                         .then(res => ({
@@ -50,26 +43,53 @@ const SearchResults = () => {
 
                 const updatedProducts = await Promise.all(productPromises);
                 setProducts(updatedProducts);
-                console.log("✅ 별점 및 리뷰 포함된 최종 상품 리스트:", updatedProducts);
+                setFilteredProducts(updatedProducts);  // ✅ 초기에는 원본 데이터를 그대로 사용
             })
             .catch((error) => {
                 console.error("❌ 검색 실패:", error);
                 setProducts([]);
+                setFilteredProducts([]);
+            })
+            .finally(() => {
+                setIsLoading(false); // ✅ 모든 요청이 완료되거나 실패하면 로딩 종료
             });
-    }, [searchParams]); // ✅ `searchParams`가 변경될 때마다 실행
+
+    }, [keyword]);
+
+    // ✅ 정렬 기능 적용
+    useEffect(() => {
+        if (!sortBy || products.length === 0) return;
+
+        let sortedItems = [...products];
+
+        if (sortBy === "rating") {
+            sortedItems.sort((a, b) => b.averageRating - a.averageRating);
+        } else if (sortBy === "reviewCount") {
+            sortedItems.sort((a, b) => b.reviewCount - a.reviewCount);
+        } else if (sortBy === "priceAsc") {
+            sortedItems.sort((a, b) => a.productSalePrice - b.productSalePrice);
+        } else if (sortBy === "priceDesc") {
+            sortedItems.sort((a, b) => b.productSalePrice - a.productSalePrice);
+        }
+
+        setFilteredProducts(sortedItems);  // ✅ 정렬된 데이터 업데이트
+    }, [sortBy, products]); 
 
     return (
-        <article>
-            <div className="display-sub-category-container">
-                <h2 className="display-sub-category-title">🔍 "{keyword}" 검색 결과</h2>
-            </div>
-            <div className="display-box"></div>
-            {/* <div className="display-container"> */}
-                <ProductSidebar /> {/* ✅ 기존 사이드바 유지 (가격 필터 포함) */}
-                <div className="display-container">
+        <div className="display-wrapper">
+            <ProductSidebar /> {/* ✅ 기존 사이드바 유지 (필터 적용 가능) */}
+
+            <div className="display-container">
+                {isLoading && <LoadingScreen />} {/* ✅ 로딩 화면 */}
+
+                <div className="display-sub-category-container">
+                    <h2 className="display-sub-category-title">🔍 "{keyword}" 검색 결과</h2>
+                </div>
+
+                {/* ✅ 상품 리스트 출력 */}
                 <div className="display-product-list">
-                    {products.length > 0 ? (
-                        products.map((product) => (
+                    {filteredProducts.length > 0 ? (
+                        filteredProducts.map((product) => (
                             <SearchItem key={product.productSeq} product={product} />
                         ))
                     ) : (
@@ -77,7 +97,7 @@ const SearchResults = () => {
                     )}
                 </div>
             </div>
-        </article>
+        </div>
     );
 };
 

@@ -1,67 +1,151 @@
-
-/* 필터 사이드바 */
+/* ✅ 기본 사이드바 스타일 */
 .product-sidebar {
-    width: 250px;
-    padding: 20px;
+    width: 280px;
+    background-color: #ffffff;
+    padding: 20px 15px;
     border-right: 1px solid #ddd;
-    background: #f8f8f8;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    overflow-y: auto;
+    position: relative; /* 기본 위치 */
+    font-size: 14px;
+    color: #333;
 }
 
-/* 필터 섹션 */
+/* ✅ 섹션 제목 스타일 */
+.sidebar-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding-left: 5px;
+    border-left: 3px solid #333;
+}
+
+/* ✅ 리스트 스타일 */
+.category-list,
+.sub-category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-list li,
+.sub-category-list li {
+    margin-bottom: 6px;
+}
+
+/* ✅ 카테고리 버튼 스타일 */
+.category-button,
+.sub-category-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 6px;
+    border: none;
+    background: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border-left: 3px solid transparent;
+}
+
+.category-button:hover,
+.sub-category-button:hover,
+.category-button.active,
+.sub-category-button.active {
+    background-color: #f8f8f8;
+    border-left: 3px solid #333;
+    font-weight: bold;
+}
+
+/* ✅ 필터 섹션 스타일 */
 .filter-section {
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 14px;
 }
 
 .filter-section h4 {
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    padding-left: 5px;
+    border-left: 3px solid #333;
 }
 
-/* 가격 필터 옵션 */
+/* ✅ 가격 필터 */
 .price-options {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
-.price-option {
+.price-label {
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 14px;
+    gap: 6px;
 }
 
-/* 직접 입력 */
+/* ✅ 직접 입력 가격 스타일 */
 .price-inputs {
     display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+    gap: 6px;
+    align-items: center;
+    margin-top: 4px;
 }
 
 .price-inputs input {
-    width: 80px;
+    width: 45%;
     padding: 5px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px;
-    text-align: center;
+    font-size: 13px;
 }
 
-/* 적용 버튼 */
-.filter-section button {
-    margin-top: 10px;
-    padding: 6px 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #333;
-    color: white;
+/* ✅ 정렬 드롭다운 스타일 */
+.sort-dropdown {
+    width: 90%;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 13px;
+    background-color: #fff;
     cursor: pointer;
 }
 
-.filter-section button:hover {
-    background-color: #555;
+/* ✅ 적용 및 초기화 버튼을 sticky로 설정 */
+.filter-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding: 10px;
+    background-color: #fff;
+    position: sticky;
+    bottom: 20px; /* 화면 하단에서 20px 떨어진 위치 */
+    z-index: 10;
+    /* box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); */
+}
+
+.apply-button,
+.reset-button {
+    width: 48%;
+    padding: 8px;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.apply-button {
+    background-color: #333;
+    color: white;
+}
+
+.apply-button:hover {
+    background-color: #222;
+}
+
+.reset-button {
+    background-color: #ddd;
+    color: #333;
+}
+
+.reset-button:hover {
+    background-color: #ccc;
 }
