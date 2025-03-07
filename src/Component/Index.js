@@ -93,7 +93,7 @@ const Index = () => {
         <div className='main-category'>
             <Link to='/bestProduct' id='best-link'>
                 <img src='./imgs/a.jpg'/>
-                <p>22베스트22</p>
+                <p>122베스트122</p>
             </Link>
 
             <Link to='/newProduct' id='best-link'>
