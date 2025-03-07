@@ -104,17 +104,15 @@ const location = useLocation();
 
     // ✅ Redux 상태 업데이트를 기다린 후 로그인 여부 확인
     useEffect(() => {
-        if (!loginUser?.memberId) {
-            const storedUser = getStoredUser();
-            if (!storedUser?.memberId) {
-                console.warn("🚨 로그인 정보 없음 → 로그인 페이지 이동");
-                navigate("/login");
-                return;
-            }
-            console.log("✅ Redux 상태 업데이트: ", storedUser);
-            dispatch(loginAction(storedUser));
-        }
-    }, [loginUser, dispatch, navigate]); // ✅ Redux 상태 변경 시 한 번만 실행되도록 조정
+      const storedUser = getStoredUser();
+      if (storedUser?.memberId) {
+          // 로그인 정보가 있을 경우 Redux 상태 업데이트
+          console.log("✅ Redux 상태 업데이트: ", storedUser);
+          dispatch(loginAction(storedUser));
+      }
+      // 로그인 정보가 없다면 그냥 리턴해서 로그인 페이지로 이동하지 않도록 처리
+  }, [loginUser, dispatch, navigate]);
+  
 
     useEffect(() => {
       console.log('likeList updated:', likeList);
