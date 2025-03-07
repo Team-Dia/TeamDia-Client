@@ -28,64 +28,42 @@ const Index = () => {
 
   // ✅ 회원 정보 가져오기
   useEffect(() => {
-    if (!memberId) {
-      console.error("❌ memberId가 없음! 요청을 보내지 않음.");
-      return;
-    }
-
-    axios
-      .get("/api/member/userinfo", {
-        headers: {
-          Authorization: memberId, // ✅ `Authorization`에 `memberId` 포함
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log("✅ 서버에서 받아온 회원 정보:", response.data);
-        setUserData(response.data.loginUser); // ✅ 회원 정보 상태 업데이트
-      })
-      .catch((error) => console.error("❌ 회원 정보 가져오기 실패:", error));
-  }, [memberId]); // ✅ memberId 변경 시 다시 요청
-
-  // 베스트 상품 정보 가져오기
-  useEffect(() => {
-    axios
-      .get("/api/product/bestPro")
+    const limit = 8; // limit 값을 8로 설정
+    
+    // 베스트 상품 가져오기
+    axios.get(`/api/product/bestPro?limit=${limit}`)
       .then((result) => {
-        const best = result.data.bestProduct;
-        if (Array.isArray(best)) {
-          console.log("✅ [프론트] bestProduct 개수:", best.length);
-          setBestProduct(best);
+        console.log("📌 [베스트 상품] 응답 데이터:", result.data.bestProduct);
+        
+        if (Array.isArray(result.data.bestProduct)) {
+          console.log("✅ [프론트] bestProduct 개수:", result.data.bestProduct.length);
+          setBestProduct(result.data.bestProduct);
         } else {
-          console.error("❌ [프론트] bestProduct가 배열이 아님:", best);
-          setBestProduct([]); // 빈 배열로 초기화하여 이후 배열 메서드 호출 문제 방지
+          console.error("❌ [프론트] bestProduct가 배열이 아님:", result.data.bestProduct);
         }
       })
       .catch((err) => {
         console.error("❌ 베스트 상품 가져오기 실패:", err);
         setBestProduct([]); // 에러 시 빈 배열로 초기화
       });
-  }, []);
 
-  // 신상품 정보 가져오기
-  useEffect(() => {
-    axios
-      .get("/api/product/newPro")
+    // 신상품 가져오기
+    axios.get(`/api/product/newPro?limit=${limit}`)
       .then((result) => {
-        const newPro = result.data.newProduct;
-        if (Array.isArray(newPro)) {
-          console.log("✅ [프론트] newProduct 개수:", newPro.length);
-          setNewProduct(newPro);
+        console.log("📌 [신상품] 응답 데이터:", result.data.newProduct);
+
+        if (Array.isArray(result.data.newProduct)) {
+          console.log("✅ [프론트] newProduct 개수:", result.data.newProduct.length);
+          setNewProduct(result.data.newProduct);
         } else {
-          console.error("❌ [프론트] newProduct가 배열이 아님:", newPro);
-          setNewProduct([]); // 빈 배열로 초기화
+          console.error("❌ [프론트] newProduct가 배열이 아님:", result.data.newProduct);
         }
       })
       .catch((err) => {
         console.error("❌ 신상품 가져오기 실패:", err);
         setNewProduct([]); // 에러 시 빈 배열로 초기화
       });
-  }, []);
+  }, []); // useEffect의 두 번째 인자에 빈 배열 넣어서 최초 렌더링 시 한 번만 실행되도록
 
   return (
     <div className="main-container">
@@ -148,7 +126,6 @@ const Index = () => {
                           )
                         }
                       />
-                      {/* 퀵뷰 텍스트는 이미지 영역 내부에 위치 */}
                       {hoveredProductId === product.productSeq && (
                         <div className="quickview">상품 바로가기</div>
                       )}
@@ -157,14 +134,9 @@ const Index = () => {
                   <div className="name" style={{ marginLeft: "10px" }}>
                     {product.productName}
                   </div>
-                  &nbsp;
                   <div className="pro-price" style={{ marginLeft: "10px" }}>
-                    {new Intl.NumberFormat("ko-KR").format(
-                      product.productSalePrice
-                    )}
-                    원
+                    {new Intl.NumberFormat("ko-KR").format(product.productSalePrice)} 원
                   </div>
-                  &nbsp;
                 </div>
               </div>
             );
@@ -177,8 +149,8 @@ const Index = () => {
       <h1>&nbsp;NEW PRODUCT&nbsp;</h1>
 
       <div className="itemlist">
-        {Array.isArray(bestProduct) && bestProduct.length > 0 ? (
-          bestProduct.map((product, idx) => {
+        {Array.isArray(newProduct) && newProduct.length > 0 ? (
+          newProduct.map((product, idx) => {
             return (
               <div className="item" key={idx}>
                 <div className="product-image">
@@ -206,7 +178,6 @@ const Index = () => {
                           )
                         }
                       />
-                      {/* 퀵뷰 텍스트는 이미지 영역 내부에 위치 */}
                       {hoveredProductId === product.productSeq && (
                         <div className="quickview">상품 바로가기</div>
                       )}
@@ -215,14 +186,9 @@ const Index = () => {
                   <div className="name" style={{ marginLeft: "10px" }}>
                     {product.productName}
                   </div>
-                  &nbsp;
                   <div className="pro-price" style={{ marginLeft: "10px" }}>
-                    {new Intl.NumberFormat("ko-KR").format(
-                      product.productSalePrice
-                    )}
-                    원
+                    {new Intl.NumberFormat("ko-KR").format(product.productSalePrice)} 원
                   </div>
-                  &nbsp;
                 </div>
               </div>
             );
