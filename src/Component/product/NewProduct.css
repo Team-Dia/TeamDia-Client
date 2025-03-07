@@ -1,11 +1,11 @@
-.bestProduct-container{
+.newProduct-container{
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.bestProduct-header{
+.newProduct-header{
     width: 100%;
     height: 500px;
     display: flex;
@@ -14,14 +14,14 @@
 
 }
 
-.bestProduct-header img{
+.newProduct-header img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 
 }
 
-.bestProduct-header-text{
+.newProduct-header-text{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -30,7 +30,7 @@
     text-align: center;
 }
 
-.bestProduct-content{
+.newProduct-content{
     width: 95%;
     height: auto;
     display: flex;
@@ -39,7 +39,7 @@
     margin-top: 50px;
 }
 
-.bestProduct-content-header{
+.newProduct-content-header{
     width: 100%;
     display: flex;
     align-items: center;
@@ -47,7 +47,7 @@
 }
 
 
-.best-drop-container {
+.new-drop-container {
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -55,7 +55,7 @@
     margin-top: 10px;
   }
 
-.best-st-btn{
+.new-st-btn{
 display: flex;
 justify-content: center;
 align-items: center;
@@ -65,7 +65,7 @@ margin-bottom: 10px;
 padding: 7px;
 }
 
-.best-drop-menu {
+.new-drop-menu {
     position: absolute;
     top: 120%;
     right: 0;
@@ -77,27 +77,27 @@ padding: 7px;
     z-index: 10;
   }
   
-  .best-drop-menu div {
+  .new-drop-menu div {
     padding: 10px;
     cursor: pointer;
   }
   
-  .best-drop-menu div:hover {
+  .new-drop-menu div:hover {
     background-color: #f0f0f0;
   }
 
-  .best-drop-menu div.active {
+  .new-drop-menu div.active {
     background-color: #f0f0f0;
   }
   
-  .best-pro-item{
+  .new-pro-item{
     width: 95%;
     display: flex;
     justify-content: center;
     margin: 0 auto;
   }
 
-.best-item-list{
+.new-item-list{
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -106,12 +106,12 @@ padding: 7px;
 }
 
 
- .best-review-ct{
+ .new-review-ct{
     display: flex;
     justify-content: flex-end;
  }
 
- .best-dis-rating{
+ .new-dis-rating{
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -119,7 +119,7 @@ padding: 7px;
     margin-left: 9px;
  }
 
- .best-dis-rating .best-stars {
+ .new-dis-rating .new-stars {
     display: flex;
     gap: 5px;  /* 별 사이 간격을 조정 */
 }

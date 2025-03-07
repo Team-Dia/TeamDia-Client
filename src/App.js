@@ -12,6 +12,7 @@ import Heading from "./Component/Heading/Heading";
 import Footing from "./Component/Footing/Footing";
 import MySlider from "./Component/MySlider/Slider";
 import BestProduct from "./Component/product/BestProduct";
+import NewProduct from "./Component/product/NewProduct";
 
 // 로그인
 import Login from "./Component/Login";
@@ -98,7 +99,8 @@ function App() {
 
                 {/* 메인 */}
                 <Route path="/" element={<><Navbar/><Heading /><MySlider /><Index /><Footing/></>} />
-                <Route path="/bestProduct" element={<><Navbar/><BestProduct /></>} /> 
+                <Route path="/bestProduct" element={<><Navbar/><BestProduct /><Footing/></>} />
+                <Route path="/newProduct" element={<><Navbar/><NewProduct /><Footing/></>} /> 
 
                 {/* 로그인 및 회원가입 */}
                 <Route path="/login" element={<><Navbar/> <Login/><Footing/></>} />

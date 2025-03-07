@@ -49,16 +49,19 @@ const Index = () => {
 
   // 베스트 상품 정보 가져오기
   useEffect(() => {
-    axios
-      .get("/api/product/bestPro")
+
+    const limit = 8; // limit 값을 8로 설정
+    axios.get(`/api/product/bestPro?limit=${limit}`) // 백틱과 ${}를 사용하여 limit 값 삽입
       .then((result) => {
-        const best = result.data.bestProduct;
-        if (Array.isArray(best)) {
-          console.log("✅ [프론트] bestProduct 개수:", best.length);
-          setBestProduct(best);
+        console.log("📌 [베스트 상품] 응답 데이터:", result.data.bestProduct);
+        
+        // ✅ bestProduct가 배열인지 확인
+        if (Array.isArray(result.data.bestProduct)) {
+          console.log("✅ [프론트] bestProduct 개수:", result.data.bestProduct.length);
+          setBestProduct(result.data.bestProduct);
         } else {
-          console.error("❌ [프론트] bestProduct가 배열이 아님:", best);
-          setBestProduct([]); // 빈 배열로 초기화하여 이후 배열 메서드 호출 문제 방지
+          console.error("❌ [프론트] bestProduct가 배열이 아님:", result.data.bestProduct);
+
         }
       })
       .catch((err) => {
@@ -67,18 +70,18 @@ const Index = () => {
       });
   }, []);
 
-  // 신상품 정보 가져오기
-  useEffect(() => {
-    axios
-      .get("/api/product/newPro")
+
+    axios.get(`/api/product/newPro?limit=${limit}`)
       .then((result) => {
-        const newPro = result.data.newProduct;
-        if (Array.isArray(newPro)) {
-          console.log("✅ [프론트] newProduct 개수:", newPro.length);
-          setNewProduct(newPro);
+        console.log("📌 [신상품] 응답 데이터:", result.data.newProduct);
+
+        // ✅ newProduct가 배열인지 확인
+        if (Array.isArray(result.data.newProduct)) {
+          console.log("✅ [프론트] newProduct 개수:", result.data.newProduct.length);
+          setNewProduct(result.data.newProduct);
         } else {
-          console.error("❌ [프론트] newProduct가 배열이 아님:", newPro);
-          setNewProduct([]); // 빈 배열로 초기화
+          console.error("❌ [프론트] newProduct가 배열이 아님:", result.data.newProduct);
+
         }
       })
       .catch((err) => {
