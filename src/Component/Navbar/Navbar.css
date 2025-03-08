@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 150px;
+    height: 100px;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
 }
@@ -20,7 +20,7 @@
 }
 
 .nav-wrapper:not(.expanded) {
-    height: 150px; /* ✅ 기본 네비게이션 높이 */
+    height: 100px; /* ✅ 기본 네비게이션 높이 */
 }
 
 
@@ -152,7 +152,7 @@
     align-items: center;
     justify-content: center;
     width: 200px; /* 로고 컨테이너 크기 */
-    height: 80px; /* 높이 설정 */
+    height: 60px; /* 높이 설정 */
     overflow: hidden; /* 넘치는 부분 숨김 */
 }
 
