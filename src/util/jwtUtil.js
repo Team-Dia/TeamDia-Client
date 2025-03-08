@@ -5,6 +5,17 @@ const jaxios = axios.create();
 const cookies = new Cookies();
 
 const beforeReq = async (config) => {
+
+    // 1) 만약 현재 요청 URL이 "/api/product/bestPro", "/api/product/newPro" 처럼
+    //    누구나 접근 가능한 공개 API라면, '사용자 정보 체크' 로직을 SKIP:
+    if (
+        config.url.includes("/api/product/bestPro") ||
+        config.url.includes("/api/product/newPro")
+    ) {
+        return config; // 사용자 정보 없이 그냥 통과
+    }
+
+    // 2) 그 외엔 로그인 사용자 정보가 필요한 로직 수행
     try {
         console.log("beforeReq 호출됨", config); // 요청 전 로그
 
@@ -24,14 +35,14 @@ const beforeReq = async (config) => {
             throw new Error("로그인 정보가 부족합니다.");
         }
 
-        // Header 양식으로 조립해서
+        // Header 양식으로 조립해서 (기존 토큰을 헤더에 세팅)
         const headers = { 
             'Authorization': `Bearer ${accessToken}`
         };
 
         console.log("토큰 갱신 요청 시작");
         
-        // axios로 토큰 검증을 요청합니다. (params 제거)
+        // axios로 토큰 검증을 요청합니다. (params 제거):  refreshToken을 사용해 토큰 검증/갱신 요청
         const res = await axios.get(`/api/member/refresh`, { headers, params: { refreshToken } });
 
         console.log("토큰 갱신 결과:", res.data);  // 갱신된 토큰 정보 로그 출력
@@ -40,7 +51,8 @@ const beforeReq = async (config) => {
         if (res.data && res.data.accessToken && res.data.refreshToken) {
             currentUser.accessToken = res.data.accessToken;
             currentUser.refreshToken = res.data.refreshToken;
-
+            
+            // 쿠키 업데이트(객체를 JSON 문자열로 변환해서 저장)
             cookies.set('loginUser', JSON.stringify(currentUser));
             
             // accessToken만 따로 다시 헤더에 조립하여 config 완성

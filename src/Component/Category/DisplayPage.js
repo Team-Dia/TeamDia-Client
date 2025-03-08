@@ -170,7 +170,7 @@ const DisplayPage = () => {
                                     <div 
                                         className="display-product-card" 
                                         key={product.productSeq} 
-                                        onClick={() => navigate(`/productDetail/${product.productSeq}`)}
+                                        onClick={() => navigate(`/producDetail/${product.productSeq}`)}
                                     >
                                         <div className="display-image">
                                             <img src={`http://localhost:8070/product_images/${product.productImage}`} alt={product.productName} />
