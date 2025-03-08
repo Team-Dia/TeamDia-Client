@@ -31,7 +31,7 @@ const Index = () => {
     const limit = 8; // limit 값을 8로 설정
     
     // 베스트 상품 가져오기
-    axios.get(`/api/product/bestPro?limit=${limit}`)
+    jaxios.get(`/api/product/bestPro?limit=${limit}`)
       .then((result) => {
         console.log("📌 [베스트 상품] 응답 데이터:", result.data.bestProduct);
         
@@ -48,7 +48,7 @@ const Index = () => {
       });
 
     // 신상품 가져오기
-    axios.get(`/api/product/newPro?limit=${limit}`)
+    jaxios.get(`/api/product/newPro?limit=${limit}`)
       .then((result) => {
         console.log("📌 [신상품] 응답 데이터:", result.data.newProduct);
 
