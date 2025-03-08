@@ -20,8 +20,8 @@
 }
 
 .header-img {
-    width: 90%;  
-    height: 800px;
+    width: 100%;  
+    height: 600px; /* 기본 높이 */
     display: flex;
     justify-content: center;
     gap: 15px;
@@ -30,6 +30,42 @@
     overflow: hidden;
     position: relative;
     filter: brightness(0.4);
+    object-fit: cover;
+}
+
+/* 📌 16인치 노트북 & 일반 데스크탑 (너비 1400px ~ 1919px) */
+@media screen and (min-width: 1400px) and (max-width: 1919px) {
+    .header-img {
+        height: 600px; /* 기존보다 약간 더 길게 조정 */
+    }
+}
+
+/* 📌 27인치 이상의 큰 데스크탑 (너비 1920px 이상) */
+@media screen and (min-width: 1920px) {
+    .header-img {
+        height: 700px; /* 더 큰 화면에서는 높이를 키워서 비어 보이지 않도록 */
+    }
+}
+
+/* 📌 일반 노트북 화면 (너비 1024px ~ 1399px) */
+@media screen and (max-width: 1399px) {
+    .header-img {
+        height: 500px; /* 노트북에서는 적당한 높이 */
+    }
+}
+
+/* 📌 태블릿 화면 (너비 768px ~ 1023px) */
+@media screen and (max-width: 1023px) {
+    .header-img {
+        height: 450px;
+    }
+}
+
+/* 📌 모바일 화면 (너비 767px 이하) */
+@media screen and (max-width: 767px) {
+    .header-img {
+        height: 350px;
+    }
 }
 
 
