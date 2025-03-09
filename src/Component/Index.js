@@ -88,7 +88,7 @@ const Index = () => {
           <p>목걸이</p>
         </Link>
 
-        <Link to="/earring" id="best-link">
+        <Link to="/earRing" id="best-link">
           <img src="./imgs/b.jpg" />
           <p>귀걸이</p>
         </Link>
