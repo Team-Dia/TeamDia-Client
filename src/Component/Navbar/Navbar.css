@@ -189,7 +189,7 @@
     background: transparent;
     border: none;
     outline: none;
-    font-size: 18px;
+    font-size: 14px;
     padding: 8px 35px 8px 10px;
     color: #333;
 }
@@ -197,7 +197,7 @@
 /* ✅ 검색 아이콘 */
 .search i {
     position: absolute;
-    right: 12px;
+    right: 50px;
     font-size: 24px;
     color: #666;
     cursor: pointer;
