@@ -180,6 +180,7 @@
     align-items: center;
     font-size: 16px;
     margin-top: 5px;
+    /* gap: 10px */
 }
 
 .display-rating .star {
@@ -308,4 +309,19 @@
 
 .filter-remove-icon:hover {
     color: #e74c3c;
+}
+
+
+.display-like-icon {
+    cursor: pointer;
+    font-size: 18px; /* 하트 크기 */
+    margin-left: 4px; /* 리뷰 개수와 너무 붙지 않도록 여백 조정 */
+}
+
+.display-liked {
+    color: red;
+}
+
+.display-unliked {
+    color: gray;
 }

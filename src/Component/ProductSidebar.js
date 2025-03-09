@@ -40,9 +40,10 @@ const ProductSidebar = ({ setPrevCategory }) => {
     const handleCategoryClick = (category) => {
         setPrevCategory(selectedCategory);
         setSelectedCategory(category);
-        setSelectedSubCategory("전체");
-        navigate(`/${category}?subCategory=전체`);
+        setSelectedSubCategory("전체"); // ✅ 기본값을 "전체"로 설정
+        navigate(`/${category}?subCategory=${encodeURIComponent("전체")}`); // ✅ URL에도 반영
     };
+    
 
     const handleSubCategoryClick = (subCategory) => {
         setSelectedSubCategory(subCategory);
