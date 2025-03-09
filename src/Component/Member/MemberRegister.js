@@ -90,7 +90,7 @@ const MemberRegister = () => {
         }
     
         try {
-            const response = await axios.post("/member/idCheck", {
+            const response = await axios.post("/api/member/idCheck", {
                 userid: formData.memberId, // ShoesShop 방식
             });
     
@@ -276,9 +276,10 @@ const MemberRegister = () => {
                 headers['Authorization'] = 'Bearer ' + jwtToken;
             }
     
-            const response = await fetch("/member/auth/send-email", {
+            const response = await fetch("/api/member/auth/send-email", {
                 method: "POST",
-                headers: headers,
+                //headers: headers,
+                headers: { 'Content-Type': 'application/json' },  // ❌ JWT 토큰 제거
                 body: JSON.stringify({ email: `${emailId}@${emailDomain}` }),
             });
     
