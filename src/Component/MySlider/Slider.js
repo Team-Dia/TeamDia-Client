@@ -1,55 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import './Slider.css';
-import jaxios from "../../util/jwtUtil";
+import { Link } from 'react-router-dom'; // Link 추가
 
-
-const MainSlider = ({ isLoggedIn, memberId }) => {
+const MainSlider = () => {
   const [popularItems, setPopularItems] = useState([]);
-  const [recommendedItems, setRecommendedItems] = useState([]);
-  const [loadingPopular, setLoadingPopular] = useState(true);
-  const [loadingRecommended, setLoadingRecommended] = useState(true);
-  const [errorPopular, setErrorPopular] = useState(null);
-  const [errorRecommended, setErrorRecommended] = useState(null);
+  const [loading, setLoading] = useState(true);  // 로딩 상태 추가
+  const [error, setError] = useState(null);  // 오류 상태 추가
 
-  // 인기 상품 가져오기
+  // 인기 상품을 서버에서 가져오는 함수
   useEffect(() => {
+    console.log('Fetching popular items based on order quantity in the last 30 days...');
     axios.get("/api/product/popular-items")
       .then(response => {
         if (response.status === 204) {
-          console.log('No popular products found.');
-          setPopularItems([]);
+          console.log('No popular products found for the last 30 days.');
         } else {
-          setPopularItems(response.data);
+          console.log('Popular products:', response.data);
+          setPopularItems(response.data);  // 상태 업데이트
         }
       })
-      .catch(error => setErrorPopular(error))
-      .finally(() => setLoadingPopular(false));
+      .catch(error => {
+        console.error('Error fetching popular products:', error);
+        setError(error);  // 오류 상태 업데이트
+      })
+      .finally(() => {
+        setLoading(false);  // 데이터 로딩 후 로딩 상태 해제
+      });
   }, []);
-
-// 추천 상품 가져오기 (로그인된 사용자만)
-useEffect(() => {
-  if (!isLoggedIn || !memberId) return; // 로그인되지 않은 경우 실행하지 않음
   
-  // jaxios 사용 (JWT 토큰을 자동으로 처리함)
-  jaxios.get(`/api/product/recommendations?memberId=${memberId}`)
-    .then(response => {
-      if (response.status === 204) {
-        console.log('추천할 상품이 없습니다.');
-        setRecommendedItems([]);
-      } else {
-        console.log('추천 상품 데이터:', response.data);
-        setRecommendedItems(response.data);
-      }
-    })
-    .catch(error => {
-      console.error('추천 상품 로딩 오류:', error);
-      setErrorRecommended(error);
-    })
-    .finally(() => setLoadingRecommended(false));
-}, [isLoggedIn, memberId]);
+  
 
   const settings = {
     slidesToShow: 3,
@@ -60,73 +43,51 @@ useEffect(() => {
   };
 
   // 로딩 상태 표시
-  if (loadingPopular || (isLoggedIn && loadingRecommended)) return <div>Loading...</div>;
-  if (errorPopular || (isLoggedIn && errorRecommended)) return <div>Error loading data.</div>;
+  if (loading) {
+    return <div>Loading...</div>;  // 로딩 상태 표시
+  }
+
+  // 오류 상태 표시
+  if (error) {
+    return <div>Error: {error}</div>;  // 오류 표시
+  }
 
   return (
-    <div>
-      {/* 비로그인 상태: 인기 상품 슬라이더 */}
-      {!isLoggedIn && (
-        <div className="autoplay">
-          <Slider {...settings}>
-            {popularItems.length > 0 ? (
-              popularItems.map((item, index) => (
-                <div className="slider-item" key={index}>
-                  <Link to={`/producDetail/${item.productSeq}`} className="slider-link">
-                    <div className="image-container">
-                      <img src={`http://localhost:8070/product_images/${item.productImage}`} alt={item.productName} className="slide-product-image" />
-                      <div className="badge">인기 상품</div>
-                      <div className="overlay">
-                        <div className="slide-product-info">
-                          <div className="slide-product-name">{item.productName}</div>
-                          <div className="slide-product-price">₩ {new Intl.NumberFormat("ko-KR").format(item.productSalePrice)} 원</div>
-                        </div>
-                      </div>
-                     <div className="slide-product-link">상품 바로가기</div>  {/* 상품 바로가기 버튼 */}
-                    </div>
-                  </Link>
+    <div className="autoplay">
+  <Slider {...settings}>
+    {popularItems.length > 0 ? (
+      popularItems.map((item, index) => (
+        <div className="slider-item" key={index}>
+          <Link to={`/producDetail/${item.productSeq}`} className="slider-link">
+            <div className="image-container">
+              <img
+                src={`http://localhost:8070/product_images/${item.productImage}`}  // 서버 이미지 경로
+                alt={item.productName}
+                className="slide-product-image"
+              />
+              <div className="badge">인기 상품</div> {/* 배지 추가 */}
+              <div className="overlay">
+                <div className="slide-product-info">
+                  <div className="slide-product-name">{item.productName}</div>
+                  <div className="slide-product-price">
+                    ₩ {new Intl.NumberFormat("ko-KR").format(item.productSalePrice)} 원
+                  </div>
                 </div>
-              ))
-            ) : (
-              <div className="slider-item">
-                <img src="/imgs/no-popular.jpg" alt="No popular products" />
               </div>
-            )}
-          </Slider>
+              <div className="slide-product-link">상품 바로가기</div>  {/* 상품 바로가기 버튼 */}
+            </div>
+          </Link>
         </div>
-      )}
+      ))
+    ) : (
+      <div className="slider-item">
+        <img src="/imgs/loading.jpg" alt="Loading..." />
+      </div>
+    )}
+  </Slider>
+</div>
 
-      {/* 로그인 상태: 추천 상품 슬라이더 */}
-      {isLoggedIn && (
-        <div className="autoplay">
-          <Slider {...settings}>
-            {recommendedItems.length > 0 ? (
-              recommendedItems.map((item, index) => (
-                <div className="slider-item" key={index}>
-                  <Link to={`/producDetail/${item.productSeq}`} className="slider-link">
-                    <div className="image-container">
-                      <img src={`http://localhost:8070/product_images/${item.productImage}`} alt={item.productName} className="slide-product-image" />
-                      <div className="badge" style={{left: '21%'}}>{memberId}님 추천상품</div>
-                      <div className="overlay">
-                        <div className="slide-product-info">
-                          <div className="slide-product-name">{item.productName}</div>
-                          <div className="slide-product-price">₩ {new Intl.NumberFormat("ko-KR").format(item.productSalePrice)} 원</div>
-                        </div>
-                      </div>
-                      <div className="slide-product-link">상품 바로가기</div>  {/* 상품 바로가기 버튼 */}
-                    </div>
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <div className="slider-item">
-                <img src="/imgs/no-recommendation.jpg" alt="No recommended products" />
-              </div>
-            )}
-          </Slider>
-        </div>
-      )}
-    </div>
+
   );
 };
 

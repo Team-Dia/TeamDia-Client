@@ -59,7 +59,6 @@ import CustomerQnaView from "./Component/Customer/CustomerQnaView";
 // 로그인 운영
 import { loginAction, logoutAction } from "./store/userSlice";
 import jaxios from "./util/jwtUtil";
-import MainSlider from "./Component/MySlider/Slider"; // 맞춤형 추천 상품 슬라이더
 
 
 
@@ -99,18 +98,7 @@ function App() {
             <Routes>
 
                 {/* 메인 */}
-<Route path="/" element={<>
-    <Navbar/>
-    <Heading />
-    {loginUser.memberId ? (
-        <MainSlider memberId={loginUser.memberId} isLoggedIn={true} />
-    ) : (
-        <MainSlider />
-    )}
-    <Index />
-    <Footing/>
-</>} />
-
+                <Route path="/" element={<><Navbar/><Heading /><MySlider /><Index /><Footing/></>} />
                 <Route path="/bestProduct" element={<><Navbar/><BestProduct /><Footing/></>} />
                 <Route path="/newProduct" element={<><Navbar/><NewProduct /><Footing/></>} /> 
 
