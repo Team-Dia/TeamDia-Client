@@ -166,74 +166,94 @@ const Cartlist = () => {
     return (
         <article>
             <div className='subPage'>
-                <div className='cartList'>
-                    <h2>장바구니</h2>
-                    {cartList.length > 0 ? (
-                        <div className="tb">
-                            <div className="row">
-                                <div className="coltitle">상품 이미지</div>
-                                <div className="coltitle">상품명</div>
-                                <div className="coltitle">옵 션</div>
-                                <div className="coltitle">수 량</div>
-                                <div className="coltitle">가 격</div>
-                                <div className="coltitle">선 택</div>
-                            </div>
-                            {cartList.map((cart, idx) => (
-                                <div className="row" key={cart.cartSeq}>
-                                    {/* 상품이미지 추가 */}
-                                    <img src={`http://localhost:8070/product_images/${cart.productImage}`} 
-                                        alt={cart.productName} 
-                                        style={{ width: "100px", height: "100px", objectFit: "cover" }}
-                                    />
-                                    {/* ✅ 상품명을 클릭하면 상세 페이지로 이동 */}
-                                    <span 
-                                        className="product-link" 
-                                        onClick={() => goToProductDetail(cart.productSeq)}
-                                    >
-                                            {cart.productName}
-                                    </span>
-                                    <div className="col">{cart.sizeValue}</div>
-                                    <div className="col">{cart.quantity}</div>
-                                    <div className="col">
-                                        {new Intl.NumberFormat('ko-KR').format(cart.quantity * cart.productSalePrice)}
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            type="checkbox"
-                                            id={`ch${idx}`}
-                                            value={cart.cartSeq}
-                                            onChange={(e) => handleCheck(cart.cartSeq, e.target.checked)}
-                                        />
-                                    </div>
-                                </div>
-                            ))}
-                            <div className="row">
-                                <div className="col" style={{ backgroundColor: "blue", color: "white", flex: "2" }}> 총 액</div>
-                                <div className="col" style={{ flex: "2", textAlign: "left" }}>
-                                    &nbsp;&nbsp;&nbsp;{new Intl.NumberFormat('ko-KR').format(totalPrice)}
-                                </div>
-                                <div className="col" style={{ flex: "1" }}>
-                                    <button onClick={handleDeleteCart}>삭제</button>
-                                </div>
-                            </div>
-                            <div className="btn" style={{ display: "flex" }}>
-                                <button
-                                    style={{ flex: "1", background: "blue", padding: "10px", color: "white", margin: "3px" }}
-                                    onClick={() => navigate('/')}
+            <div className='cartlist-container'>
+    <div className='cartlist-header'>
+        <h1>장바구니</h1>
+        <div className='cartlist-header-right'>
+            <p style={{display:'flex',alignItems:'center'}}>장바구니&nbsp;<i className="ri-play-circle-fill"></i></p>&nbsp;&nbsp;
+            <p style={{display:'flex',alignItems:'center',color:'rgb(155, 155, 155)'}}>결제하기&nbsp;<i className="ri-play-circle-fill"></i></p>&nbsp;&nbsp;
+            <p style={{color:'rgb(155, 155, 155)'}}>주문완료</p>
+        </div>
+    </div>
+
+    {cartList.length > 0 ? (
+        <>
+            <div className="cartlist-product-header">
+                <p style={{fontSize:'22px', fontWeight:'bold'}}>상품 정보</p>
+                <div className='cartlist-product-right'>
+                    <p>수량</p>
+                    <p>할인혜택</p>
+                    <p>주문금액</p>
+                </div>
+            </div>
+
+            <div className="cartlist-table">
+                {cartList.map((cart, idx) => (
+                    <div className="cartlist-row" key={cart.cartSeq}>
+                        <div className="cartlist-product-info">
+                            <input
+                                className="cartlist-checkbox"
+                                type="checkbox"
+                                id={`ch${idx}`}
+                                value={cart.cartSeq}
+                                onChange={(e) => handleCheck(cart.cartSeq, e.target.checked)}
+                            />
+                            <img 
+                                className="cartlist-product-image"
+                                src={`http://localhost:8070/product_images/${cart.productImage}`} 
+                                alt={cart.productName} 
+                            />
+                            <div className='cartlist-product-detail'>
+                                <span 
+                                    className="cartlist-product-link" 
+                                    onClick={() => goToProductDetail(cart.productSeq)}
                                 >
-                                    쇼핑 계속하기
-                                </button>
-                                <button style={{ flex: "1", background: "blue", padding: "10px", color: "white", margin: "3px" }}
-                                    onClick={handleOrder}  // ✅ 불필요한 중괄호 제거
-                                >
-                                    주문하기
-                                </button>
+                                    {cart.productName}
+                                </span>
+                                <p className="cartlist-product-option">옵션: {cart.sizeValue}</p>
+                                <div className="cartlist-product-price">
+                                    {new Intl.NumberFormat('ko-KR').format(cart.quantity * cart.productSalePrice)}원
+                                </div>
                             </div>
                         </div>
-                    ) : (
-                        <h3>장바구니가 비었습니다.</h3>
-                    )}
-                </div>
+                        <div className='cartlist-info-right'>
+                            <p>{cart.quantity}개</p>
+                            <p>쿠폰적용</p>
+                            <div>{new Intl.NumberFormat('ko-KR').format(cart.quantity * cart.productSalePrice)}원</div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div className="cartlist-total-price">
+                <div className="cartlist-total-price-label">상품&nbsp;{new Intl.NumberFormat('ko-KR').format(totalPrice)} + 배송비 0 = &nbsp;</div>
+                <div>{new Intl.NumberFormat('ko-KR').format(totalPrice)}원</div>
+            </div>
+
+            <div className="cartlist-button-container">
+                <button className="cartlist-button cartlist-delete-button" onClick={handleDeleteCart}>
+                    선택 상품 삭제
+                </button>
+                <button
+                    className="cartlist-button cartlist-continue-shopping"
+                    onClick={() => navigate('/')}
+                >
+                    쇼핑 계속하기
+                </button>
+                <button 
+                    className="cartlist-button cartlist-order-button"
+                    onClick={handleOrder}
+                >
+                    주문하기
+                </button>
+            </div>
+        </>
+    ) : (
+        <h3>장바구니가 비었습니다.</h3>
+    )}
+</div>
+
+
             </div>
         </article>
     );
