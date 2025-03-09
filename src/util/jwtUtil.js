@@ -10,7 +10,9 @@ const beforeReq = async (config) => {
     //    누구나 접근 가능한 공개 API라면, '사용자 정보 체크' 로직을 SKIP:
     if (
         config.url.includes("/api/product/bestPro") ||
-        config.url.includes("/api/product/newPro")
+        config.url.includes("/api/product/newPro") ||
+        config.url.includes("/api/member/auth/send-email") ||  // ✅ JWT 없이 접근 가능해야 하는 API 추가
+        config.url.includes("/api/member/auth/verify-email")
     ) {
         return config; // 사용자 정보 없이 그냥 통과
     }
