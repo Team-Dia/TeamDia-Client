@@ -129,6 +129,7 @@
   background-color: #f8f9fa;
   color: #000000;
   padding: 5px 10px;
+  font-weight: bold;
   opacity: 0;  /* 기본적으로 숨김 처리 */
   pointer-events: none; /* 마우스 이벤트를 무시하여 클릭되지 않도록 */
   transition: transform 0.3s ease, opacity 0.3s ease;  /* 아래로 슬라이딩 하며 나타남 */

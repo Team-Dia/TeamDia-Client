@@ -17,6 +17,7 @@
     /* background-color: #ff6200; */
     align-items: center;
     margin: 0 auto;
+    position: relative; /* 부모 요소에 relative 추가 */
 }
 
 .header-img {
@@ -32,6 +33,7 @@
     position: relative;
     filter: brightness(0.4);
     object-fit: cover;
+    transition: height 0.3s ease; /* 드롭다운 시에 이미지의 높이가 바뀔 때 부드럽게 이동 */
 }
 
 /* 📌 16인치 노트북 & 일반 데스크탑 (너비 1400px ~ 1919px) */
@@ -102,6 +104,7 @@
     transform: translate(-50%, -20%); /* 정확한 중앙 정렬 */
     text-align: center;
     color: white;
+    transition: top 0.3s ease; /* 드롭다운에 따라 텍스트 위치 변화 */
 }
 
 .header-text h1{
@@ -124,12 +127,18 @@
     border: 3px solid white;
     margin-bottom: 40px;
     font-size: 20px;
-    font-weight:500
+    font-weight:500;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 #header-link:hover{
     background-color: white;
     color: #000000;
     border-color: #000000;
-    transition: 0.3s;
 }
+
+/* 마우스 올렸을 때 드롭다운이 내려오도록 */
+.header-content:hover .header-text {
+    /* top: 60%; */
+}
+
