@@ -90,28 +90,26 @@ const navigate = useNavigate();
 const location = useLocation();
 
 // ✅ localStorage에서 로그인 정보 가져오기
-    const getStoredUser = () => {
-        const storedUserStr = localStorage.getItem("loginUser");
-        if (storedUserStr) {
-            try {
-                return JSON.parse(storedUserStr);
-            } catch (error) {
-                console.error("❌ 로그인 정보 파싱 오류:", error);
-            }
-        }
-        return null;
-    };
-
-    // ✅ Redux 상태 업데이트를 기다린 후 로그인 여부 확인
-    useEffect(() => {
-      const storedUser = getStoredUser();
-      if (storedUser?.memberId) {
-          // 로그인 정보가 있을 경우 Redux 상태 업데이트
-          console.log("✅ Redux 상태 업데이트: ", storedUser);
-          dispatch(loginAction(storedUser));
+const getStoredUser = () => {
+  const storedUserStr = localStorage.getItem("loginUser");
+  if (storedUserStr) {
+      try {
+          return JSON.parse(storedUserStr);
+      } catch (error) {
+          console.error("❌ 로그인 정보 파싱 오류:", error);
       }
-      // 로그인 정보가 없다면 그냥 리턴해서 로그인 페이지로 이동하지 않도록 처리
-  }, [loginUser, dispatch, navigate]);
+  }
+  return null;
+};
+
+useEffect(() => {
+  const storedUser = getStoredUser();
+  if (storedUser?.memberId && storedUser?.memberId !== loginUser?.memberId) {
+    console.log("✅ Redux 상태 업데이트: ", storedUser);
+    dispatch(loginAction(storedUser)); // 상태 업데이트
+  }
+}, [dispatch]); // 의존성 배열 수정
+
   
 
     useEffect(() => {

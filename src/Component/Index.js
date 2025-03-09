@@ -70,25 +70,25 @@ const Index = () => {
       <div className="main-category">
         <Link to="/bestProduct" id="best-link">
           <img src="./imgs/a.jpg" />
-          <p>22베스트22</p>
+          <p>베스트</p>
         </Link>
 
         <Link to="/newProduct" id="best-link">
           <img src="./imgs/e.jpg" />
-          <p>33신상품33</p>
+          <p>신상품</p>
         </Link>
 
         <Link to="/ring" id="best-link">
           <img src="./imgs/d.jpg" />
-          <p>44반지44</p>
+          <p>반지</p>
         </Link>
 
         <Link to="/necklace" id="best-link">
           <img src="./imgs/c.jpg" />
-          <p>55목걸이55</p>
+          <p>목걸이</p>
         </Link>
 
-        <Link to="/earring" id="best-link">
+        <Link to="/earRing" id="best-link">
           <img src="./imgs/b.jpg" />
           <p>귀걸이</p>
         </Link>
@@ -133,10 +133,10 @@ const Index = () => {
                   </Link>
                   <div className="name" style={{ marginLeft: "10px" }}>
                     {product.productName}
-                  </div>
-                  <div className="pro-price" style={{ marginLeft: "10px" }}>
+                  </div>&nbsp;
+                  <div className="pro-price" style={{ marginLeft: "10px",fontWeight:'bold'}}>
                     {new Intl.NumberFormat("ko-KR").format(product.productSalePrice)} 원
-                  </div>
+                  </div>&nbsp;
                 </div>
               </div>
             );
@@ -185,10 +185,10 @@ const Index = () => {
                   </Link>
                   <div className="name" style={{ marginLeft: "10px" }}>
                     {product.productName}
-                  </div>
-                  <div className="pro-price" style={{ marginLeft: "10px" }}>
+                  </div>&nbsp;
+                  <div className="pro-price" style={{ marginLeft: "10px", fontWeight:'bold'}}>
                     {new Intl.NumberFormat("ko-KR").format(product.productSalePrice)} 원
-                  </div>
+                  </div>&nbsp;
                 </div>
               </div>
             );
@@ -198,7 +198,7 @@ const Index = () => {
         )}
       </div>
 
-      <Link to="/ring" id="all-link">
+      <Link to="/ring" id="all-link" style={{marginTop:'80px',marginBottom:'100px'}}>
         Shop All
       </Link>
     </div>

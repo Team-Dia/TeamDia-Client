@@ -543,7 +543,7 @@ const OrderList = () => {
                         )}
                     </div>
 
-                    <button style={{marginTop:'30px',border:'none',width:'100%',height:'48px',background:'black',color:'white',fontWeight:'bold',fontSize:'16px',cursor:'pointer'}} 
+                    <button style={{marginBottom:'50px', marginTop:'30px',border:'none',width:'100%',height:'48px',background:'black',color:'white',fontWeight:'bold',fontSize:'16px',cursor:'pointer'}} 
                             onClick={createOrder} disabled={isLoading}>결제하기
                     </button>
 

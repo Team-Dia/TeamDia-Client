@@ -5,6 +5,8 @@ import ProductSidebar from "../ProductSidebar";
 import LoadingScreen from "../LoadingScreen";
 import './DisplayPage.css';
 import { FaTimes } from "react-icons/fa";
+import {FaHeart, FaRegHeart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const categoryConfig = {
     ring: { id: 1, name: "반지", subCategories: ["전체", "커플링", "심플", "큐빅", "골드", "실버"] },
@@ -25,20 +27,37 @@ const DisplayPage = () => {
     const [sortBy, setSortBy] = useState(searchParams.get("sortBy") || "");
     const [isLoading, setIsLoading] = useState(false);
     const [prevCategory, setPrevCategory] = useState(category); // ✅ 이전 카테고리 저장
+    const [likeList, setLikeList] = useState([]); // ✅ 찜한 상품 목록
+
+    const loginUser = useSelector(state => state.user);
 
     const categoryData = categoryConfig[category];
+
+
+    // ✅ 로그인한 사용자의 찜 목록 불러오기
+    useEffect(() => {
+        if (loginUser && loginUser.memberId) {
+            axios.get(`/api/post/getUserLikes`, { 
+                params: { memberId: loginUser.memberId }
+            })
+            .then((response) => {
+                setLikeList(response.data.map(item => item.productSeq));
+            })
+            .catch((error) => console.error("좋아요 목록 불러오기 오류:", error));
+        }
+    }, [loginUser]);
 
     useEffect(() => {
         setIsLoading(true);
         const searchParams = new URLSearchParams(location.search);
         const subCategoryFromURL = searchParams.get("subCategory") || "전체";
         setSelectedSubCategory(subCategoryFromURL);
-
+    
         if (categoryData?.id) {
             axios.get("/api/product/categoryList", {
                 params: { 
                     categoryId: categoryData.id, 
-                    subCategory: subCategoryFromURL !== "전체" ? subCategoryFromURL : undefined
+                    subCategory: subCategoryFromURL !== "전체" ? subCategoryFromURL : undefined // ✅ "전체"이면 필터링 없이 가져오기
                 }
             })
             .then((result) => {
@@ -68,7 +87,7 @@ const DisplayPage = () => {
         } else {
             setIsLoading(false);
         }
-    }, [location.search, category]);
+    }, [location.search, category]);    
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -110,6 +129,37 @@ const DisplayPage = () => {
         navigate(`/${category}?${newSearchParams.toString()}`);
     };
 
+// ✅ 찜(좋아요) 추가/취소 기능
+const toggleLike = async (productSeq) => {
+    if (!loginUser || !loginUser.memberId) {
+        alert("로그인이 필요합니다.");
+        navigate("/login");
+        return;
+    }
+
+    try {
+        if (likeList.includes(productSeq)) {
+            // ✅ 좋아요 취소
+            await axios.delete(`/api/post/removeLike`, {
+                params: {
+                    memberId: loginUser.memberId,
+                    productSeq: productSeq
+                }
+            });
+            setLikeList(likeList.filter(id => id !== productSeq));
+        } else {
+            // ✅ 좋아요 추가
+            await axios.post(`/api/post/addLike`, {
+                memberId: loginUser.memberId,
+                productSeq: productSeq
+            });
+            setLikeList([...likeList, productSeq]);
+        }
+    } catch (error) {
+        console.error("좋아요 처리 오류:", error);
+    }
+};
+    
     return (
         <div className="display-wrapper">
             {/* ✅ 이전 카테고리를 저장하도록 `setPrevCategory` 전달 */}
@@ -175,6 +225,9 @@ const DisplayPage = () => {
                                         <div className="display-image">
                                             <img src={`http://localhost:8070/product_images/${product.productImage}`} alt={product.productName} />
                                         </div>
+
+
+
                                         <div className="display-details">
                                             <div className="display-rating">
                                                 {Array.from({ length: 5 }).map((_, index) => (
@@ -186,12 +239,26 @@ const DisplayPage = () => {
                                                     </span>
                                                 ))}
                                                 <span className="review-count">({product.reviewCount})</span>
+
+                                                {/* ✅ 리뷰 개수 오른편에 찜(하트) 버튼 추가 */}
+                                                <span className="display-like-icon" onClick={(e) => { 
+                                                    e.stopPropagation();
+                                                    toggleLike(product.productSeq);
+                                                }}>
+                                                    {likeList.includes(product.productSeq) 
+                                                        ? <FaHeart className="display-liked" /> 
+                                                        : <FaRegHeart className="display-unliked" />}
+                                                </span>
                                             </div>
                                             <h4>{product.productName}</h4>
                                             <p className="display-price">
                                                 <span className="sale-price">{product.productSalePrice.toLocaleString()}원</span>
                                             </p>
                                         </div>
+
+
+
+
                                     </div>
                                 ))
                             ) : (
