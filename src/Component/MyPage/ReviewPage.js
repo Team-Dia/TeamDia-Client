@@ -124,6 +124,14 @@ const ReviewPage = () => {
             </React.Fragment>
         ))}
     </div>
+
+useEffect(() => {
+    // 이미지 URL이 변경되었을 때만 렌더링되도록 유도
+    if (uploadedImageUrls.length > 0) {
+        console.log("업로드된 이미지 URLs: ", uploadedImageUrls);
+    }
+}, [uploadedImageUrls]); // uploadedImageUrls 상태가 변할 때마다 실행됨
+
     
     return (
         <div className="mypage-container">

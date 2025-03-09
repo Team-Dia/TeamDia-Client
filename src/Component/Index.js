@@ -133,10 +133,10 @@ const Index = () => {
                   </Link>
                   <div className="name" style={{ marginLeft: "10px" }}>
                     {product.productName}
-                  </div>
-                  <div className="pro-price" style={{ marginLeft: "10px" }}>
+                  </div>&nbsp;
+                  <div className="pro-price" style={{ marginLeft: "10px",fontWeight:'bold'}}>
                     {new Intl.NumberFormat("ko-KR").format(product.productSalePrice)} 원
-                  </div>
+                  </div>&nbsp;
                 </div>
               </div>
             );
@@ -185,10 +185,10 @@ const Index = () => {
                   </Link>
                   <div className="name" style={{ marginLeft: "10px" }}>
                     {product.productName}
-                  </div>
-                  <div className="pro-price" style={{ marginLeft: "10px" }}>
+                  </div>&nbsp;
+                  <div className="pro-price" style={{ marginLeft: "10px", fontWeight:'bold'}}>
                     {new Intl.NumberFormat("ko-KR").format(product.productSalePrice)} 원
-                  </div>
+                  </div>&nbsp;
                 </div>
               </div>
             );
@@ -198,7 +198,7 @@ const Index = () => {
         )}
       </div>
 
-      <Link to="/ring" id="all-link">
+      <Link to="/ring" id="all-link" style={{marginTop:'80px',marginBottom:'100px'}}>
         Shop All
       </Link>
     </div>

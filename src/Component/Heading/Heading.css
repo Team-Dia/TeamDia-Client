@@ -137,8 +137,5 @@
     border-color: #000000;
 }
 
-/* 마우스 올렸을 때 드롭다운이 내려오도록 */
-.header-content:hover .header-text {
-    /* top: 60%; */
-}
+
 
