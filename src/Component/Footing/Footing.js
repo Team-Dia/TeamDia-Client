@@ -36,7 +36,8 @@ const Footing = () => {
                 
                 <div className='footer-adimin'>
                     <p>주식회사 DIA 쇼핑몰</p>
-                    <a href={`${window.location.origin}:3001/admin`}> {/* admin 로그인 페이지로 이동 */}
+                    {/* <a href={`${window.location.origin}:3001/admin`}> admin 로그인 페이지로 이동http://localhost:3001/admin */}
+                    <a href={`http://localhost:3001/admin`}>
                         <i className="ri-admin-line"></i> Admin
                     </a>
                 </div>
