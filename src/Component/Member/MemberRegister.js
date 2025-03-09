@@ -90,7 +90,7 @@ const MemberRegister = () => {
         }
     
         try {
-            const response = await axios.post("/api/member/idCheck", {
+            const response = await axios.post("/member/idCheck", {
                 userid: formData.memberId, // ShoesShop 방식
             });
     
@@ -250,6 +250,10 @@ const MemberRegister = () => {
     
     
     // 이메일 인증 요청
+
+    const BASE_URL = process.env.NODE_ENV === "production" 
+    ? "http://43.201.136.44:8070"  // ✅ AWS 배포 환경에서 백엔드 API 주소
+    : "http://localhost:8070"; // ✅ 로컬 개발 환경
    
 
     const requestEmailVerification = async () => {
@@ -272,7 +276,7 @@ const MemberRegister = () => {
                 headers['Authorization'] = 'Bearer ' + jwtToken;
             }
     
-            const response = await fetch("/api/member/auth/send-email", {
+            const response = await fetch("/member/auth/send-email", {
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify({ email: `${emailId}@${emailDomain}` }),
