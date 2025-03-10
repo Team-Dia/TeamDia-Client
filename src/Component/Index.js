@@ -41,17 +41,24 @@ const Index = () => {
   // ✅ 회원 정보 가져오기
   useEffect(() => {
     const limit = 8; // limit 값을 8로 설정
-    
+
     // 베스트 상품 가져오기
-    jaxios.get(`/api/product/bestPro?limit=${limit}`)
+    jaxios
+      .get(`/api/product/bestPro?limit=${limit}`)
       .then((result) => {
         console.log("📌 [베스트 상품] 응답 데이터:", result.data.bestProduct);
-        
+
         if (Array.isArray(result.data.bestProduct)) {
-          console.log("✅ [프론트] bestProduct 개수:", result.data.bestProduct.length);
+          console.log(
+            "✅ [프론트] bestProduct 개수:",
+            result.data.bestProduct.length
+          );
           setBestProduct(result.data.bestProduct);
         } else {
-          console.error("❌ [프론트] bestProduct가 배열이 아님:", result.data.bestProduct);
+          console.error(
+            "❌ [프론트] bestProduct가 배열이 아님:",
+            result.data.bestProduct
+          );
         }
       })
       .catch((err) => {
@@ -60,15 +67,22 @@ const Index = () => {
       });
 
     // 신상품 가져오기
-    jaxios.get(`/api/product/newPro?limit=${limit}`)
+    jaxios
+      .get(`/api/product/newPro?limit=${limit}`)
       .then((result) => {
         console.log("📌 [신상품] 응답 데이터:", result.data.newProduct);
 
         if (Array.isArray(result.data.newProduct)) {
-          console.log("✅ [프론트] newProduct 개수:", result.data.newProduct.length);
+          console.log(
+            "✅ [프론트] newProduct 개수:",
+            result.data.newProduct.length
+          );
           setNewProduct(result.data.newProduct);
         } else {
-          console.error("❌ [프론트] newProduct가 배열이 아님:", result.data.newProduct);
+          console.error(
+            "❌ [프론트] newProduct가 배열이 아님:",
+            result.data.newProduct
+          );
         }
       })
       .catch((err) => {
@@ -147,10 +161,18 @@ const Index = () => {
                   </Link>
                   <div className="name" style={{ marginLeft: "10px" }}>
                     {product.productName}
-                  </div>&nbsp;
-                  <div className="pro-price" style={{ marginLeft: "10px",fontWeight:'bold'}}>
-                    {new Intl.NumberFormat("ko-KR").format(product.productSalePrice)} 원
-                  </div>&nbsp;
+                  </div>
+                  &nbsp;
+                  <div
+                    className="pro-price"
+                    style={{ marginLeft: "10px", fontWeight: "bold" }}
+                  >
+                    {new Intl.NumberFormat("ko-KR").format(
+                      product.productSalePrice
+                    )}{" "}
+                    원
+                  </div>
+                  &nbsp;
                 </div>
               </div>
             );
@@ -201,10 +223,18 @@ const Index = () => {
                   </Link>
                   <div className="name" style={{ marginLeft: "10px" }}>
                     {product.productName}
-                  </div>&nbsp;
-                  <div className="pro-price" style={{ marginLeft: "10px", fontWeight:'bold'}}>
-                    {new Intl.NumberFormat("ko-KR").format(product.productSalePrice)} 원
-                  </div>&nbsp;
+                  </div>
+                  &nbsp;
+                  <div
+                    className="pro-price"
+                    style={{ marginLeft: "10px", fontWeight: "bold" }}
+                  >
+                    {new Intl.NumberFormat("ko-KR").format(
+                      product.productSalePrice
+                    )}{" "}
+                    원
+                  </div>
+                  &nbsp;
                 </div>
               </div>
             );
@@ -214,7 +244,11 @@ const Index = () => {
         )}
       </div>
 
-      <Link to="/ring" id="all-link" style={{marginTop:'80px',marginBottom:'100px'}}>
+      <Link
+        to="/ring"
+        id="all-link"
+        style={{ marginTop: "80px", marginBottom: "100px" }}
+      >
         Shop All
       </Link>
     </div>

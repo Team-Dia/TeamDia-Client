@@ -1,899 +1,553 @@
-import React, { useState, useEffect,useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import axios from 'axios';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
-import './ProducDetail.css';
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import { useNavigate,useParams } from 'react-router-dom';
-import Modal from '../Modal/Modal';
-import ProductInfoReview from '../review/ProductInfoReview';
-import { useSelector, useDispatch } from 'react-redux';
-import { Cookies } from 'react-cookie';
-import jaxios from '../../util/jwtUtil';
-import { useLocation } from 'react-router-dom';
-import Footing from '../Footing/Footing';
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import AdminLayout from '../AdminLayout'
+import jaxios from '../../util/jwtUtil'
+import '../../style/admin.css'
 
-const ProducDetail = () => {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [thumbsActiveIndex, setThumbsActiveIndex] = useState(0);
-  const [user, setUser] = useState(null);
-  const [selectedOption, setSelectedOption] = useState("");
-  const [categoryName, setCategoryName] = useState("");
-  const [categoryId, setCategoryId] = useState(null); // ✅ categoryId 상태 추가
-  const [reviewCount, setReviewCount] = useState(0);
-  const [averageRating, setAverageRating] = useState(0); // 평균 별점 상태 추가
-  const [totalLikes, setTotalLikes] = useState(0); // 총 좋아요 수 가져오기
+const UpdateProduct = () => {
+  const { productSeq } = useParams()
+  const navigate = useNavigate() // 상품 관련 상태 및 카테고리 목록 (WriteProduct.js와 유사한 구조)
+   // ✅ 상품 정보 상태
+  const [product, setProduct] = useState({})
+  const [categories, setCategories] = useState([
+    { id: 1, name: '반지' },
+    { id: 2, name: '목걸이' },
+    { id: 3, name: '귀걸이' },
+    { id: 4, name: '팔찌' },
+  ]) 
+
+   // ✅ 마진 자동 계산
+   const calculateMarginPrice = (costPrice, salePrice) => {
+    const cost = Number(costPrice) || 0
+    const sale = Number(salePrice) || 0
+    return String(sale - cost)
+  } 
+  // ✅ 이미지 URL 상태 관리 (S3 적용)
+  const [imgSrc, setImgSrc] = useState('')
+  const [imgSrc2, setImgSrc2] = useState('')
+  const [imgSrc3, setImgSrc3] = useState('')
+  const [imgSrc4, setImgSrc4] = useState('')
+  const [infoImgSrc, setInfoImgSrc] = useState('')
+  const [infoImgSrc2, setInfoImgSrc2] = useState('')
+  const [infoImgSrc3, setInfoImgSrc3] = useState('')
+  const [infoImgSrc4, setInfoImgSrc4] = useState('')
+  const [infoImgSrc5, setInfoImgSrc5] = useState('')
+  const [hoverImgSrc, setHoverImgSrc] = useState('') // 마진 계산 함수 (원가와 판매가의 차이를 자동으로 계산)
   
-  const categoryOptions = {
-    1: ["10호", "11호", "12호"], // 반지 (category_id: 1)
-    2: ["40cm", "41cm", "42cm"], // 목걸이 (category_id: 2)
-    3: ["옐로우골드", "로즈골드", "화이트골드"], // 귀걸이 (category_id: 3)
-    4: ["17cm", "18cm", "19cm"] // 팔찌 (category_id: 4)
+  // ✅ S3 이미지 URL 저장 상태
+  const [uploadedImages, setUploadedImages] = useState({
+    productImage: "",
+    productImage2: "",
+    productImage3: "",
+    productImage4: "",
+    infoImage: "",
+    infoImage2: "",
+    infoImage3: "",
+    infoImage4: "",
+    infoImage5: "",
+    hoverImage: "",
+  });
+
+  // ✅ S3 URL 확인 및 변환 함수
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "/images/no-image.png"; 
+    if (imagePath.startsWith("http")) return imagePath; 
+    return `http://localhost:8070/product_images/${imagePath}`; 
   };
-  
-  const handleOptionChange = (e) => {
-    const option = e.target.value;
-    if (!option) return;
 
-    // ✅ 중복 추가 방지: 이미 sizeList에 존재하는지 확인
-    setSizeList((prevList) => {
-        if (prevList.includes(option)) {
-            return prevList; // 기존 리스트 유지 (중복 방지)
+  // ✅ 상품 정보 불러오기 (S3 URL 유지)
+  useEffect(() => {
+    jaxios.get(`/api/admin/product/${productSeq}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setProduct(response.data);
+          setUploadedImages({
+            productImage: response.data.productImage || "",
+            productImage2: response.data.productImage2 || "",
+            productImage3: response.data.productImage3 || "",
+            productImage4: response.data.productImage4 || "",
+            infoImage: response.data.infoImage || "",
+            infoImage2: response.data.infoImage2 || "",
+            infoImage3: response.data.infoImage3 || "",
+            infoImage4: response.data.infoImage4 || "",
+            infoImage5: response.data.infoImage5 || "",
+            hoverImage: response.data.hoverImage || "",
+          });
+        } else {
+          Swal.fire({ icon: 'error', title: '불러오기 실패', text: '상품 정보를 불러오는 데 실패했습니다.' });
         }
-        return [...prevList, option]; // 새로운 옵션 추가
-    });
-
-    // ✅ 옵션별 수량을 관리하는 객체 업데이트 (기본값 1)
-    setQuantityList((prevList) => ({
-        ...prevList,
-        [option]: prevList[option] || 1
-    }));
-
-    setSelectedOption(""); // ✅ 선택 후 옵션 초기화 (한 번만 추가되도록)
-  };
-
-
-  function ProductOptions({ categoryId, selectedOption, handleOptionChange }) {
-    const options = categoryOptions[categoryId] || [];
-    return (
-      <div>
-        <select value={selectedOption} onChange={handleOptionChange} className="size-select">
-          <option value="">옵션 선택</option>
-          {options.map((option, index) => (
-            <option key={index} value={option}>{option}</option>
-          ))}
-        </select>
-  
-        {/* 선택된 사이즈 표시 */}
-        {selectedOption && (
-          <div className='size-info'>
-            <p style={{ marginTop: '15px' }}>{selectedOption}</p>
-            <img 
-              src='/imgs/deletebtn.png' 
-              style={{ width: '20px', marginRight: '10px', marginTop: '15px', cursor: 'pointer' }} 
-              onClick={() => handleOptionChange({ target: { value: "" } })} 
-            />
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  const handleSlideChange = (swiper) => {
-    setActiveIndex(swiper.activeIndex); // 메인 이미지 activeIndex 업데이트
-    if (thumbsSwiper) {
-      thumbsSwiper.slideTo(swiper.activeIndex);  // 썸네일 슬라이드 이동
-    }
-  };
-
-  const handleThumbsSlideChange = (swiper) => {
-    setThumbsActiveIndex(swiper.activeIndex);
-    if (thumbsSwiper) {
-      thumbsSwiper.slideTo(swiper.activeIndex);  // 썸네일에서 슬라이드하면 메인 이미지도 동기화
-    }
-  };
-
-  const handleSizeChange = (e) => {
-    const newSize = e.target.value;
-    if (newSize && !sizeList.includes(newSize)) {
-      setSizeList((prevList) => [...prevList, newSize]);
-      setQuantityList((prevList) => [...prevList, { size: newSize, quantity: 1 }]); // 새로운 사이즈 추가
-    }
-  };
-
-  const handleDeleteSize = (sizeToDelete) => {
-    // 사이즈 삭제 시, 사이즈 리스트와 수량 리스트에서 해당 항목을 모두 삭제
-    setSizeList((prevList) => prevList.filter(size => size !== sizeToDelete));
-    // ✅ quantityList에서 해당 size 삭제 (객체 업데이트)
-    setQuantityList((prevList) => {
-      const updatedList = { ...prevList };
-      delete updatedList[sizeToDelete];
-      return updatedList;
-    });
-  };
-
-  // 수량 변경을 위한 버튼 핸들러
-  const handleIncrease = (size) => {
-    setQuantityList((prevList) => ({
-      ...prevList,
-      [size]: (prevList[size] || 1) + 1
-    }));
-  };
-  
-  const handleDecrease = (size) => {
-    setQuantityList((prevList) => ({
-      ...prevList,
-      [size]: Math.max(1, (prevList[size] || 1) - 1)
-    }));
-  };
-
-  // 수량 변경
-  const handleQuantityChange = (size, e) => {
-    const newQuantity = Number(e.target.value);
-    if (!isNaN(newQuantity) && newQuantity > 0) {
-      setQuantityList((prevList) => ({
-        ...prevList,
-        [size]: newQuantity
-      }));
-    }
-  };
-  
-
-  // ------------------------------------------------------------------------------------------------------
-
-  const [productImages, setProductImages] = useState([]); // 이미지 데이터를 저장할 상태
-  const {productSeq} = useParams();
-  const [product, setProduct] = useState({});
-  const [review,setReview] = useState([]);
-  const [size, setSize] = useState('');
-  const [quantity,setQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [sizeList, setSizeList] = useState([]);  // 여러 사이즈를 관리하는 배열
-  const [quantityList, setQuantityList] = useState({});
-  const [likeList, setLikeList] = useState([])
-  const dispatch = useDispatch()
-  const cookies = new Cookies();
-  const sizeQuantity = quantityList[size] ?? 1; // ✅ 기본값 1로 설정
-  
-  const basePrice = product.productSalePrice || 0;
-
-  // ------------------------------------------------------------------------------------------------------
-
-
-  // 모달 열기/닫기 상태 관리
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState({ title: '', content: '' });
-
-  // 클릭된 div에 따라 모달 내용 변경
-  const openModal = (type) => {
-    if (type === 'exchange') {
-      setModalContent({
-        title: '교환 및 반품 정보',
-        content: '여기에는 교환 및 반품에 대한 정보가 들어갑니다.',
+      })
+      .catch(() => {
+        Swal.fire({ icon: 'error', title: '오류', text: '상품 정보를 불러오는 중 오류가 발생했습니다.' });
       });
-    } else if (type === 'as') {
-      setModalContent({
-        title: 'A/S 정보',
-        content: '여기에는 A/S에 대한 정보가 들어갑니다.',
-      });
-    }
-    setIsModalOpen(true);
+  }, [productSeq]);
+
+  // ✅ 입력 필드 변경 핸들러
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: value,
+      productMarginPrice: (name === 'productCostPrice' || name === 'productSalePrice') 
+        ? calculateMarginPrice(name === 'productCostPrice' ? value : prevProduct.productCostPrice, 
+                               name === 'productSalePrice' ? value : prevProduct.productSalePrice)
+        : prevProduct.productMarginPrice,
+    }));
   };
-
-  // 모달 닫기
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // ------------------------------------------------------------------------------------------------------
-
-  // 로그인 후 사용자가 좋아요한 목록을 가져오는 함수
-  async function fetchUserLikes(productSeq = null) {
-    if (loginUser && loginUser.memberId) {
-      try {
-        // 요청 파라미터 설정
-        const params = {
-          memberId: loginUser.memberId,
-        };
-
-        // productSeq가 있으면 해당 상품에 대한 좋아요만 조회
-        if (productSeq) {
-          params.productSeq = productSeq;
-        }
-
-        // 서버로 요청 보내기
-        const response = await jaxios.get('/api/post/getUserLikes', { params });
-
-        // 서버로부터 받은 좋아요 데이터에서 memberId를 적절히 처리
-        const transformedData = response.data.map(item => ({
-          ...item,
-          memberId: item.member ? item.member.memberId : null, // memberId 추출
-        }));
-
-        // 상태에 좋아요 데이터 설정
-        setLikeList(transformedData);
-      } catch (error) {
-        console.error('좋아요 목록을 가져오는 중 오류 발생:', error);
-      }
-    }
-  }
-
   
-  
-  
+  // ✅ 파일 업로드 핸들러 (S3 적용)
+  const handleFileChange = async (event, fieldName) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-  // redux에 저장된 로그인 유저 로딩
-  const loginUser = useSelector(state => state.user);
-    if (!loginUser || Object.keys(loginUser).length === 0) {
-        console.log("사용자 정보가 로드되지 않았습니다.");
-    } else {
-        console.log(loginUser);
-}
-
-  const navigate = useNavigate();
-
-  async function onLike() {
-    if (!loginUser || !loginUser.memberId) {
-        // 로그인하지 않은 상태일 때, 로그인 페이지로 리다이렉트
-        navigate('/login');  // '/login' 페이지로 이동
-        return;  // 더 이상 실행되지 않도록 반환
-    }
+    const formData = new FormData();
+    formData.append("file", file);
 
     try {
-        const isLiked = likeList.some(product_like => loginUser.memberId === product_like.memberId);
+      const response = await jaxios.post(`/api/upload/${folderMapping[fieldName]}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-        if (!isLiked) {
-            // 좋아요 추가 - 서버에 요청 (색칠되지 않은 상태일 때 추가)
-            const response = await jaxios.post('/api/post/addLike', {
-                memberId: loginUser.memberId,
-                productSeq: productSeq,
-            });
-            console.log('좋아요 추가:', response.data);
-            
-            // 서버 응답 후 likeList에 새로운 아이템 추가
-            setLikeList(prevList => [...prevList, { memberId: loginUser.memberId, productSeq }]);
+      const fileUrl = response.data;
+      // setUploadedImages((prev) => ({ ...prev, [fieldName]: fileUrl }));
+      // setProduct((prev) => ({ ...prev, [fieldName]: fileUrl }));
 
-            // 로컬 상태에서 totalLikes 수를 1 증가시킴
-            setTotalLikes(prevTotalLikes => prevTotalLikes + 1);
+      // 기존 이미지(product) 상태는 유지하고, 신규 업로드된 이미지만 반영
+      setUploadedImages((prev) => ({ ...prev, [fieldName]: fileUrl }));
 
-        } else {
-            // 좋아요 취소 - 서버에 요청 (색칠된 상태일 때 취소)
-            const response = await jaxios.delete(`/api/post/removeLike?memberId=${loginUser.memberId}&productSeq=${productSeq}`);
-            console.log('좋아요 취소:', response.data);
-            
-            // 서버 응답 후 likeList에서 해당 아이템 제거
-            setLikeList(prevList => prevList.filter(product_like => product_like.memberId !== loginUser.memberId));
-
-            // 로컬 상태에서 totalLikes 수를 1 감소시킴
-            setTotalLikes(prevTotalLikes => prevTotalLikes - 1);
-
-        }
-
-        
-        
     } catch (error) {
-        console.error('좋아요 처리 중 오류 발생:', error);
+      console.error("파일 업로드 실패", error);
+      alert("파일 업로드에 실패했습니다.");
     }
-}
-
-
-  // ------------------------------------------------------------------------------------------------------
-
-  // ✅ 수량 변경 시, 총 가격 업데이트
-  useEffect(() => {
-    let updatedPrice = basePrice;
-
-    // ✅ quantityList를 객체에서 배열로 변환 후 합산
-    const totalQuantity = Object.values(quantityList).reduce((acc, quantity) => acc + quantity, 0);
-
-    setTotalPrice(updatedPrice * totalQuantity);
-  }, [quantityList, basePrice]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0); // 페이지가 로드되면 스크롤을 맨 위로 이동
-  }, []);
-
-  useEffect(() => {
-    // 로그인 정보가 변경될 때마다 업데이트
-    if (loginUser && loginUser.memberId) {
-      setUser(loginUser);  // Redux에서 가져온 로그인 정보를 상태에 반영
-      console.log('로그인 정보 업데이트:', loginUser);
-    }
-  
-    // productSeq가 존재하면 해당 상품에 대한 좋아요만 조회
-    if (productSeq) {
-      fetchUserLikes(productSeq);
-    } else {
-      fetchUserLikes();  // 전체 좋아요 목록을 가져오려면 그냥 호출
-    }
-  }, [loginUser, productSeq]);  // loginUser나 productSeq가 변경될 때마다 실행
-  
+  };
 
   
   
-
-  // 사이즈와 수량에 따른 가격 계산
-  
-  // ✅ 총 상품 금액 계산 (모든 옵션 합산)
-  useEffect(() => {
-    let updatedPrice = basePrice;
-
-    // ✅ quantityList를 객체에서 배열로 변환 후 합산
-    const totalQuantity = Object.values(quantityList).reduce((acc, quantity) => acc + quantity, 0);
-
-    setTotalPrice(updatedPrice * totalQuantity);
-  }, [quantityList, basePrice]);
-  
-  
-
-  // 서버에서 이미지 데이터를 받아오는 함수
-  
-  useEffect(() => {
-    
-    axios.get(`/api/product/selectPro`, { params: { productSeq } })
-      .then((result) => {
-        console.log(result.data.productImages);
-        setProductImages(result.data.productImages || []); // 서버에서 받은 데이터를 상태에 저장
-      })
-      .catch((err) => {
-        console.error(err);
-        setProductImages([]);
-      });
-  }, [productSeq]);
-
-  useEffect(() => {
-    axios.get(`/api/product/getProduct`, { params: { productSeq } })
-      .then((result) => {
-        if (result.data.product) {
-          setProduct(result.data.product);
-          // setCategoryName(result.data.product.categoryName); // ✅ 부모 카테고리 설정
-          setCategoryId(result.data.product.categoryId); // ✅ categoryId 설정
-          console.log("Loaded product:", result.data.product.categoryId); // 로드된 상품 확인
-        } else {
-          console.warn("상품 정보를 불러올 수 없습니다.");
-        }
-      })
-      .catch((err) => {
-        console.error("상품 정보를 불러오는 중 오류 발생:", err);
-      });
-  }, [productSeq]);
-
-  useEffect(() => {
-    axios.get(`/api/review/getReview`, { params: { productSeq } })
-      .then((result) => {
-        console.log("Loaded reviews:", result.data.review); // 로드된 댓글 확인
-  
-        // 리뷰가 없을 경우 빈 배열로 설정
-        const reviews = result.data.review || [];
-        const reviewCount = result.data.reviewCount || 0;
-        const averageRating = result.data.averageRating || 0;
-  
-        setReview(reviews); // 리뷰 설정
-        setReviewCount(reviewCount); // 리뷰 갯수 설정
-        setAverageRating(averageRating); // 평균 별점 설정
-      })
-      .catch((err) => {
-        console.error(err);
-        // 에러가 발생했을 때에도 기본값을 설정
-        setReview([]); // 빈 배열로 설정
-        setReviewCount(0); // 리뷰 갯수 0으로 설정
-        setAverageRating(0); // 평균 별점 0으로 설정
-      });
-  }, [productSeq]); // productSeq가 변경될 때마다 호출
-  
-
-  useEffect(() => {
-    // 서버에서 총 좋아요 수를 받아오는 API 호출
-    const fetchLikes = async () => {
-        try {
-            const response = await axios.get(`/api/post/getLikesCount?productSeq=${productSeq}`);
-            console.log('서버에서 받은 총 좋아요 수:', response.data);  // 서버에서 받은 좋아요 수 확인
-            setTotalLikes(response.data);  // 서버에서 받은 총 좋아요 수를 상태에 설정
-        } catch (error) {
-            console.error('좋아요 수 가져오기 오류:', error);
-        }
-    };
-
-    if (productSeq) {
-        fetchLikes();
-    }
-
-}, [productSeq]);  // productSeq가 변경될 때마다 호출
-
-
-
-
-console.log('Product Seq:', productSeq); // productSeq 값 확인
-console.log('Review Seq:', review); // reviewSeq 값 확인 (없을 수 있음)
-console.log('CategoryName:', categoryName);
-
-
-
-
-useEffect(() => {
-  if (thumbsSwiper && productImages.length > 0) {
-    thumbsSwiper.update();  // 썸네일 swiper 업데이트
-    thumbsSwiper.slideTo(activeIndex);  // 메인 이미지의 activeIndex에 맞춰 썸네일 슬라이드 업데이트
-  }
-}, [activeIndex, thumbsSwiper, productImages]);
-
-const goCart = async () => {
-  if (!loginUser || !loginUser.memberId) {
-    alert("로그인이 필요합니다.");
-    navigate('/login');
-    return;
-  }
-  if (sizeList.length === 0) {
-    alert("옵션을 선택해주세요.");
-    return;
-  }
-  try {
-    console.log("장바구니 추가 시도");
-    for (const size of sizeList) {
-      const sizeQuantity = quantityList[size] ?? 1; // 옵션별 수량 가져오기
-
-      console.log("jaxios 요청 전");
-
-      const response = await jaxios.post('/api/cart/insertCart', null, {
-        params: {
-          productSeq: productSeq,
-          memberId: loginUser.memberId,
-          quantity: sizeQuantity,
-          option: size, // ✅ 옵션 정보를 백엔드에 전달
-        }
-      });
-      console.log("jaxios 요청 후", response);
-
-      // 요청 전후의 헤더를 확인
-console.log("Request Headers:", response.config.headers);  // 헤더 출력
-
-if (response.data.msg === "ok") {
-    console.log(`장바구니 추가 성공: ${size}`);
-} else {
-    console.warn(`장바구니 추가 실패: ${size}`);
-}
-    }
-
-    if (window.confirm("장바구니에 추가되었습니다. 장바구니로 이동할까요?")) {
-      navigate('/cartlist'); // ✅ 장바구니 페이지로 이동
-    }
-  } catch (error) {
-    console.error("장바구니 추가 중 오류 발생:", error);
-    alert("장바구니 추가에 실패했습니다.");
-  }
-};
-
-
-
-
-const { productId } = useParams(); // URL에서 productId 가져오기
-
-  // 최근 본 상품 출력 기능
-  useEffect(() => {
-    if (productSeq && product?.productName) { 
-        let viewedProducts = JSON.parse(localStorage.getItem("viewedProducts")) || [];
-
-        // 🔹 중복 제거 (같은 상품이 이미 존재하면 삭제)
-        viewedProducts = viewedProducts.filter((p) => p.productSeq !== productSeq);
-
-        // 🔹 새로운 상품을 배열의 맨 앞에 추가
-        viewedProducts.unshift({
-            productSeq: productSeq,
-            productName: product.productName,
-            productImage: product.productImage || "/images/default-placeholder.jpg",
-            productPrice: product.productMarginPrice || 0,
-        });
-
-        // 🔹 최근 본 상품 최대 10개까지만 유지
-        if (viewedProducts.length > 10) {
-            viewedProducts.pop();
-        }
-
-        // 🔹 localStorage에 업데이트
-        localStorage.setItem("viewedProducts", JSON.stringify(viewedProducts));
-
-        // 🔹 MyPage에서 즉시 반영될 수 있도록 이벤트 발생
-        window.dispatchEvent(new Event("recentlyViewedUpdated"));
-    }
-  }, [productSeq, product]);
-
-  // orderOne 함수 정의
-  const orderOne = () => {
-    if (!loginUser || !loginUser.memberId) {
-      alert("로그인이 필요합니다.");
-      navigate('/login');
-      return;
-    }
-  
-    if (sizeList.length === 0) {
-      alert("옵션을 선택해주세요.");
-      return;
-    }
-  
-    // 주문할 상품 리스트 생성 (여러 옵션이 있는 경우)
-    const orderItems = sizeList.map((size) => ({
-      productSeq: product.productSeq,
-      productName: product.productName,
-      productImage: product.productImage,
-      sizeValue: size, // 선택한 옵션(사이즈)
-      quantity: quantityList[size] ?? 1, // 선택한 옵션의 수량
-      totalPrice: (quantityList[size] ?? 1) * product.productSalePrice, // 개별 상품 총 가격
+  // ✅ S3 업로드 후 실행되는 함수
+  const handleUploadSuccess = (fieldName, fileUrl) => {
+    setUploadedImages((prev) => ({
+      ...prev,
+      [fieldName]: fileUrl, 
     }));
-    console.log("📌 생성된 orderItems:", orderItems); // ✅ 로그 추가
+
+    setProduct((prev) => ({
+      ...prev,
+      [fieldName]: fileUrl, 
+    }));
+  };
   
-    // OrderList 페이지로 데이터 전달
-    navigate('/orderList', {
-      state: { 
-        loginUser,
-        orderItems, // 주문할 상품 리스트 전달
+  // 라디오 버튼 변경 처리
+  const handleRadioChange = (e) => {
+    const { name, value } = e.target
+    setProduct((prev) => ({ ...prev, [name]: value }))
+  } // 상품 정보를 페이지 로드 시 불러오기 (기존 이미지 미리보기 설정 포함)
+
+  
+
+  // ✅ 상품 수정 요청
+  const onUpdateSubmit = (e) => {
+    e.preventDefault();
+    
+    jaxios.put(`/api/admin/product/${productSeq}`, { ...product })
+      .then(() => {
+        Swal.fire({ icon: 'success', title: '성공', text: '상품 정보가 수정되었습니다.' })
+          .then(() => navigate(`/productView/${productSeq}`));
+      })
+      .catch(() => {
+        Swal.fire({ icon: 'error', title: '수정 실패', text: '상품 정보 수정에 실패했습니다.' });
+      });
+  };
+
+  const handleCancel = () => {
+    Swal.fire({
+      title: '수정 취소',
+      text: '상품 수정을 취소하고 이전 페이지로 돌아가시겠습니까?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '네',
+      cancelButtonText: '아니오',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate(`/productView/${productSeq}`)
       }
-    });
+    })
+  }
+
+  // ✅ 이미지 업로드 폴더 매핑
+  const folderMapping = {
+    productImage: "product_images",
+    productImage2: "product_images",
+    productImage3: "product_images",
+    productImage4: "product_images",
+    infoImage: "product_infoimages",
+    infoImage2: "product_infoimages",
+    infoImage3: "product_infoimages",
+    infoImage4: "product_infoimages",
+    infoImage5: "product_infoimages",
+    hoverImage: "product_hover",
   };
-
-  // ✅ S3 URL인지 확인 후 반환하는 함수
-  const getImageUrl = (imagePath) => {
-    if (!imagePath) return "/images/no-image.png"; // 기본 이미지 처리
-    if (imagePath.startsWith("http")) return imagePath; // S3 이미지면 그대로 반환
-    return `http://localhost:8070/product_images/${imagePath}`; // 기존 서버 이미지 경로
-  };
-
-
-
-
 
   return (
-    <>
-    <div className='product-detail'>
-
-      <div className='product-allcontainer'>
-
-      <div className="swiper-container">
-      
-        {/* 메인 이미지 Swiper */}
-        <div className="swiper-wrapper">
-          <Swiper
-            style={{
-              '--swiper-navigation-color': '#fff',
-              '--swiper-pagination-color': '#fff',
-            }}
-            loop={false}  // 메인 이미지 순환 비활성화
-            spaceBetween={10}
-            onInit={(swiper) => {
-              if (productImages.length > 0) {
-                swiper.update();  // Swiper가 초기화될 때 이미지가 로드된 후 업데이트
-              }
-            }}
-            navigation={{
-              prevEl: '.swiper-button-prev',
-              nextEl: '.swiper-button-next',
-              disabledClass: 'swiper-button-disabled',
-            }}
-            thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : null}  // 썸네일 Swiper와 메인 슬라이드 동기화
-            onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-            modules={[FreeMode, Navigation, Thumbs]}
-            className="mySwiper2"
-            key={productImages.length}
-          >
-            {productImages.length > 0 ? (
-                productImages.map((product, idx) => (
-                  <>
-                    {product.productImage && (
-                    <SwiperSlide key={`${idx}-1`} className={activeIndex === idx ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage)} alt="상품 이미지" />
-                    </SwiperSlide>
-                  )}
-
-                  {product.productImage2 && (
-                    <SwiperSlide key={`${idx}-2`} className={activeIndex === idx + 1 ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage2)} alt="상품 이미지2" />
-                    </SwiperSlide>
-                  )}
-
-                  {product.productImage3 && (
-                    <SwiperSlide key={`${idx}-3`} className={activeIndex === idx + 2 ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage3)} alt="상품 이미지3" />
-                    </SwiperSlide>
-                  )}
-
-                  {product.productImage4 && (
-                    <SwiperSlide key={`${idx}-4`} className={activeIndex === idx + 3 ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage4)} alt="상품 이미지4" />
-                    </SwiperSlide>
-                  )}
-                </>
-                ))
-              ) : (
-                <SwiperSlide>로딩 중...</SwiperSlide>
-              )}
-
-          </Swiper>
-          
-          {/* 화살표 버튼 */}
-          <div className="swiper-button-prev" onClick={() => console.log('Prev Button Clicked')}></div>
-          <div className="swiper-button-next" onClick={() => console.log('Next Button Clicked')}></div>
-
-        </div>
-
-        {/* 썸네일 Swiper */}
-        <div className="wrapper2">
-          <Swiper
-            onSlideChange={(swiper) => setThumbsActiveIndex(swiper.activeIndex)}
-            onSwiper={setThumbsSwiper}  // 썸네일 Swiper 초기화
-            loop={false}  // 썸네일도 순환하도록 설정
-            spaceBetween={20}
-            slidesPerView={5}
-            freeMode={true}
-            watchSlidesProgress={true}
-            modules={[FreeMode, Navigation, Thumbs]}
-            className="mySwiper"
-          >
-            {productImages.length > 0 ? (
-                productImages.map((product, idx) => (
-                  <>
-                    {product.productImage && (
-                      <SwiperSlide key={`${idx}-1`} className={thumbsActiveIndex === idx ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage)} alt="상품 썸네일" />
-                      </SwiperSlide>
-                    )}
-
-                    {product.productImage2 && (
-                      <SwiperSlide key={`${idx}-2`} className={thumbsActiveIndex === idx + 1 ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage2)} alt="상품 썸네일2" />
-                      </SwiperSlide>
-                    )}
-
-                    {product.productImage3 && (
-                      <SwiperSlide key={`${idx}-3`} className={thumbsActiveIndex === idx + 2 ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage3)} alt="상품 썸네일3" />
-                      </SwiperSlide>
-                    )}
-
-                    {product.productImage4 && (
-                      <SwiperSlide key={`${idx}-4`} className={thumbsActiveIndex === idx + 3 ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage4)} alt="상품 썸네일4" />
-                      </SwiperSlide>
-                    )}
-                  </>
-                ))
-              ) : (
-                <SwiperSlide>로딩 중...</SwiperSlide>
-              )}
-          </Swiper>
-        </div>
-
-      <div className="Return-info">
-        &nbsp;&nbsp;
-        <div onClick={() => openModal('exchange')}>▶ 교환 및 반품 정보</div>
-        &nbsp;
-        <div onClick={() => openModal('as')}>▶ A/S 정보</div>
-      </div>
-
-      {/* 모달 컴포넌트 */}
-      <Modal
-        isOpen={isModalOpen}
-        closeModal={closeModal}
-        title={modalContent.title}
-        content={modalContent.content}
-      />
-
-    </div>
-
-      <div className='product-info'>
-          <div className='brandname'>
-
-            
-          <div className='interest-info'>
-                <span style={{display:'flex', justifyContent:'center', alignItems:'center', width:'65px', height:'30px', background:'black', color:'white', fontWeight:'bold', fontSize:'13px'}}>
-                    무료배송
-                </span>
-                <div className='like' style={{ display: 'flex', alignItems: 'center' }}>
-                    <span style={{ marginRight: '15px', fontSize: '18px', fontWeight: 'bold' }}>
-                        {totalLikes !== null ? totalLikes : '로딩 중...'}  {/* 좋아요 수 또는 로딩 중 표시 */}
-                    </span>
-                    {
-                        likeList.some(product_like => loginUser.memberId === product_like.memberId) ? (
-                            <img
-                                src={`http://localhost:8070/product_images/delike.png`}  
-                                onClick={() => { onLike() }} 
-                                alt="Like"
-                            />
-                        ) : (
-                            <img 
-                                src={`http://localhost:8070/product_images/like.png`} 
-                                onClick={() => { onLike() }} 
-                                alt="Like" 
-                            />
-                        )
-                    }
-                </div>
+    <AdminLayout>
+      <div className="main-content">
+        <h2>상품 수정</h2>
+        <form onSubmit={onUpdateSubmit}>
+          <div className="form-group">
+            <label htmlFor="categoryId">카테고리</label>
+            <select
+              name="categoryId"
+              id="categoryId"
+              value={product.categoryId || ''}
+              onChange={handleInputChange}
+              className="form-control category-select"
+            >
+            <option value="">카테고리 선택</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="productName">상품명</label>
+            <input
+              type="text"
+              name="productName"
+              id="productName"
+              className="form-control"
+              value={product.productName || ''}
+              onChange={handleInputChange}
+              placeholder="상품명을 입력하세요"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="productCostPrice">원가</label>
+            <input
+              type="number"
+              name="productCostPrice"
+              id="productCostPrice"
+              className="form-control"
+              value={product.productCostPrice || ''}
+              onChange={handleInputChange}
+              placeholder="원가를 입력하세요"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="productSalePrice">판매가</label>
+            <input
+              type="number"
+              name="productSalePrice"
+              id="productSalePrice"
+              className="form-control"
+              value={product.productSalePrice || ''}
+              onChange={handleInputChange}
+              placeholder="판매가를 입력하세요"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="productMarginPrice">마진</label>
+            <input
+              type="text"
+              name="productMarginPrice"
+              id="productMarginPrice"
+              className="form-control"
+              value={product.productMarginPrice || ''}
+              readOnly
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="productStatus">판매 상태</label>
+            <select
+              name="productStatus"
+              id="productStatus"
+              className="form-control"
+              value={product.productStatus || ''}
+              onChange={handleInputChange}
+            >
+              <option value="판매중">판매중</option>
+              <option value="판매중지">판매중지</option>
+              <option value="품절">품절</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>사용 유무</label>
+            <div className="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="productUse"
+                  value="Y"
+                  checked={product.productUse === 'Y'}
+                  onChange={handleRadioChange}
+                /> 예
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="productUse"
+                  value="N"
+                  checked={product.productUse === 'N'}
+                  onChange={handleRadioChange}
+                /> 아니오 
+              </label>
             </div>
-
-
-
-
-
-          <div className='product-content'>
-            <span style={{ fontSize:'25px',fontWeight:'bold'}}>{product.productName}</span>
-
-            <div className="rating-container">
-                {/* 별점 표시 */}
-                  <div className="stars">
-                    {Array.from({ length: 5 }).map((_, index) => {
-                      const isFullStar = index < Math.floor(averageRating); // 완전한 별
-                      const isHalfStar = index === Math.floor(averageRating) && averageRating % 1 >= 0.5; // 반별
-                      const isEmptyStar = index >= Math.ceil(averageRating); // 빈 별
-
-                      return (
-                        <span
-                          key={index}
-                          style={{
-                            color: isFullStar
-                              ? '#FFD700' // 완전한 별
-                              : isHalfStar
-                              ? '#FFD700' // 반별 (반응형 색상)
-                              : '#000000', // 빈 별
-                            fontSize: '22px',
-                            fontWeight: 'bold',
-                            marginRight: '3px',
-                            marginTop: '2px',
-                          }}
-                        >
-                          {isFullStar || isHalfStar ? '★' : '☆'} {/* '★'은 완전한 별, '☆'는 빈 별 */}
-                        </span>
-                      );
-                    })}
-                  </div>
-
-
-                {/* 후기 갯수와 링크 */}
-                <a
-                  href="#reviews-section"  // 후기 세션으로 바로 이동
-                  style={{
-                    display:'flex',
-                    alignItems: 'center',
-                    fontSize: '14px',
-                    color: '#1a1a1a',
-                    textDecoration: 'none',
-                    marginLeft: '10px',
-                    marginTop: '5px',
-                  }}
-                >
-                  {reviewCount}개의 후기 보러가기<i className="ri-arrow-right-s-fill" style={{fontSize:'20px'}}></i>
-                </a>
+          </div>
+          <div className="form-group">
+            <label>베스트 상품</label>
+            <div className="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="productBest"
+                  value="Y"
+                  checked={product.productBest === 'Y'}
+                  onChange={handleRadioChange}
+                /> 예 
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="productBest"
+                  value="N"
+                  checked={product.productBest === 'N'}
+                  onChange={handleRadioChange}
+                />아니오 
+              </label>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="productContent">상품 설명</label>
+            <textarea
+              name="productContent"
+              id="productContent"
+              className="form-control"
+              value={product.productContent || ''}
+              onChange={handleInputChange}
+              rows="5"
+              placeholder="상품 설명을 입력하세요"
+            ></textarea>
+          </div>
+          {/* 이미지 업로드 필드 */}
+          <div className="form-group">
+            <label>상품 이미지1</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.productImage ? (
+                  <img src={getImageUrl(product.productImage)} alt="기존 이미지" width="200" />
+                ) : (
+                  <p>없음</p>
+                )}
               </div>
-
-              <div className='product-price' style={{marginTop:'15px'}}>
-              <span style={{ fontSize: '30px', fontWeight: 'bold' }}>
-                {new Intl.NumberFormat('ko-KR').format(product.productSalePrice)}원
-              </span>
-
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" name="productImage1" id="productImage1Input" 
+                  onChange={(e) => handleFileChange(e, 'productImage')} />
+                {uploadedImages.productImage ? (
+                  <img src={getImageUrl(uploadedImages.productImage)} alt="신규 이미지" width="200" />
+                ) : (
+                  <p>파일을 선택하세요</p>
+                )}
               </div>
-
-              <div className='delivery-info'>
-                <span style={{ fontSize:'18px',fontWeight:'bold'}}>배송정보</span>
-
-                <div className='delivery-icon'>
-                  <i className="ri-truck-line" style={{fontSize:'25px'}}></i>
-                  &nbsp;&nbsp;<span style={{fontWeight:'bold'}}>일반 배송</span>
-                </div>
-
-                <span style={{marginLeft:'34px'}}>평균 3일 내 배송 (주말, 공휴일 제외)</span>
+            </div>
+          </div>
+          <div className="form-group">
+            <label>상품 이미지2</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.productImage2 ? (
+                  <img src={getImageUrl(product.productImage2)} alt="기존 이미지" width="200" />
+                ) : (
+                  <p>없음</p>
+                )}
               </div>
-
-              {/* ✅ 부모 카테고리가 설정된 후에 옵션 선택 UI를 렌더링 */}
-              {categoryId && (
-                <ProductOptions
-                  categoryId={categoryId}
-                  selectedOption={selectedOption}
-                  handleOptionChange={handleOptionChange}
-                />
-              )}
-              {selectedOption && (
-                <div className="quantity-wrapper">
-                  <div className="quantity-info">
-                    <div className="quantity-detail">
-                      {/* - 버튼 클릭 시 수량 감소 */}
-                      <button type="button" className="quantity-btn" onClick={() => handleDecrease(size)}>&minus;</button>
-                      {/* 수량 입력창 */}
-                      <input
-                        type="number"
-                        id="quantity"
-                        value={sizeQuantity}
-                        onChange={(e) => handleQuantityChange(size, e)}
-                        className="quantity-input"
-                        min="1"
-                      />
-                      <button type="button" className="quantity-btn" onClick={() => handleIncrease(size)}>+</button>
-                    </div>
-                    <p style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '15px', marginRight: '10px' }}>
-                      {sizeQuantity * basePrice}원
-                    </p>
-                  </div>
-                </div>
-              )}
-              
-              {/* 사이즈 선택 */}
-              {/* <div className='select-option'>
-                 <ProductOptions size={size} handleSizeChange={handleSizeChange} setSize={setSize}/>
-              </div> */}
-
-        {/* 선택된 사이즈 표시 */}
-        {sizeList.map((size, idx) => {
-            const sizeQuantity = quantityList[size] ?? 1; // ✅ 안전하게 값 가져오기
-
-            return (
-              <div key={idx} className='size-quantity-wrapper'>
-                <div className='size-info'>
-                  <p style={{ marginTop: '15px' }}>&nbsp;&nbsp;&nbsp;&nbsp;{size}</p>
-                  <img
-                    src='/imgs/deletebtn.png'
-                    style={{ width: '20px', marginRight: '10px', marginTop: '15px', cursor: 'pointer' }}
-                    onClick={() => handleDeleteSize(size)} // 삭제 버튼 클릭 시 해당 사이즈만 삭제
-                  />
-                </div>
-
-                {/* 수량 및 가격 조정 */}
-                <div className="quantity-info">
-                  <div className="quantity-detail">
-                    {/* - 버튼 클릭 시 수량 감소 */}
-                    <button type="button" className="quantity-btn" onClick={() => handleDecrease(size)}>&minus;</button>
-
-                    {/* 수량 입력창 */}
-                    <input
-                      type="number"
-                      id="quantity"
-                      value={sizeQuantity}
-                      onChange={(e) => handleQuantityChange(size, e)}
-                      className="quantity-input"
-                      min="1"  // 최소 1로 제한
-                    />
-
-                    {/* + 버튼 클릭 시 수량 증가 */}
-                    <button type="button" className="quantity-btn" onClick={() => handleIncrease(size)}>+</button>
-                  </div>
-
-                  <p style={{ fontSize: '24px', fontWeight: 'bold', marginTop: '15px', marginRight: '10px' }}>
-                    {new Intl.NumberFormat('ko-KR').format(sizeQuantity * basePrice)}&nbsp;원
-                  </p>
-
-                </div>
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" name="productImage2" id="productImage2Input" 
+                  onChange={(e) => handleFileChange(e, 'productImage2')} />
+                {uploadedImages.productImage2 ? (
+                  <img src={getImageUrl(uploadedImages.productImage2)} alt="신규 이미지" width="200" />
+                ) : (
+                  <p>파일을 선택하세요</p>
+                )}
               </div>
-            );
-          })}
-
-
-
-              {/* 총 가격 표시 */}
-              <div className="price-info">
-                <p style={{fontSize: '15px', fontWeight: 'bold'}}>총 상품 금액</p>
-                <p style={{ fontSize: '26px', fontWeight: 'bold' }}>
-                  {new Intl.NumberFormat('ko-KR').format(totalPrice)}원
-                </p>
-
+            </div>
+          </div>
+          <div className="form-group">
+            <label>상품 이미지3</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.productImage3 ? (
+                  <img src={getImageUrl(product.productImage3)} alt="기존 이미지" width="200" />
+                ) : (
+                  <p>없음</p>
+                )}
               </div>
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" name="productImage3" id="productImage3Input" 
+                  onChange={(e) => handleFileChange(e, 'productImage3')} />
+                {uploadedImages.productImage3 ? (
+                  <img src={getImageUrl(uploadedImages.productImage3)} alt="신규 이미지" width="200" />
+                ) : (
+                  <p>파일을 선택하세요</p>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <label>상품 이미지4</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.productImage4 ? (
+                  <img src={getImageUrl(product.productImage4)} alt="기존 이미지" width="200" />
+                ) : (
+                  <p>없음</p>
+                )}
+              </div>
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" name="productImage4" id="productImage4Input" 
+                  onChange={(e) => handleFileChange(e, 'productImage4')} />
+                {uploadedImages.productImage4 ? (
+                  <img src={getImageUrl(uploadedImages.productImage4)} alt="신규 이미지" width="200" />
+                ) : (
+                  <p>파일을 선택하세요</p>
+                )}
+              </div>
+            </div>
+          </div>
 
-            <div className='shopping-select'>
-              <button style={{background:'rgb(225, 225, 225)'}}  onClick={()=>{ goCart() }}>장바구니</button>
-              &nbsp;&nbsp;
-              <button style={{color:'white',background:'black'}} onClick={()=>{orderOne();}}>구매하기</button>
+          {/* ✅ 상세 정보 이미지 1~5 */}
+          <div className="form-group">
+            <label>상세 정보 이미지1</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.infoImage ? (
+                  <img src={getImageUrl(product.infoImage)} alt="기존 상세 이미지" width="200" />
+                ) : <p>없음</p>}
+              </div>
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" onChange={(e) => handleFileChange(e, 'infoImage')} />
+                {uploadedImages.infoImage ? (
+                  <img src={getImageUrl(uploadedImages.infoImage)} alt="신규 상세 이미지" width="200" />
+                ) : <p>파일을 선택하세요</p>}
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <label>상세 정보 이미지2</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.infoImage2 ? (
+                  <img src={getImageUrl(product.infoImage2)} alt="기존 상세 이미지" width="200" />
+                ) : <p>없음</p>}
+              </div>
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" onChange={(e) => handleFileChange(e, 'infoImage2')} />
+                {uploadedImages.infoImage2 ? (
+                  <img src={getImageUrl(uploadedImages.infoImage2)} alt="신규 상세 이미지" width="200" />
+                ) : <p>파일을 선택하세요</p>}
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <label>상세 정보 이미지3</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.infoImage3 ? (
+                  <img src={getImageUrl(product.infoImage3)} alt="기존 상세 이미지" width="200" />
+                ) : <p>없음</p>}
+              </div>
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" onChange={(e) => handleFileChange(e, 'infoImage3')} />
+                {uploadedImages.infoImage3 ? (
+                  <img src={getImageUrl(uploadedImages.infoImage3)} alt="신규 상세 이미지" width="200" />
+                ) : <p>파일을 선택하세요</p>}
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <label>상세 정보 이미지4</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.infoImage4 ? (
+                  <img src={getImageUrl(product.infoImage4)} alt="기존 상세 이미지" width="200" />
+                ) : <p>없음</p>}
+              </div>
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" onChange={(e) => handleFileChange(e, 'infoImage4')} />
+                {uploadedImages.infoImage4 ? (
+                  <img src={getImageUrl(uploadedImages.infoImage4)} alt="신규 상세 이미지" width="200" />
+                ) : <p>파일을 선택하세요</p>}
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <label>상세 정보 이미지5</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.infoImage5 ? (
+                  <img src={getImageUrl(product.infoImage5)} alt="기존 상세 이미지" width="200" />
+                ) : <p>없음</p>}
+              </div>
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" onChange={(e) => handleFileChange(e, 'infoImage5')} />
+                {uploadedImages.infoImage5 ? (
+                  <img src={getImageUrl(uploadedImages.infoImage5)} alt="신규 상세 이미지" width="200" />
+                ) : <p>파일을 선택하세요</p>}
+              </div>
+            </div>
+          </div> 
+          <div className="form-group">
+            <label>Hover 이미지</label>
+            <div className="image-container">
+              <div className="image-preview">
+                <p>기존 이미지</p>
+                {product.hoverImage ? (
+                  <img src={getImageUrl(product.hoverImage)} alt="기존 Hover 이미지" width="200" />
+                ) : <p>없음</p>}
+              </div>
+              <div className="image-preview">
+                <p>신규 업로드</p>
+                <input type="file" onChange={(e) => handleFileChange(e, 'hoverImage')} />
+                {uploadedImages.hoverImage ? (
+                  <img src={getImageUrl(uploadedImages.hoverImage)} alt="신규 Hover 이미지" width="200" />
+                ) : <p>파일을 선택하세요</p>}
+              </div>
             </div>
           </div>
           
-        </div>
-        
-    </div>
-    </div>
-    <ProductInfoReview review={review} />
-    
-          
-  </div>
-</>
-
-  );
+          <div className="btns">
+            <button type="submit" className="gold-gradient-button">
+              수정 완료
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="gold-gradient-button"
+            > 취소 
+            </button>
+          </div>
+        </form>
+      </div>
+    </AdminLayout>
+  )
 }
 
-export default ProducDetail
+export default UpdateProduct

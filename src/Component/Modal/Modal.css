@@ -1,43 +1,89 @@
-html, body {
-    height: 100%;
-    margin: 0;
-  }
-  
-  .modal-overlay {
-    position: fixed;   /* 화면에 고정 */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);  /* 반투명 배경 */
-    display: flex;       /* 플렉스를 사용하여 중앙 정렬 */
-    justify-content: center;  /* 가로 중앙 정렬 */
-    align-items: center;      /* 세로 중앙 정렬 */
-    z-index: 9999;       /* 모달이 다른 요소들 위에 오도록 */
-    height: 100%;        /* 화면 전체 높이를 차지 */
-  }
-  
-  .modal-con {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-  }
-  
-  #modal-btn {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #1a1a1a;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  #modal-btn:hover {
-    background-color: #333;
-  }
-  
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.modal-overlay {
+  position: fixed; /* 화면에 고정 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  display: flex; /* 플렉스를 사용하여 중앙 정렬 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  z-index: 9999; /* 모달이 다른 요소들 위에 오도록 */
+  height: 100%; /* 화면 전체 높이를 차지 */
+}
+
+.modal-con-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-con {
+  background: white;
+  padding: 20px;
+  max-width: 600px; /* 너비 제한 */
+  width: 100%;
+  max-height: 90%; /* 최대 높이 */
+  overflow-y: auto; /* 세로 스크롤 가능 */
+  text-align: left; /* 내용 왼쪽 정렬 */
+  position: relative;
+}
+
+.modal-con ul {
+  list-style: none; /* 기본 점 스타일 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  margin: 0; /* 기본 마진 제거 */
+}
+
+.modal-con li {
+  padding-left: 0; /* li 앞의 기본 여백 제거 */
+  margin-bottom: 8px; /* 리스트 항목 간 간격 추가 (선택 사항) */
+  color: rgb(102, 102, 102);
+  padding: 0 0 5px;
+}
+
+.modal-con p {
+  color: rgb(102, 102, 102);
+  padding: 0 0 5px;
+}
+
+.modal-con h3 {
+  color: #1a1a1a;
+}
+
+.modal-con h4 {
+  color: #1a1a1a;
+}
+
+#modal-btn {
+  color: #1a1a1a;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  font-size: 40px;
+  background: none;
+}
+
+.modal-delivery h3 {
+  position: relative; /* ::after의 위치를 조정하기 위해 필요 */
+  margin-bottom: 10px; /* h3와 그 아래 내용 사이의 여백 */
+  margin-top: 80px;
+}
+
+/* h3 위에 회색 밑줄 추가 */
+.modal-delivery h3::after {
+  content: ""; /* 내용 비우기 */
+  position: absolute; /* 절대 위치로 설정 */
+  top: -40px; /* h3 위에서 밑줄의 위치를 조정 (h3 아래 10px 떨어지게) */
+  left: 0; /* 왼쪽 끝에서 시작 */
+  width: 100%; /* 전체 너비로 밑줄을 생성 */
+  height: 1px; /* 밑줄의 두께 */
+  background-color: rgb(245, 245, 245);
+}
