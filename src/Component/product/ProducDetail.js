@@ -13,8 +13,6 @@ import ProductInfoReview from "../review/ProductInfoReview";
 import { useSelector, useDispatch } from "react-redux";
 import { Cookies } from "react-cookie";
 import jaxios from "../../util/jwtUtil";
-import { useLocation } from "react-router-dom";
-import Footing from "../Footing/Footing";
 
 const ProducDetail = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -27,6 +25,25 @@ const ProducDetail = () => {
   const [reviewCount, setReviewCount] = useState(0);
   const [averageRating, setAverageRating] = useState(0); // 평균 별점 상태 추가
   const [totalLikes, setTotalLikes] = useState(0); // 총 좋아요 수 가져오기
+
+  const [productImages, setProductImages] = useState([]); // 이미지 데이터를 저장할 상태
+  const { productSeq } = useParams();
+  const [product, setProduct] = useState({});
+  const [review, setReview] = useState([]);
+  const [size, setSize] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [sizeList, setSizeList] = useState([]); // 여러 사이즈를 관리하는 배열
+  const [quantityList, setQuantityList] = useState({});
+  const [likeList, setLikeList] = useState([]);
+  const dispatch = useDispatch();
+  const cookies = new Cookies();
+  const sizeQuantity = quantityList[size] ?? 1; // ✅ 기본값 1로 설정
+  const basePrice = product.productSalePrice || 0;
+
+  // -----------------------------------------------------------------------------------------------------
+
+  // {사이즈 옵션 부분}
 
   const categoryOptions = {
     1: ["10호", "11호", "12호"], // 반지 (category_id: 1)
@@ -93,20 +110,6 @@ const ProducDetail = () => {
     );
   }
 
-  const handleSlideChange = (swiper) => {
-    setActiveIndex(swiper.activeIndex); // 메인 이미지 activeIndex 업데이트
-    if (thumbsSwiper) {
-      thumbsSwiper.slideTo(swiper.activeIndex); // 썸네일 슬라이드 이동
-    }
-  };
-
-  const handleThumbsSlideChange = (swiper) => {
-    setThumbsActiveIndex(swiper.activeIndex);
-    if (thumbsSwiper) {
-      thumbsSwiper.slideTo(swiper.activeIndex); // 썸네일에서 슬라이드하면 메인 이미지도 동기화
-    }
-  };
-
   const handleSizeChange = (e) => {
     const newSize = e.target.value;
     if (newSize && !sizeList.includes(newSize)) {
@@ -155,23 +158,61 @@ const ProducDetail = () => {
     }
   };
 
-  // ------------------------------------------------------------------------------------------------------
+  // ✅ 수량 변경 시, 총 가격 업데이트
+  useEffect(() => {
+    let updatedPrice = basePrice;
 
-  const [productImages, setProductImages] = useState([]); // 이미지 데이터를 저장할 상태
-  const { productSeq } = useParams();
-  const [product, setProduct] = useState({});
-  const [review, setReview] = useState([]);
-  const [size, setSize] = useState("");
-  const [quantity, setQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [sizeList, setSizeList] = useState([]); // 여러 사이즈를 관리하는 배열
-  const [quantityList, setQuantityList] = useState({});
-  const [likeList, setLikeList] = useState([]);
-  const dispatch = useDispatch();
-  const cookies = new Cookies();
-  const sizeQuantity = quantityList[size] ?? 1; // ✅ 기본값 1로 설정
+    // ✅ quantityList를 객체에서 배열로 변환 후 합산
+    const totalQuantity = Object.values(quantityList).reduce(
+      (acc, quantity) => acc + quantity,
+      0
+    );
 
-  const basePrice = product.productSalePrice || 0;
+    setTotalPrice(updatedPrice * totalQuantity);
+  }, [quantityList, basePrice]);
+
+
+  // ✅ 총 상품 금액 계산 (모든 옵션 합산)
+  useEffect(() => {
+    let updatedPrice = basePrice;
+
+    // ✅ quantityList를 객체에서 배열로 변환 후 합산
+    const totalQuantity = Object.values(quantityList).reduce(
+      (acc, quantity) => acc + quantity,
+      0
+    );
+
+    setTotalPrice(updatedPrice * totalQuantity);
+  }, [quantityList, basePrice]);
+
+  // 서버에서 이미지 데이터를 받아오는 함수
+
+  // -----------------------------------------------------------------------------------------------------
+
+  // 상품 상세 페이지 최상단 메인 이미지 / 썸네일
+
+  const handleSlideChange = (swiper) => {
+    setActiveIndex(swiper.activeIndex); // 메인 이미지 activeIndex 업데이트
+    if (thumbsSwiper) {
+      thumbsSwiper.slideTo(swiper.activeIndex); // 썸네일 슬라이드 이동
+    }
+  };
+
+  const handleThumbsSlideChange = (swiper) => {
+    setThumbsActiveIndex(swiper.activeIndex);
+    if (thumbsSwiper) {
+      thumbsSwiper.slideTo(swiper.activeIndex); // 썸네일에서 슬라이드하면 메인 이미지도 동기화
+    }
+  };
+
+  useEffect(() => {
+    if (thumbsSwiper && productImages.length > 0) {
+      thumbsSwiper.update(); // 썸네일 swiper 업데이트
+      thumbsSwiper.slideTo(activeIndex); // 메인 이미지의 activeIndex에 맞춰 썸네일 슬라이드 업데이트
+    }
+  }, [activeIndex, thumbsSwiper, productImages]);
+
+    
 
   // ------------------------------------------------------------------------------------------------------
 
@@ -498,25 +539,6 @@ const ProducDetail = () => {
     }
   }
 
-  // ------------------------------------------------------------------------------------------------------
-
-  // ✅ 수량 변경 시, 총 가격 업데이트
-  useEffect(() => {
-    let updatedPrice = basePrice;
-
-    // ✅ quantityList를 객체에서 배열로 변환 후 합산
-    const totalQuantity = Object.values(quantityList).reduce(
-      (acc, quantity) => acc + quantity,
-      0
-    );
-
-    setTotalPrice(updatedPrice * totalQuantity);
-  }, [quantityList, basePrice]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0); // 페이지가 로드되면 스크롤을 맨 위로 이동
-  }, []);
-
   useEffect(() => {
     // 로그인 정보가 변경될 때마다 업데이트
     if (loginUser && loginUser.memberId) {
@@ -532,22 +554,38 @@ const ProducDetail = () => {
     }
   }, [loginUser, productSeq]); // loginUser나 productSeq가 변경될 때마다 실행
 
-  // 사이즈와 수량에 따른 가격 계산
-
-  // ✅ 총 상품 금액 계산 (모든 옵션 합산)
   useEffect(() => {
-    let updatedPrice = basePrice;
+    // 서버에서 총 좋아요 수를 받아오는 API 호출
+    const fetchLikes = async () => {
+      try {
+        const response = await axios.get(
+          `/api/post/getLikesCount?productSeq=${productSeq}`
+        );
+        console.log("서버에서 받은 총 좋아요 수:", response.data); // 서버에서 받은 좋아요 수 확인
+        setTotalLikes(response.data); // 서버에서 받은 총 좋아요 수를 상태에 설정
+      } catch (error) {
+        console.error("좋아요 수 가져오기 오류:", error);
+      }
+    };
 
-    // ✅ quantityList를 객체에서 배열로 변환 후 합산
-    const totalQuantity = Object.values(quantityList).reduce(
-      (acc, quantity) => acc + quantity,
-      0
-    );
+    if (productSeq) {
+      fetchLikes();
+    }
+  }, [productSeq]); // productSeq가 변경될 때마다 호출
 
-    setTotalPrice(updatedPrice * totalQuantity);
-  }, [quantityList, basePrice]);
+  console.log("Product Seq:", productSeq); // productSeq 값 확인
+  console.log("Review Seq:", review); // reviewSeq 값 확인 (없을 수 있음)
+  console.log("CategoryName:", categoryName);
 
-  // 서버에서 이미지 데이터를 받아오는 함수
+  // ------------------------------------------------------------------------------------------------------
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // 페이지가 로드되면 스크롤을 맨 위로 이동
+  }, []);
+
+  // ------------------------------------------------------------------------------------------------------
+
+  // 상품 이미지 불러오고 / 상품 정보 불러오기
 
   useEffect(() => {
     axios
@@ -580,6 +618,11 @@ const ProducDetail = () => {
       });
   }, [productSeq]);
 
+  // ------------------------------------------------------------------------------------------------------
+
+
+  // 리뷰 정보 불러오기
+
   useEffect(() => {
     axios
       .get(`/api/review/getReview`, { params: { productSeq } })
@@ -604,35 +647,9 @@ const ProducDetail = () => {
       });
   }, [productSeq]); // productSeq가 변경될 때마다 호출
 
-  useEffect(() => {
-    // 서버에서 총 좋아요 수를 받아오는 API 호출
-    const fetchLikes = async () => {
-      try {
-        const response = await axios.get(
-          `/api/post/getLikesCount?productSeq=${productSeq}`
-        );
-        console.log("서버에서 받은 총 좋아요 수:", response.data); // 서버에서 받은 좋아요 수 확인
-        setTotalLikes(response.data); // 서버에서 받은 총 좋아요 수를 상태에 설정
-      } catch (error) {
-        console.error("좋아요 수 가져오기 오류:", error);
-      }
-    };
+  // ------------------------------------------------------------------------------------------------------
 
-    if (productSeq) {
-      fetchLikes();
-    }
-  }, [productSeq]); // productSeq가 변경될 때마다 호출
-
-  console.log("Product Seq:", productSeq); // productSeq 값 확인
-  console.log("Review Seq:", review); // reviewSeq 값 확인 (없을 수 있음)
-  console.log("CategoryName:", categoryName);
-
-  useEffect(() => {
-    if (thumbsSwiper && productImages.length > 0) {
-      thumbsSwiper.update(); // 썸네일 swiper 업데이트
-      thumbsSwiper.slideTo(activeIndex); // 메인 이미지의 activeIndex에 맞춰 썸네일 슬라이드 업데이트
-    }
-  }, [activeIndex, thumbsSwiper, productImages]);
+  // 장바구니 추가
 
   const goCart = async () => {
     if (!loginUser || !loginUser.memberId) {
@@ -680,6 +697,8 @@ const ProducDetail = () => {
     }
   };
 
+  // ------------------------------------------------------------------------------------------------------
+
   const { productId } = useParams(); // URL에서 productId 가져오기
 
   // 최근 본 상품 출력 기능
@@ -714,7 +733,9 @@ const ProducDetail = () => {
     }
   }, [productSeq, product]);
 
-  // orderOne 함수 정의
+  // ------------------------------------------------------------------------------------------------------
+
+  // orderOne 주문 페이지 함수 정의
   const orderOne = () => {
     if (!loginUser || !loginUser.memberId) {
       alert("로그인이 필요합니다.");
