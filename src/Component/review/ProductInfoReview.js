@@ -18,6 +18,18 @@ const ProductInfoReview = ({ review }) => {
   const [showPhotoReviewsOnly, setShowPhotoReviewsOnly] = useState(false); // 포토 후기만 보기 상태
   const navigate = useNavigate();
 
+  // ✅ 기존 데이터와 S3 데이터를 구분하여 이미지 표시
+  const getImageUrl = (imagePath, type = "review") => {
+    if (!imagePath || imagePath === "null") return "/default-image.png"; // 기본 이미지 처리
+    if (imagePath.startsWith("http")) return `${imagePath}?t=${new Date().getTime()}`;
+    // ✅ infoImage는 "product_infoimages", reviewImage는 "product_images"에서 가져오도록 구분
+    const folder = type === "info" ? "product_infoimages" : "product_images";
+    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/${folder}/${imagePath}`;
+  };
+  // console.log("🔍 infoImage URL:", getImageUrl(productImages[0]?.infoImage));
+  console.log("🔍 infoImage URL 11:", getImageUrl(productImages[0]?.infoImage));
+  console.log("🔍 infoImage2 URL 11:", getImageUrl(productImages[0]?.infoImage2));
+  
   // 이미지 클릭 시 이동할 함수
   const handleImageClick = (image, index, item) => {
     navigate("/reviewDetail", {
@@ -126,13 +138,18 @@ const ProductInfoReview = ({ review }) => {
     axios
       .get(`/api/product/selectPro`, { params: { productSeq } })
       .then((result) => {
-        console.log(result.data.productImages);
-        setProductImages(result.data.productImages || []); // 서버에서 받은 데이터를 상태에 저장
+        console.log("📢 서버에서 받아온 productImages 데이터:", result.data.productImages);
+        // 데이터를 배열로 변환하여 저장 (객체일 경우 배열로 감싸기)
+      const images = Array.isArray(result.data.productImages)
+      ? result.data.productImages
+      : [result.data.productImages];
+
+      setProductImages(images);
       })
-      .catch((err) => {
-        console.error(err);
-        setProductImages([]);
-      });
+    .catch((err) => {
+      console.error("❌ 상품 이미지 가져오기 실패:", err);
+      setProductImages([]);
+    });
   }, [productSeq]);
 
   useEffect(() => {
@@ -142,18 +159,12 @@ const ProductInfoReview = ({ review }) => {
   }, [review]);
 
   const isReviewValid = Array.isArray(review) && review.length > 0;
+  
+  console.log("🔍 productImage 데이터 확인:", productImages);
+  console.log("🔍 infoImage URL 11:", getImageUrl(productImages[0]?.infoImage));
+  console.log("🔍 infoImage2 URL:", getImageUrl(productImages.infoImage2));
+  console.log("🖼️ 최종적으로 적용된 이미지 URL:", getImageUrl(productImages[0]?.infoImage));
 
-  // ✅ 기존 데이터와 S3 데이터를 구분하여 이미지 표시
-  const getImageUrl = (imagePath) => {
-    if (!imagePath) return "/default-image.png"; // 기본 이미지 처리
-    // S3 URL인지 확인
-    if (imagePath.startsWith("http")) {
-      return `${imagePath}?t=${new Date().getTime()}`; // ✅ 캐시 방지 추가
-      // return imagePath;
-    }
-    // 기존 로컬 서버 이미지 경로를 S3 URL로 변경
-    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
-  };
 
   return (
     <div className="inforereview-container">
@@ -181,21 +192,45 @@ const ProductInfoReview = ({ review }) => {
       </div>
 
       <div className="info-product">
-        {productImages.length > 0 ? (
-          productImages.map((productImage, idx) => (
+        {productImages.length > 0 && productImages[0] ? (
+          <>
+            {productImages[0].infoImage && (
+              <img
+                key={`infoImage-${productImages[0].infoImage}`}
+                src={getImageUrl(productImages[0]?.infoImage)}
+                alt="infoImage"
+              />
+            )}
+            {productImages[0].infoImage2 && (
+              <img
+                key={`infoImage2-${productImages[0].infoImage2}`}
+                src={getImageUrl(productImages[0]?.infoImage2)}
+                alt="infoImage2"
+              />
+            )}
+          </>
+        ) : (
+          <p>로딩 중...</p>
+        )}
+      </div>
+
+
+      {/* <div className="info-product">
+        {productImages.length > 0 && productImages[0] ? (
+          productImages.map((productImages, idx) => (
             <>
-              {productImage.infoImage && (
+              {productImages[0].infoImage && (
                 <img
-                  key={`infoImage-${productImage.infoImage}-${idx}`} // infoImage와 idx를 결합하여 고유한 key를 생성
-                  src={getImageUrl(productImage.infoImage)}
+                  key={`infoImage-${productImages[0].infoImage}-${idx}`} // infoImage와 idx를 결합하여 고유한 key를 생성
+                  src={getImageUrl(productImages[0].infoImage)}
                   // src={`http://localhost:8070/product_infoimages/${productImage.infoImage}`}
                   alt={`Product Image ${idx}`}
                 />
               )}
-              {productImage.infoImage2 && (
+              {productImages[0].infoImage2 && (
                 <img
-                  key={`infoImage2-${productImage.infoImage2}-${idx}`} // infoImage2와 idx를 결합하여 고유한 key를 생성
-                  src={getImageUrl(productImage.infoImage2)}
+                  key={`infoImage2-${productImages[0].infoImage2}-${idx}`} // infoImage2와 idx를 결합하여 고유한 key를 생성
+                  src={getImageUrl(productImages[0].infoImage2)}
                   // src={`http://localhost:8070/product_infoimages/${productImage.infoImage2}`}
                   alt={`Product Image 2 ${idx}`}
                 />
@@ -205,7 +240,7 @@ const ProductInfoReview = ({ review }) => {
         ) : (
           <p>로딩 중...</p>
         )}
-      </div>
+      </div> */}
 
       <div className="review-photo">
         <p>후기 사진</p>
@@ -228,7 +263,7 @@ const ProductInfoReview = ({ review }) => {
                       <img
                         src={getImageUrl(reviewItem.reviewImage)}
                         // src={`http://localhost:8070/product_images/${reviewItem.reviewImage}`}
-                        alt="Review Image"
+                        alt="reviewImage"
                       />
                     </div>
                   )
@@ -422,7 +457,7 @@ const ProductInfoReview = ({ review }) => {
                         key={index} // 각 이미지마다 고유한 key
                         src={getImageUrl(image)}
                         // src={`http://localhost:8070/product_images/${image}?t=${new Date().getTime()}`}
-                        alt={`Review Image ${index + 1}`}
+                        alt={`ReviewImage ${index + 1}`}
                         onClick={() => handleImageClick(image, index, item)} // 이미지 클릭 시 해당 함수 실행
                         style={{ cursor: "pointer" }} // 클릭할 수 있다는 것을 표시
                       />
