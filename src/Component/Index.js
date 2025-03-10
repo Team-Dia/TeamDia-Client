@@ -12,6 +12,18 @@ const Index = () => {
   const navigate = useNavigate();
   const memberId = useSelector((state) => state.user.memberId); // ✅ Redux에서 memberId 가져오기
 
+  // ✅  기존 데이터와 S3 데이터를 구분하여 이미지 표시
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "/images/no-image.png"; // 기본 이미지 처리
+  
+    // ✅ S3 URL인지 확인
+    if (imagePath.startsWith("http")) {
+      return imagePath;
+    }
+    // ✅ 기존 로컬 서버 이미지 경로 지원 (product_images 디렉토리)
+    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
+  };
+
   const handleImageHover = (e, imageUrl) => {
     e.target.src = imageUrl;
   };
@@ -125,18 +137,20 @@ const Index = () => {
                     >
                       <img
                         className="index-product-image"
-                        src={`http://localhost:8070/product_images/${product.productImage}`}
+                        // ✅ 기존 로컬 서버 경로에서 AWS S3 URL로 변경
+                        // src={`http://localhost:8070/product_images/${product.productImage}`}
+                        src={getImageUrl(product.productImage)} // ✅ 기존 & 새로운 이미지 지원
                         alt={product.name}
                         onMouseEnter={(e) =>
                           handleImageHover(
-                            e,
-                            `http://localhost:8070/product_hover/${product.hoverImage}`
+                            e, getImageUrl(product.hoverImage)
+                            // `http://localhost:8070/product_hover/${product.hoverImage}`
                           )
                         }
                         onMouseLeave={(e) =>
                           handleImageHover(
-                            e,
-                            `http://localhost:8070/product_images/${product.productImage}`
+                            e, getImageUrl(product.productImage)
+                            // `http://localhost:8070/product_images/${product.productImage}`
                           )
                         }
                       />
@@ -185,18 +199,20 @@ const Index = () => {
                       onMouseLeave={handleMouseLeave}
                     >
                       <img
-                        src={`http://localhost:8070/product_images/${product.productImage}`}
+                        // ✅ 기존 로컬 서버 경로에서 AWS S3 URL로 변경
+                        src={getImageUrl(product.productImage)} // ✅ 기존 & 새로운 이미지 지원
+                        // src={`http://localhost:8070/product_images/${product.productImage}`}
                         alt={product.name}
                         onMouseEnter={(e) =>
                           handleImageHover(
-                            e,
-                            `http://localhost:8070/product_hover/${product.hoverImage}`
+                            e, getImageUrl(product.hoverImage)
+                            // `http://localhost:8070/product_hover/${product.hoverImage}`
                           )
                         }
                         onMouseLeave={(e) =>
                           handleImageHover(
-                            e,
-                            `http://localhost:8070/product_images/${product.productImage}`
+                            e, getImageUrl(product.productImage)
+                            // `http://localhost:8070/product_images/${product.productImage}`
                           )
                         }
                       />
