@@ -24,6 +24,11 @@ const Cartlist = () => {
         }
     }, [loginUser, navigate]);
 
+    // 체크리스트나 카트 리스트가 변경될 때마다 총합 계산
+    useEffect(() => {
+        calculateTotalPrice();
+    }, [checklist, cartList]);
+
     const fetchCartList = async () => {
         try {
             const result = await jaxios.get('/api/cart/getCartList', {
@@ -32,7 +37,7 @@ const Cartlist = () => {
             console.log('🛒 장바구니 데이터:', result.data); // API 응답 확인
             if (Array.isArray(result.data)) {  // 응답 데이터가 배열인지 확인
                 setCartList(result.data);
-                calculateTotalPrice(result.data);
+                // 초기에는 체크리스트가 비어있으므로 여기서 calculateTotalPrice 호출하지 않음
             } else {
                 console.error("장바구니 데이터가 배열이 아닙니다:", result.data);
             }
@@ -41,9 +46,10 @@ const Cartlist = () => {
         }
     };
     
-
-    const calculateTotalPrice = (cartItems) => {
-        const total = cartItems.reduce((sum, cart) => sum + (cart.quantity * cart.productSalePrice), 0);
+    const calculateTotalPrice = () => {
+        const total = cartList
+            .filter(cart => checklist.includes(cart.cartSeq)) // 체크된 상품만 필터링
+            .reduce((sum, cart) => sum + (cart.quantity * cart.productSalePrice), 0); // 합계 계산
         setTotalPrice(total);
     };
 
@@ -86,7 +92,6 @@ const Cartlist = () => {
         }
     };
     
-
     const handleDeleteCart = async () => {
         if (checklist.length === 0) {
             alert('삭제할 항목을 선택하세요');
@@ -102,13 +107,6 @@ const Cartlist = () => {
             // ✅ 삭제 후 프론트에서 상태 업데이트 (즉시 반영)
             setCartList(prevCartList => {
                 const updatedCartList = prevCartList.filter(cart => !checklist.includes(cart.cartSeq));
-    
-                // ✅ 삭제 후 총 금액도 업데이트
-                const newTotalPrice = updatedCartList.reduce(
-                    (sum, cart) => sum + (cart.quantity * cart.productSalePrice),0
-                );
-                setTotalPrice(newTotalPrice);
-    
                 return updatedCartList;
             });
             // ✅ 삭제 후 체크리스트 초기화
@@ -120,12 +118,12 @@ const Cartlist = () => {
 
     const handleCheck = (cartSeq, checked) => {
         setChecklist(prevChecklist => {
-            if (checked) {
-                return [...prevChecklist, cartSeq];
-            } else {
-                return prevChecklist.filter(seq => seq !== cartSeq);
-            }
+            const updatedChecklist = checked 
+                ? [...prevChecklist, cartSeq] 
+                : prevChecklist.filter(seq => seq !== cartSeq);
+            return updatedChecklist;
         });
+        // 여기서 calculateTotalPrice를 호출하지 않음 - useEffect에서 자동으로 처리됨
     };
 
     // ✅ 상품명을 클릭하면 해당 상품의 상세 페이지로 이동
@@ -161,8 +159,6 @@ const Cartlist = () => {
         });
     };
 
-
-
     return (
         <article>
             <div className='subPage'>
@@ -196,6 +192,7 @@ const Cartlist = () => {
                                 type="checkbox"
                                 id={`ch${idx}`}
                                 value={cart.cartSeq}
+                                checked={checklist.includes(cart.cartSeq)}
                                 onChange={(e) => handleCheck(cart.cartSeq, e.target.checked)}
                             />
                             <img 
