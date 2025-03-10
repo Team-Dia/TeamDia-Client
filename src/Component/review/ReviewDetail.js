@@ -130,7 +130,7 @@ const ReviewDetail = () => {
         {/* 리뷰 이미지 슬라이더 */}
         <div className="review-detail-images">
           <div
-            className="review-slider"
+            className="rv-review-slider"
             style={{
               transform: `translateX(-${currentSlide * 100}%)`,
               display: "flex",
@@ -140,14 +140,13 @@ const ReviewDetail = () => {
             {reviewImages.map((image, index) => (
               <div
                 key={index}
-                className="review-slide"
+                className="rv-review-slide"
                 style={{ width: slideWidth, flex: `0 0 ${slideWidth}` }}
               >
                 <img
                   src={image}
                   // src={`http://localhost:8070/product_images/${image}`}
                   alt={`Review Image ${index + 1}`}
-                  style={{ width: "100%", objectFit: "cover" }}
                 />
               </div>
             ))}

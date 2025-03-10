@@ -243,7 +243,7 @@ const MemberRegister = () => {
     };
 
     
-    // 이메일 값 합쳐서 `memberEmail` 저장
+    // 이메일 값 합쳐서 memberEmail 저장
     useEffect(() => {
         setFormData({ ...formData, memberEmail: `${emailId}@${emailDomain}` });
     }, [emailId, emailDomain]);
@@ -357,7 +357,7 @@ const MemberRegister = () => {
             extraAddress += (extraAddress !== '' ? ', ' : '') + data.buildingName;
         }
         if (extraAddress !== '') {
-            fullAddress += ` (${extraAddress})`;
+            fullAddress += `(${extraAddress})`;
         }
 
         setFormData({
@@ -546,18 +546,7 @@ const handleSubmit = async (e) => {
                         />
                     </div>
                     {errors.memberPhone && <p className="register-error">{errors.memberPhone}</p>}
-                    {/* <div>
-                        <label htmlFor="memberBirthdate" className="member-register-label">생년월일</label>
-                        <input
-                            type="date"
-                            name="birthdate"
-                            value={formData.birthdate}
-                            onChange={handleBirthdateChange}
-                            min="1920-01-01"
-                            max={new Date().toISOString().split("T")[0]} // 🔥 오늘 날짜까지만 선택 가능
-                            className="register-input"
-                        />
-                    </div> */}
+
                     <div>
                         <label htmlFor="memberBirthdate" className="member-register-label">생년월일</label>
                         <input 
@@ -574,43 +563,44 @@ const handleSubmit = async (e) => {
                     <div>
                         <label htmlFor="memberEmail" className="member-register-label">이메일</label>
                         <div className="email-container">
+                            {/* ✅ 이메일 인증 요청 버튼 */}
+                            <div className="email-container">
                             <input 
                                 type="text" 
                                 placeholder="이메일 아이디" 
                                 value={emailId} 
-                                onChange={handleEmailIdChange} // 이메일 입력 시 인증 상태 초기화
+                                onChange={handleEmailIdChange} 
                                 className="register-input email-id"
                             />
                             <span className="email-at">@</span>
                             {!isCustomDomain ? (
-                                <select className="email-select" onChange={handleDomainChange} >
-                                    <option value="">도메인 선택</option>
-                                    <option value="gmail.com">gmail.com</option>
-                                    <option value="naver.com">naver.com</option>
-                                    <option value="daum.net">daum.net</option>
-                                    <option value="yahoo.com">yahoo.com</option>
-                                    <option value="custom">직접 입력</option>
+                                <select className="email-select" onChange={handleDomainChange}>
+                                <option value="">도메인 선택</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="naver.com">naver.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="yahoo.com">yahoo.com</option>
+                                <option value="custom">직접 입력</option>
                                 </select>
                             ) : (
                                 <input 
-                                    type="text" 
-                                    placeholder="도메인 입력 (예: example.com)" 
-                                    value={emailDomain} 
-                                    onChange={handleCustomDomainChange} // 도메인 직접 입력 시 인증 상태 초기화
-                                    className="register-input email-custom"
+                                type="text" 
+                                placeholder="도메인 입력 (예: example.com)" 
+                                value={emailDomain} 
+                                onChange={handleCustomDomainChange} 
+                                className="register-input email-custom"
                                 />
                             )}
-                            {/* 이메일 인증 버튼 */}
-                            <div className="email-verification">
-                                <button 
-                                    type="button" 
-                                    onClick={requestEmailVerification} 
-                                    disabled={isVerificationSent || !emailId || !emailDomain} 
-                                    className="verification-btn"
-                                >
-                                    {isVerificationSent ? "전송 완료" : "인증 요청"}
-                                </button>
+                            <button 
+                                type="button" 
+                                onClick={requestEmailVerification} 
+                                disabled={isVerificationSent || !emailId || !emailDomain} 
+                                className="verification-btn"
+                            >
+                                {isVerificationSent ? "전송 완료" : "인증 요청"}
+                            </button>
                             </div>
+
                         </div>
                     </div>
                     {/* 이메일 인증 코드 입력 */}
@@ -624,11 +614,12 @@ const handleSubmit = async (e) => {
                                 className="register-input email-code-input"
                             />
                             <button 
-                                type="button" 
-                                onClick={verifyEmailCode} 
-                                disabled={isEmailVerified} 
-                                className={`verification-btn ${isEmailVerified ? "verified" : ""}`}
+                            type="button" 
+                            onClick={verifyEmailCode} 
+                            disabled={isEmailVerified} 
+                            className={`verification-btn ${isEmailVerified ? "verified" : ""}`}
                             >
+
                                 {isEmailVerified ? "인증 완료" : "인증 확인"}
                             </button>
                         </div>
@@ -651,7 +642,7 @@ const handleSubmit = async (e) => {
                             <button 
                                 type="button" 
                                 onClick={openPostcodeModal} 
-                                className="search-btn"
+                                className="search-btn check-btn"
                             >
                                 우편번호 찾기
                             </button>

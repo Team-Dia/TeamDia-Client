@@ -76,22 +76,23 @@ const ProductSidebar = ({ setPrevCategory }) => {
       category: selectedCategory,
       subCategory: selectedSubCategory,
     };
-
+  
     if (selectedPrice !== "all") {
       if (selectedPrice === "custom") {
-        filterParams.minPrice = customPrice[0] || null;
-        filterParams.maxPrice = customPrice[1] || null;
+        filterParams.minPrice = customPrice[0] ?? 0; // ✅ 0도 포함
+        filterParams.maxPrice = customPrice[1] ?? Infinity;
       } else {
         const [min, max] = selectedPrice.split("-").map(Number);
-        filterParams.minPrice = min || null;
-        filterParams.maxPrice = max || null;
+        filterParams.minPrice = min ?? 0; // ✅ 0을 제외하지 않음
+        filterParams.maxPrice = max ?? Infinity;
       }
     }
-
+  
     if (sortBy) filterParams.sortBy = sortBy;
-
+  
     setSearchParams(filterParams);
   };
+  
 
   const handleResetFilter = () => {
     setSelectedCategory("ring");

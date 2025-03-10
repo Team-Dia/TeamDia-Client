@@ -4,6 +4,7 @@
   align-items: center;
   min-height: calc(100vh - 120px); /* 헤더 & 푸터 공간 고려 */
   background-color: #f9f9f9;
+  top: 100px;
 }
 
 #member-terms-article {
@@ -54,33 +55,140 @@
   list-style: none;
   padding: 0;
 }
-
+/* ✅ 체크박스 컨테이너: 제목과 체크박스를 한 줄 정렬 */
 .member-terms-item {
-  display: flex;
-  justify-content: space-between; /* 제목 왼쪽, 체크박스 오른쪽 정렬 */
-  align-items: center;
-  padding: 10px 15px;
-  border-bottom: 1px solid #ddd;
-}
-
-.member-terms-item label {
-  font-size: 17px;
-  color: #333;
-  font-weight: bold;
-  flex: 1; /* 제목이 자동으로 확장되도록 설정 */
-}
-
-.member-terms-item input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
+    display: flex;
+    justify-content: space-between; /* 제목 왼쪽, 체크박스 오른쪽 */
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* ✅ 제목 스타일 */
+  .terms-title {
+    font-size: 17px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* ✅ 체크박스 컨테이너: 오른쪽 정렬 */
+  .member-terms-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40px;
+  }
+  
+  /* ✅ 기본 체크박스 숨김 */
+  .member-terms-item input[type="checkbox"],
+  .member-terms-all input[type="checkbox"] {
+    display: none;
+  }
+  
+  /* ✅ 커스텀 체크박스 디자인 */
+  .custom-checkbox,
+  .custom-checkbox-all {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #666;
+    border-radius: 6px;
+    background-color: white;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* ✅ 체크박스 체크 시 스타일 */
+  .custom-checkbox::after,
+  .custom-checkbox-all::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  /* ✅ 체크된 상태 */
+  input[type="checkbox"]:checked + .custom-checkbox,
+  input[type="checkbox"]:checked + .custom-checkbox-all {
+    background-color: black;
+    border-color: black;
+  }
+  
+  input[type="checkbox"]:checked + .custom-checkbox::after,
+  input[type="checkbox"]:checked + .custom-checkbox-all::after {
+    opacity: 1;
+  }
+  
+  /* ✅ 전체 동의 체크박스 스타일 */
+  .member-terms-all {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* ✅ 전체 동의 체크박스 오른쪽 정렬 */
+  .member-terms-all-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40px;
+  }
+  
+  /* ✅ 전체 동의 체크박스 고유한 스타일 */
+  .custom-checkbox-all {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #333; /* ✅ 전체 동의 체크박스는 더 진한 색상 */
+    border-radius: 6px;
+    background-color: white;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* ✅ 전체 동의 체크박스 체크 시 스타일 */
+  .custom-checkbox-all::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 3px;
+    width: 8px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  /* ✅ 전체 동의 체크박스 체크 시 색상 변경 */
+  .member-terms-all input[type="checkbox"]:checked + .custom-checkbox-all {
+    background-color: black;
+    border-color: black;
+  }
+  
+  .member-terms-all input[type="checkbox"]:checked + .custom-checkbox-all::after {
+    opacity: 1;
+  }
+  
 .terms-box {
   background: #f9f9f9;
   padding: 12px;
   border-radius: 5px;
-  max-height: 100px; /* 세로 길이 조정 */
+  max-height: 150px; /* 세로 길이 조정 */
   overflow-y: auto;
   margin-bottom: 8px;
   font-size: 16px;

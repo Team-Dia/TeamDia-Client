@@ -327,8 +327,18 @@ const NewProduct = () => {
                       src={getImageUrl(product.productImage)}
                       // src={`http://localhost:8070/product_images/${product.productImage}`}
                       alt={product.name}
-                      onMouseEnter={(e) => handleImageHover(e, product.hoverImage)}
-                      onMouseLeave={(e) => handleImageHover(e, product.productImage)}
+                      onMouseEnter={(e) =>
+                        handleImageHover(
+                          e, getImageUrl(product.hoverImage)
+                          // `http://localhost:8070/product_hover/${product.hoverImage}`
+                        )
+                      }
+                      onMouseLeave={(e) =>
+                        handleImageHover(
+                          e, getImageUrl(product.productImage)
+                          // `http://localhost:8070/product_images/${product.productImage}`
+                        )
+                      }
                       // onMouseEnter={(e) => handleImageHover(e, `http://localhost:8070/product_hover/${product.hoverImage}`)}
                       // onMouseLeave={(e) => handleImageHover(e, `http://localhost:8070/product_images/${product.productImage}`)}
                     />

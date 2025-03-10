@@ -40,6 +40,7 @@
   height: auto;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .review-photo {
@@ -419,7 +420,7 @@ label {
 }
 
 .info-product img {
-  width: 700px;
+  width: 100%;
   height: auto;
   object-fit: cover;
 }
