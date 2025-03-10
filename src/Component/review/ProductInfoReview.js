@@ -143,6 +143,18 @@ const ProductInfoReview = ({ review }) => {
 
   const isReviewValid = Array.isArray(review) && review.length > 0;
 
+  // ✅ 기존 데이터와 S3 데이터를 구분하여 이미지 표시
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "/default-image.png"; // 기본 이미지 처리
+    // S3 URL인지 확인
+    if (imagePath.startsWith("http")) {
+      return `${imagePath}?t=${new Date().getTime()}`; // ✅ 캐시 방지 추가
+      // return imagePath;
+    }
+    // 기존 로컬 서버 이미지 경로를 S3 URL로 변경
+    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
+  };
+
   return (
     <div className="inforereview-container">
       <div className="inforereview-header">
@@ -175,14 +187,16 @@ const ProductInfoReview = ({ review }) => {
               {productImage.infoImage && (
                 <img
                   key={`infoImage-${productImage.infoImage}-${idx}`} // infoImage와 idx를 결합하여 고유한 key를 생성
-                  src={`http://localhost:8070/product_infoimages/${productImage.infoImage}`}
+                  src={getImageUrl(productImage.infoImage)}
+                  // src={`http://localhost:8070/product_infoimages/${productImage.infoImage}`}
                   alt={`Product Image ${idx}`}
                 />
               )}
               {productImage.infoImage2 && (
                 <img
                   key={`infoImage2-${productImage.infoImage2}-${idx}`} // infoImage2와 idx를 결합하여 고유한 key를 생성
-                  src={`http://localhost:8070/product_infoimages/${productImage.infoImage2}`}
+                  src={getImageUrl(productImage.infoImage2)}
+                  // src={`http://localhost:8070/product_infoimages/${productImage.infoImage2}`}
                   alt={`Product Image 2 ${idx}`}
                 />
               )}
@@ -212,7 +226,8 @@ const ProductInfoReview = ({ review }) => {
                       onClick={() => openModal(reviewItem)} // 리뷰 정보를 모달로 전달
                     >
                       <img
-                        src={`http://localhost:8070/product_images/${reviewItem.reviewImage}`}
+                        src={getImageUrl(reviewItem.reviewImage)}
+                        // src={`http://localhost:8070/product_images/${reviewItem.reviewImage}`}
                         alt="Review Image"
                       />
                     </div>
@@ -405,7 +420,8 @@ const ProductInfoReview = ({ review }) => {
                     image ? (
                       <img
                         key={index} // 각 이미지마다 고유한 key
-                        src={`http://localhost:8070/product_images/${image}?t=${new Date().getTime()}`}
+                        src={getImageUrl(image)}
+                        // src={`http://localhost:8070/product_images/${image}?t=${new Date().getTime()}`}
                         alt={`Review Image ${index + 1}`}
                         onClick={() => handleImageClick(image, index, item)} // 이미지 클릭 시 해당 함수 실행
                         style={{ cursor: "pointer" }} // 클릭할 수 있다는 것을 표시

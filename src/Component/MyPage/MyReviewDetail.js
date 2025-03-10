@@ -30,6 +30,18 @@ const MyReviewDetail = () => {
     }
   }, [reviewSeq, review]);
 
+  // ✅ 기존 데이터와 S3 데이터를 구분하여 이미지 표시
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "/images/no-image.png"; // 기본 이미지 처리
+
+    // ✅ S3 URL인지 확인
+    if (imagePath.startsWith("http")) {
+      return imagePath;
+    }
+    // ✅ 기존 로컬 서버 이미지 경로를 S3 URL로 변경
+    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
+  };
+
   // 🔹 리뷰 이미지 배열 만들기
   const reviewImages = useMemo(() => {
     return review
@@ -102,7 +114,8 @@ const MyReviewDetail = () => {
                   {reviewImages.map((image, index) => (
                     <div key={index} className="review-slide">
                       <img
-                        src={`http://localhost:8070/product_images/${image}`}
+                        src={getImageUrl(image)} // 🔹 수정됨: S3 URL 적용
+                        // src={`http://localhost:8070/product_images/${image}`}
                         alt={`Review Image ${index + 1}`}
                         className="review-image"
                       />
