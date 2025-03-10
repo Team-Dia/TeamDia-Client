@@ -21,7 +21,7 @@ const Index = () => {
       return imagePath;
     }
     // ✅ 기존 로컬 서버 이미지 경로 지원 (product_images 디렉토리)
-    return `http://localhost:8070/product_images/${imagePath}`;
+    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
   };
 
   const handleImageHover = (e, imageUrl) => {
