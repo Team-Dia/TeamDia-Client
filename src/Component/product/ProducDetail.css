@@ -1,5 +1,4 @@
-
-.product-detail{
+.product-detail {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,13 +9,13 @@
   margin-top: 60px;
 }
 
-.product-allcontainer{
+.product-allcontainer {
   width: 100%;
   display: flex;
   height: auto;
 }
 
-.product-info{
+.product-info {
   width: 50%;
   height: 100%;
   display: flex;
@@ -24,42 +23,36 @@
   /* border: 1px solid blue; */
 }
 
-
-
 .swiper-container {
-    width: 50%; /* 화면의 50% 크기 */
-    height: 100%; /* 원하는 높이 */
-    margin: 0 auto; /* 가운데 정렬 */
-    display: flex;
-    flex-direction: column;
-    
-  }
-  
-  .swiper-wrapper {
-    display: flex;
-    width: 100%;
-    height: auto;
-    /* border: 1px solid green; */
-    /* margin: 0 !important; */
+  width: 50%; /* 화면의 50% 크기 */
+  height: 100%; /* 원하는 높이 */
+  margin: 0 auto; /* 가운데 정렬 */
+  display: flex;
+  flex-direction: column;
+}
 
-  }
+.swiper-wrapper {
+  display: flex;
+  width: 100%;
+  height: auto;
+  /* border: 1px solid green; */
+  /* margin: 0 !important; */
+}
 
-  .swiper-container .mySwiper2 img {
-    width: 100%; /* 이미지의 width를 부모의 100%로 설정 */
-    height: auto; /* 비율에 맞게 자동 조정 */
-    object-fit: contain; /* 이미지가 잘리거나 왜곡되지 않도록 설정 */
-  }
+.swiper-container .mySwiper2 img {
+  width: 100%; /* 이미지의 width를 부모의 100%로 설정 */
+  height: auto; /* 비율에 맞게 자동 조정 */
+  object-fit: contain; /* 이미지가 잘리거나 왜곡되지 않도록 설정 */
+}
 
-  
-  
-  .wrapper2 {
-    width: 100%;
-    display: flex;
-    margin-top: 20px; 
-    justify-content: center;
-    overflow: hidden; 
-    align-items: center;
-  }
+.wrapper2 {
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  overflow: hidden;
+  align-items: center;
+}
 
 /* .swiper-wrapper 스타일 (썸네일 전용) */
 .wrapper2 .swiper-wrapper {
@@ -69,29 +62,19 @@
   margin-left: 28px;
 }
 
+.swiper-slide {
+  display: flex;
+  align-items: center;
+}
 
+.mySwiper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-
-  .swiper-slide {
-    display: flex;
-    align-items: center;
-  }
-
-  
-  
-  .mySwiper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-  }
-
-
-  
-
-
-  /* 썸네일 이미지 기본 스타일 */
+/* 썸네일 이미지 기본 스타일 */
 .mySwiper .swiper-slide img {
   width: 100%;
   height: 100%;
@@ -107,17 +90,12 @@
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+/* 썸네일 사이 간격 */
+.mySwiper .swiper-slide {
+  margin-right: 10px;
+}
 
-
-  
-  /* 썸네일 사이 간격 */
-  .mySwiper .swiper-slide {
-    margin-right: 10px;
-  }
-  
- 
-
-  /* 화살표 버튼 스타일 */
+/* 화살표 버튼 스타일 */
 .swiper-button-prev,
 .swiper-button-next {
   background-color: #dee2e6;
@@ -143,21 +121,19 @@
   font-size: 22px; /* 화살표 크기 */
 }
 
-
 /* 비활성화 상태 */
 .swiper-button-disabled {
-  opacity: 0.3;  /* 비활성화 상태에서 투명도 낮추기 */
+  opacity: 0.3; /* 비활성화 상태에서 투명도 낮추기 */
   pointer-events: none; /* 클릭 불가 */
   background-color: rgba(0, 0, 0, 0.2); /* 비활성화 상태 배경색 */
 }
 
-.brandname{
+.brandname {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
 }
-
 
 /* .brandlogo {
   position: relative;
@@ -182,7 +158,7 @@
   align-items: center;
 }
 
-.product-content{
+.product-content {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -205,7 +181,7 @@
   background-color: rgb(229, 229, 229); 
 } */
 
-#btn1{
+#btn1 {
   width: 70px;
   height: 30px;
   border: 1px solid rgb(229, 229, 229);
@@ -247,8 +223,7 @@ a {
   text-decoration: none;
 }
 
-
-.delivery-info{
+.delivery-info {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -256,7 +231,7 @@ a {
   margin-top: 20px;
 }
 
-.delivery-icon{
+.delivery-icon {
   width: 100%;
   display: flex;
   margin-top: 5px;
@@ -275,13 +250,12 @@ a {
   appearance: none;
 }
 
-
 .size-select option {
   font-size: 18px; /* 옵션 글자 크기 */
   padding: 10px; /* 옵션의 패딩 */
 }
 
-.size-info{
+.size-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -315,7 +289,6 @@ a {
   border-radius: 50%;
 }
 
-
 .quantity-input {
   width: 40px;
   text-align: center;
@@ -328,7 +301,6 @@ a {
   font-weight: bold;
   background: none;
 }
-
 
 .price-info {
   display: flex;
@@ -346,9 +318,7 @@ a {
   margin: 0;
 }
 
-
-
-.quantity-detail{
+.quantity-detail {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -356,13 +326,13 @@ a {
   margin-top: 15px;
 }
 
-.shopping-select{
+.shopping-select {
   width: 100%;
   display: flex;
   margin-top: 15px;
 }
 
-.shopping-select button{
+.shopping-select button {
   width: 50%;
   height: 40px;
   /* margin: 5px; */
@@ -373,14 +343,14 @@ a {
   cursor: pointer;
 }
 
-.Return-info{
+.Return-info {
   display: flex;
   flex-direction: column;
   border-top: 1px solid rgb(229, 229, 229);
   margin-top: 20px;
 }
 
-.swiper-container .mySwiper2 img{
+.swiper-container .mySwiper2 img {
   width: 550px;
   height: 450px;
   object-fit: cover;

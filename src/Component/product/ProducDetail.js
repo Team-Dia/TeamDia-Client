@@ -534,13 +534,6 @@ const { productId } = useParams(); // URL에서 productId 가져오기
     });
   };
 
-  // ✅ S3 URL인지 확인 후 반환하는 함수
-  const getImageUrl = (imagePath) => {
-    if (!imagePath) return "/images/no-image.png"; // 기본 이미지 처리
-    if (imagePath.startsWith("http")) return imagePath; // S3 이미지면 그대로 반환
-    return `http://localhost:8070/product_images/${imagePath}`; // 기존 서버 이미지 경로
-  };
-
 
 
 
@@ -583,25 +576,25 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                   <>
                     {product.productImage && (
                     <SwiperSlide key={`${idx}-1`} className={activeIndex === idx ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage)} alt="상품 이미지" />
+                      <img src={`http://localhost:8070/product_images/${product.productImage}`} />
                     </SwiperSlide>
                   )}
 
                   {product.productImage2 && (
                     <SwiperSlide key={`${idx}-2`} className={activeIndex === idx + 1 ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage2)} alt="상품 이미지2" />
+                      <img src={`http://localhost:8070/product_images/${product.productImage2}`} />
                     </SwiperSlide>
                   )}
 
                   {product.productImage3 && (
                     <SwiperSlide key={`${idx}-3`} className={activeIndex === idx + 2 ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage3)} alt="상품 이미지3" />
+                      <img src={`http://localhost:8070/product_images/${product.productImage3}`} />
                     </SwiperSlide>
                   )}
 
                   {product.productImage4 && (
                     <SwiperSlide key={`${idx}-4`} className={activeIndex === idx + 3 ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage4)} alt="상품 이미지4" />
+                      <img src={`http://localhost:8070/product_images/${product.productImage4}`} />
                     </SwiperSlide>
                   )}
                 </>
@@ -636,25 +629,25 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                   <>
                     {product.productImage && (
                       <SwiperSlide key={`${idx}-1`} className={thumbsActiveIndex === idx ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage)} alt="상품 썸네일" />
+                        <img src={`http://localhost:8070/product_images/${product.productImage}`} />
                       </SwiperSlide>
                     )}
 
                     {product.productImage2 && (
                       <SwiperSlide key={`${idx}-2`} className={thumbsActiveIndex === idx + 1 ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage2)} alt="상품 썸네일2" />
+                        <img src={`http://localhost:8070/product_images/${product.productImage2}`} />
                       </SwiperSlide>
                     )}
 
                     {product.productImage3 && (
                       <SwiperSlide key={`${idx}-3`} className={thumbsActiveIndex === idx + 2 ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage3)} alt="상품 썸네일3" />
+                        <img src={`http://localhost:8070/product_images/${product.productImage3}`} />
                       </SwiperSlide>
                     )}
 
                     {product.productImage4 && (
                       <SwiperSlide key={`${idx}-4`} className={thumbsActiveIndex === idx + 3 ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage4)} alt="상품 썸네일4" />
+                        <img src={`http://localhost:8070/product_images/${product.productImage4}`} />
                       </SwiperSlide>
                     )}
                   </>
@@ -711,6 +704,11 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                     }
                 </div>
             </div>
+
+
+
+
+
           <div className='product-content'>
             <span style={{ fontSize:'25px',fontWeight:'bold'}}>{product.productName}</span>
 
