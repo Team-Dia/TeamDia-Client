@@ -34,23 +34,28 @@ const UserMenu = () => {
   );
 
   return (
-    <div className="nav-icons">
-      {user?.memberId ? (
-        <>
+    <>
+          {/* ✅ 닉네임 또는 "로그인 해주세요" 문구 표시 */}
           <div className="nav-nickname">
-            {user.memberName || user.memberId} 님
-          </div>
-          <div className="nav-item" onClick={handleLogout}>
-            <i className="ri-logout-box-line"></i>
-            <span className="nav-text">Logout</span>
-          </div>
-        </>
+          {user?.memberId ? `${user.memberName || user.memberId} 님 ✨` : "로그인해 주세요 🌟"}
+        </div>
+    <div className="nav-icons">
+
+
+      {/* ✅ 로그인 상태에 따라 버튼 변경 */}
+      {user?.memberId ? (
+        <div className="nav-item" onClick={handleLogout}>
+          <i className="ri-logout-box-line"></i>
+          <span className="nav-text">Logout</span>
+        </div>
       ) : (
         <Link to="/login" className="nav-item">
           <i className="ri-login-box-line"></i>
           <span className="nav-text">Login</span>
         </Link>
       )}
+
+      {/* ✅ 마이페이지 & 장바구니 */}
       <Link
         to="/myPage"
         className="nav-item"
@@ -65,6 +70,7 @@ const UserMenu = () => {
         <span className="nav-text">Cart</span>
       </Link>
     </div>
+    </>
   );
 };
 
