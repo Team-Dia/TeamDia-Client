@@ -1,276 +1,278 @@
 /* 문의 페이지 전체 레이아웃 */
 .qna-container {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    min-height: 100vh;
-    width: 90%; /* ✅ 화면의 90%만 사용하여 푸터와 동일한 너비 유지 */
-    max-width: none; /* ✅ 기존 max-width 제거 */
-    margin: 0 auto;
-    /* border: 1px solid red; */
-    justify-content: center;
-    overflow: visible;
-    height: auto;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  min-height: 100vh;
+  width: 90%; /* ✅ 화면의 90%만 사용하여 푸터와 동일한 너비 유지 */
+  max-width: none; /* ✅ 기존 max-width 제거 */
+  margin: 0 auto;
+  /* border: 1px solid red; */
+  justify-content: center;
+  overflow: visible;
+  height: auto;
 }
 
 /* 문의 내역 컨텐츠 */
 .qna-content {
-    flex-grow: 1;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    /* border: 1px solid blue; */
+  flex-grow: 1;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* border: 1px solid blue; */
 }
 
 /* 문의 내역 테이블 */
 .qna-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    /* border: 1px solid purple; */
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  /* border: 1px solid purple; */
 }
 
-.qna-table th, .qna-table td {
-    padding: 12px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+.qna-table th,
+.qna-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
 .qna-table th {
-    background-color: #f5f5f5;
-    font-weight: bold;
+  background-color: #f5f5f5;
+  font-weight: bold;
 }
 
 .qna-table tr:hover {
-    background-color: #f9f9f9;
-    cursor: pointer;
+  background-color: #f9f9f9;
+  cursor: pointer;
 }
 
 /* ✅ 제목과 버튼을 한 줄에 정렬 */
 .qna-header {
-    display: flex;
-    justify-content: space-between;  /* 제목과 버튼을 좌우로 배치 */
-    align-items: center;
-    margin-bottom: 15px;  /* 제목과 테이블 사이 간격 추가 */
+  display: flex;
+  justify-content: space-between; /* 제목과 버튼을 좌우로 배치 */
+  align-items: center;
+  margin-bottom: 15px; /* 제목과 테이블 사이 간격 추가 */
 }
 
 /* ✅ 버튼 스타일 */
 .qna-button {
-    padding: 10px 15px;
-    background: #1a1a1a;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px 15px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .qna-button:hover {
-    background: #333;
+  background: #333;
 }
 
 /* 답변 여부 표시 */
 .qna-answered {
-    color: #28a745;
-    font-weight: bold;
+  color: #28a745;
+  font-weight: bold;
 }
 
 .qna-not-answered {
-    color: #ff5733;
-    font-weight: bold;
+  color: #ff5733;
+  font-weight: bold;
 }
 
 /* 📌 QnA 페이징 스타일 (기존 페이징과 통일) */
 .qna-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
 }
 
 .qna-page-btn {
-    background-color: #ff6b81; /* 🔥 포인트 컬러 적용 */
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 17px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
+  background-color: #ff6b81; /* 🔥 포인트 컬러 적용 */
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
 }
 
 .qna-page-btn:hover {
-    background-color: #ff4757; /* 🔥 마우스 오버 시 색상 변경 */
-    transform: scale(1.05);
+  background-color: #ff4757; /* 🔥 마우스 오버 시 색상 변경 */
+  transform: scale(1.05);
 }
 
 .qna-page-btn:disabled {
-    background-color: #e0e0e0;
-    color: #a0a0a0;
-    cursor: not-allowed;
-    transform: none;
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* 🔹 현재 페이지(active) 스타일 */
 .qna-page-btn.active {
-    background-color: #ff4757;
-    box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
+  background-color: #ff4757;
+  box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
 }
 
 /* 🔹 이전/다음 버튼 스타일 */
 .qna-page-btn.prev-next {
-    background-color: #ffcccb;
-    color: #333;
+  background-color: #ffcccb;
+  color: #333;
 }
 
 .qna-page-btn.prev-next:hover {
-    background-color: #ffa8a8;
+  background-color: #ffa8a8;
 }
 
 /* 🔹 비밀글 아이콘 스타일 */
 .qna-title {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .qna-lock {
-    font-size: 16px;
-    color: #ff5733;
-    margin-left: 5px;
+  font-size: 16px;
+  color: #ff5733;
+  margin-left: 5px;
 }
-
-
 
 /* --- */
 
 /* 문의 작성 폼 전체 */
 .qna-form {
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    /* border: 1px solid red; */
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* border: 1px solid red; */
 }
 
 /* 입력 필드 공통 스타일 */
-.qna-input, .qna-textarea, .qna-pass-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 18px;
-    outline: none;
+.qna-input,
+.qna-textarea,
+.qna-pass-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 18px;
+  outline: none;
 }
 
 /* 입력 필드 포커스 효과 */
-.qna-input:focus, .qna-textarea:focus, .qna-pass-input:focus {
-    border-color: #1a1a1a;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+.qna-input:focus,
+.qna-textarea:focus,
+.qna-pass-input:focus {
+  border-color: #1a1a1a;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 /* 내용 입력 필드 */
 .qna-textarea {
-    resize: none;
-    height: 150px;
+  resize: none;
+  height: 150px;
 }
 
 /* 🔹 비밀글 설정 컨테이너 */
 .qna-security {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 /* 🔹 기본 체크박스 숨기고 커스텀 디자인 적용 */
 .qna-security input[type="checkbox"] {
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    position: relative;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.2s ease-in-out;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
 }
 
 /* 🔹 체크된 상태 */
 .qna-security input[type="checkbox"]:checked {
-    background-color: #1a1a1a;
-    border-color: #1a1a1a;
+  background-color: #1a1a1a;
+  border-color: #1a1a1a;
 }
 
 /* 🔹 체크 표시 추가 */
 .qna-security input[type="checkbox"]::after {
-    content: "✔";
-    font-size: 14px;
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
+  content: "✔";
+  font-size: 14px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
 }
 
 /* 🔹 체크된 상태에서 ✔ 표시 */
 .qna-security input[type="checkbox"]:checked::after {
-    display: block;
+  display: block;
 }
 
 /* 🔹 체크박스 레이블 스타일 */
 .qna-security label {
-    font-size: 18px;
-    color: #333;
-    cursor: pointer;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
 }
-
 
 /* 비밀번호 입력 */
 .qna-pass-input {
-    width: 200px;
-    padding: 8px;
+  width: 200px;
+  padding: 8px;
 }
 
 /* 버튼 그룹 */
 .qna-button-group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 /* 버튼 스타일 */
 .qna-button {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 /* 취소 버튼 */
 .qna-button.cancel {
-    background: #ccc;
-    color: white;
+  background: #ccc;
+  color: white;
 }
 
 .qna-button.cancel:hover {
-    background: #999;
+  background: #999;
 }
 
 /* 등록 버튼 */
 .qna-button.submit {
-    background: #1a1a1a;
-    color: white;
+  background: #1a1a1a;
+  color: white;
 }
 
 .qna-button.submit:hover {
-    background: #333;
+  background: #333;
 }
 
 /* --- */
@@ -287,55 +289,54 @@
 
 /* 필드 스타일 */
 .qna-field {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 /* 라벨 */
 .qna-field label {
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
 }
 
 /* 값 스타일 */
 .qna-value {
-    font-size: 18px;
-    padding: 8px;
-    background: #f8f9fa;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+  font-size: 18px;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 5px;
+  border: 1px solid #ddd;
 }
 
 /* 내용 박스 (더 크게 확장) */
 .qna-content-box {
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 20px;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    min-height: 150px; /* ✅ 최소 높이 설정 */
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 20px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  min-height: 150px; /* ✅ 최소 높이 설정 */
 }
 
 /* 답변 칸 (더 크게 확장) */
 .qna-reply-box {
-    padding: 20px;
-    background: #e9f5ff; /* ✅ 답변 배경 색상 추가 */
-    border-radius: 8px;
-    border: 1px solid #1a1a1a;
-    font-size: 20px;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    min-height: 120px; /* ✅ 최소 높이 설정 */
+  padding: 20px;
+  background: #e9f5ff; /* ✅ 답변 배경 색상 추가 */
+  border-radius: 8px;
+  border: 1px solid #1a1a1a;
+  font-size: 20px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  min-height: 120px; /* ✅ 최소 높이 설정 */
 }
-
 
 /* 버튼 그룹 */
 .qna-button-group {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 }

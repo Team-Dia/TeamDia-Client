@@ -1,116 +1,124 @@
 /* 🔹 전체 화면 오버레이 */
 .loading-screen-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 /* 🔹 로딩 스피너 */
 .loading-screen-spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(0, 0, 0, 0.1);
-    border-top: 5px solid #000;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
 }
 
 /* 🔹 로딩 메시지 */
 .loading-screen-message {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 15px;
-    text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 /* 🔹 상품 미리보기 컨테이너 */
 .loading-screen-product-preview {
-    width: 250px;
-    text-align: center;
-    margin-top: 20px;
-    animation: fadeIn 0.8s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 250px;
+  text-align: center;
+  margin-top: 20px;
+  animation: fadeIn 0.8s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 🔹 이미지 컨테이너 (이미지를 위로 배치) */
 .loading-screen-image-container {
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-    margin-bottom: 15px; /* 간격 조정 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  margin-bottom: 15px; /* 간격 조정 */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* 🔹 상품 이미지 (부드러운 변경 효과 포함) */
 .loading-screen-product-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    animation: fadeIn 0.5s ease-in-out forwards;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 /* 🔹 상품 정보 컨테이너 (상품명과 안내 문구를 묶음) */
 .loading-screen-product-info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 🔹 상품 정보 안내 문구 */
 .loading-screen-product-info {
-    font-size: 16px;
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 5px;
 }
 
 /* 🔹 상품명 */
 .loading-screen-product-name {
-    font-size: 20px;
-    font-weight: bold;
-    color: #222;
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
 }
 
 /* 🔹 취소 버튼 */
 .loading-screen-cancel-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .loading-screen-cancel-button:hover {
-    background-color: #444;
+  background-color: #444;
 }
 
 /* 🔹 스피너 애니메이션 */
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* 🔹 페이드 인 효과 */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

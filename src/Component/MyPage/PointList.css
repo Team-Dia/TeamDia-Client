@@ -1,109 +1,108 @@
 /* 📌 포인트 내역 테이블 스타일 (주문 내역과 동일) */
 .points-section {
-    margin-top: 20px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .points-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 16px; /* ✅ 주문 테이블과 동일한 글자 크기 */
-    border-radius: 8px;
-    overflow: hidden;
-    margin-top: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px; /* ✅ 주문 테이블과 동일한 글자 크기 */
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* ✅ thead가 항상 보이도록 설정 */
 .points-table thead {
-    display: table-header-group;
+  display: table-header-group;
 }
 
-.points-table th, 
+.points-table th,
 .points-table td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 
 /* ✅ 주문 내역 테이블과 동일한 색상 적용 */
 .points-table th {
-    background: #e4e8ec; /* 부드럽고 차분한 라이트 그레이 */
-    font-weight: bold;
-    color: #2c3e50; /* 가독성을 위한 다크 네이비 */
+  background: #e4e8ec; /* 부드럽고 차분한 라이트 그레이 */
+  font-weight: bold;
+  color: #2c3e50; /* 가독성을 위한 다크 네이비 */
 }
 
 /* ✅ 포인트 상태 색상 유지 (적립/사용 구분) */
 .points-table .earn {
-    color: #2ecc71; /* 초록색 (적립) */
-    font-weight: bold;
+  color: #2ecc71; /* 초록색 (적립) */
+  font-weight: bold;
 }
 
 .points-table .use {
-    color: #e74c3c; /* 빨간색 (사용) */
-    font-weight: bold;
+  color: #e74c3c; /* 빨간색 (사용) */
+  font-weight: bold;
 }
 
 /* 📌 포인트 내역이 없을 때 스타일 */
 .no-points {
-    text-align: center;
-    color: #888;
-    padding: 15px;
-    font-size: 16px;
-    background-color: #f9f9f9;
+  text-align: center;
+  color: #888;
+  padding: 15px;
+  font-size: 16px;
+  background-color: #f9f9f9;
 }
 
 /* 🔹 반응형 디자인 (모바일 최적화) */
 @media (max-width: 768px) {
-    .points-table {
-        font-size: 14px;
-    }
+  .points-table {
+    font-size: 14px;
+  }
 
-    .points-table th, 
-    .points-table td {
-        padding: 8px;
-    }
+  .points-table th,
+  .points-table td {
+    padding: 8px;
+  }
 }
-
 
 /* 📌 고유한 스타일 적용된 페이지네이션 */
 .custom-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
 }
 
 .custom-pagination button {
-    background-color: #ff6b81; /* 🔥 포인트 컬러 적용 */
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
+  background-color: #ff6b81; /* 🔥 포인트 컬러 적용 */
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
 }
 
 .custom-pagination button:hover {
-    background-color: #ff4757; /* 🔥 마우스 오버 시 색상 변경 */
-    transform: scale(1.05);
+  background-color: #ff4757; /* 🔥 마우스 오버 시 색상 변경 */
+  transform: scale(1.05);
 }
 
 .custom-pagination button:disabled {
-    background-color: #e0e0e0;
-    color: #a0a0a0;
-    cursor: not-allowed;
-    transform: none;
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .custom-pagination span {
-    font-size: 16px;
-    font-weight: bold;
-    color: #444;
+  font-size: 16px;
+  font-weight: bold;
+  color: #444;
 }
