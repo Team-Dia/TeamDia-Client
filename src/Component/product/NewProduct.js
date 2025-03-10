@@ -239,6 +239,13 @@ const NewProduct = () => {
     const handlePageChange = (page) => {
       setCurrentPage(page);
     };
+
+    // ✅ S3 URL인지 확인 후 반환하는 함수
+    const getImageUrl = (imagePath) => {
+      if (!imagePath) return "/images/no-image.png"; // 기본 이미지 처리
+      if (imagePath.startsWith("http")) return imagePath; // S3 이미지면 그대로 반환
+      return `http://localhost:8070/product_images/${imagePath}`; // 기존 서버 이미지 경로
+  };
   
     
   
@@ -313,10 +320,13 @@ const NewProduct = () => {
                   >
                     <img
                       className="new-pro-image"
-                      src={`http://localhost:8070/product_images/${product.productImage}`}
+                      src={getImageUrl(product.productImage)}
+                      // src={`http://localhost:8070/product_images/${product.productImage}`}
                       alt={product.name}
-                      onMouseEnter={(e) => handleImageHover(e, `http://localhost:8070/product_hover/${product.hoverImage}`)}
-                      onMouseLeave={(e) => handleImageHover(e, `http://localhost:8070/product_images/${product.productImage}`)}
+                      onMouseEnter={(e) => handleImageHover(e, product.hoverImage)}
+                      onMouseLeave={(e) => handleImageHover(e, product.productImage)}
+                      // onMouseEnter={(e) => handleImageHover(e, `http://localhost:8070/product_hover/${product.hoverImage}`)}
+                      // onMouseLeave={(e) => handleImageHover(e, `http://localhost:8070/product_images/${product.productImage}`)}
                     />
                   </div>
                 </Link>
@@ -330,7 +340,11 @@ const NewProduct = () => {
                   }}
                 >
                   <img
-                    src={`http://localhost:8070/product_images/${likeList.some(product_like => product_like.productSeq === product.productSeq) ? 'delike.png' : 'like.png'}`}
+                    src={getImageUrl(
+                      likeList.some(product_like => product_like.productSeq === product.productSeq) 
+                      ? 'delike.png' 
+                      : 'like.png'
+                    )}
                     alt={likeList.some(product_like => product_like.productSeq === product.productSeq) ? 'Liked' : 'Like'}
                     className="like-icon"
                   />
