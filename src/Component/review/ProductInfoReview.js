@@ -197,14 +197,14 @@ const ProductInfoReview = ({ review }) => {
             {productImages[0].infoImage && (
               <img
                 key={`infoImage-${productImages[0].infoImage}`}
-                src={getImageUrl(productImages[0]?.infoImage)}
+                src={getImageUrl(productImages[0]?.infoImage, "info")}
                 alt="infoImage"
               />
             )}
             {productImages[0].infoImage2 && (
               <img
                 key={`infoImage2-${productImages[0].infoImage2}`}
-                src={getImageUrl(productImages[0]?.infoImage2)}
+                src={getImageUrl(productImages[0]?.infoImage2, "info")}
                 alt="infoImage2"
               />
             )}
