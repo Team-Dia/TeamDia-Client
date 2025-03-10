@@ -101,7 +101,7 @@ const EditProfile = () => {
             return;
         }
     
-        axios.get("/api/member/userinfo", {
+        jaxios.get("/api/member/userinfo", {
             headers: { "Authorization": memberId },
             withCredentials: true
         })

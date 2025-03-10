@@ -172,13 +172,117 @@ const ProducDetail = () => {
   const openModal = (type) => {
     if (type === 'exchange') {
       setModalContent({
-        title: '교환 및 반품 정보',
-        content: '여기에는 교환 및 반품에 대한 정보가 들어갑니다.',
+        title: '배송 관련 안내',
+        content: (
+          <>
+            <div style={{ marginBottom: '20px',marginTop:'50px'}}>
+              <h3>배송비</h3>&nbsp;
+              <p>다이아몬즈는 전상품 무료배송입니다.</p>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>추가 배송비</h3>&nbsp;
+              <p>제주 및 도서산간 지역은 배송비가 별도로 부과됩니다.</p>
+              <ul>
+                <li>제주도 : 3,500원 / 그 외 도서산간 지역 : 3,500원</li>
+              </ul>
+            </div>
+  
+            <div className='modal-delivery' style={{ marginBottom: '20px' }}>
+              <h3>반품 / 교환 안내</h3>&nbsp;
+              <p>다이아몬즈의 모든 제품은 오더메이드 방식으로 진행되므로 단순변심으로 인한 교환/환불이 불가합니다.</p>
+              <p>제작되는 모든 주얼리는 수공예 실버제품 특성상 표면에 미세한 스크래치 및 자국이 존재할 수 있습니다.</p>
+              <p>진주 / 원석이 셋팅된 제품의 경우 색감, 모양, 크기 등이 다소 차이가 있을 수 있습니다.</p>
+              <p>이 점은 교환/환불의 사유가 되지 않습니다.</p>
+              <p>제품 불량으로 판단될 경우 착용하지 않은 상품에 한해 동일제품으로 교환이 가능합니다.</p>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>반품 / 교환 불가사유</h3>&nbsp;
+              <ul>
+                <li>불량교환은 제품 수령후 3일 이내에 접수해주셔야 하며, 7일 이내 제품 회수가 완료되어야 합니다. 접수하지 않고 임의로 발송시 착불로 반송됩니다.</li>
+                <li>* 제품을 착용한 흔적이 있는 경우</li>
+                <li>* 알러지 반응으로 인한 반품 (알러지 반응은 개인차 부분으로 제품하자가 아닙니다)</li>
+                <li>* 고객님 부주의로 인한 제품의 오염, 변형, 파손된 경우</li>
+                <li>* 교환 및 반품기간이 경과된 경우</li>
+                <li>* 미세한 스크래치, 이음새 땜 자국, 얼룩, 기포, 본딩자국, 작은 흠집 등 제작과정중 발생한 자연스러운 현상이므로 반품사유가 되지 않습니다.</li>
+                <li>* 침의 휘어짐 또는 연결고리 벌어짐 등 손으로 간단하게 교정이 가능한 경우</li>
+                <li>* 천연 원석, 진주 같은 경우 소재 특성상 미세한 기스 및 요철, 내포물, 사이즈, 모양, 색상의 차이</li>
+                <li>* 유화처리 된 제품의 경우 거뭇한 표현 및 일정하지 않은 색상</li>
+                <li>* 패키지 내용물 분실 및 파손 (반품시 모든 내용물 그대로 보내주셔야 합니다)</li>
+              </ul>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>반품 사유에 따른 환불정보</h3>&nbsp;
+              <ul>
+                <li><strong>단순 변심이나 구매자의 사유로 인한 반품 시</strong>: 왕복 배송비를 차감하여 환불해드립니다. (도서산간 지역의 경우, 도서산간 추가배송비 부과)</li>
+                <li><strong>제품의 하자나 기타 브랜드의 과실로 인한 반품 시</strong>: 전액 환불해드립니다.</li>
+              </ul>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>반품/교환 시 택배 발송 방법</h3>&nbsp;
+              <p>상품을 받으신 택배사/송장번호로 반품 접수 해주세요. 다른 택배사로 반품 접수하실 경우, 해당 반송 비용은 판매자가 책임지지 않습니다.</p>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>반품 / 교환 시 보내실 곳</h3>&nbsp;
+              <p>서울특별시 성동구 성수동1가 656-591번지 서울숲에이타워 1301B호</p>
+            </div>
+  
+            <div className='modal-delivery' style={{ marginBottom: '20px' }}>
+              <h3>판매자 정보</h3>&nbsp;
+              <h4><strong>상호</strong></h4><br/><p>다이아몬즈 / DIAMONDZ</p>&nbsp;
+              <h4><strong>대표자</strong></h4><br/><p>이후용</p>&nbsp;
+              <h4><strong>사업자 소재지</strong></h4><br/><p>(03473) 서울특별시 성동구 성수동1가 656-591번지</p>&nbsp;
+              <h4><strong>전화번호</strong></h4><br/><p>1644-3662</p>&nbsp;
+              <h4><strong>E-mail</strong></h4><br/><p>scott@naver.com</p>&nbsp;
+              <h4><strong>사업자 등록번호</strong></h4><br/><p>204-86-00983</p>&nbsp;
+              <h4><strong>통신판매 신고번호</strong></h4><br/><p>2021서울성동1673</p>&nbsp;
+            </div>
+          </>
+        ),
       });
     } else if (type === 'as') {
       setModalContent({
         title: 'A/S 정보',
-        content: '여기에는 A/S에 대한 정보가 들어갑니다.',
+        content: (
+          <>
+            <div style={{ marginBottom: '20px',marginTop:'50px'}}>
+              <h3>A/S 안내</h3>&nbsp;
+              <p>Q&a에 사진과 함께 문의를 남겨주세요.<br/><br/>
+              불량 제품의 경우 24시간 이내 연락바랍니다.</p>
+            </div>
+
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>착용시 주의 사항</h3>&nbsp;
+              <ul>
+                <li>* 실버925 (은제품)은 특성상 스크래치나 압력에 취약합니다. </li>
+                <li>* 미착용시에는 밀폐된 지퍼백에 보관하시고, 변색되었을 경우 은세척제 / 은 전용 폴리싱 천으로 관리합니다.</li>
+                <li>* 오픈링의 경우 늘림-줄임 여러번 반복시 끊어질 수 있습니다.</li>
+              </ul>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>품질보증 기준</h3>&nbsp;
+              <ul>
+                <li>제품구입후 30일 이내 무상 a/s 가능합니다. 제품상태에따라 추가요금이 발생할 수 있습니다. (왕복배송비 구매자 부담)</li>
+              </ul>
+            </div>
+
+            <h4><strong>제조자</strong></h4><br/><p>DIAMONDZ</p>&nbsp;
+            <h4><strong>제조국</strong></h4><br/><p>대한민국</p>
+  
+  
+            <div className='modal-delivery' style={{ marginBottom: '20px' }}>
+              <h3>고객센터</h3>&nbsp;
+              <h4><strong>고객센터 전화번호</strong></h4><br/><p>1644-3662</p>&nbsp;
+              <h4><strong>카카오톡 플러스친구</strong></h4><br/><p>DIAMONDZ</p>&nbsp;
+            </div>
+          </>
+        ),
       });
     }
     setIsModalOpen(true);
@@ -660,9 +764,9 @@ const { productId } = useParams(); // URL에서 productId 가져오기
 
       <div className="Return-info">
         &nbsp;&nbsp;
-        <div onClick={() => openModal('exchange')}>▶ 교환 및 반품 정보</div>
+        <div style={{cursor:'pointer'}} onClick={() => openModal('exchange')}>▶ 교환 및 반품 정보</div>
         &nbsp;
-        <div onClick={() => openModal('as')}>▶ A/S 정보</div>
+        <div style={{cursor:'pointer'}} onClick={() => openModal('as')}>▶ A/S 정보</div>
       </div>
 
       {/* 모달 컴포넌트 */}

@@ -75,7 +75,7 @@ useEffect(() => {
                   <Link to={`/producDetail/${item.productSeq}`} className="slider-link">
                     <div className="image-container">
                       <img src={`http://localhost:8070/product_images/${item.productImage}`} alt={item.productName} className="slide-product-image" />
-                      <div className="badge">인기 상품</div>
+                      <div className="badge" style={{marginLeft:'15px'}}>인기 상품</div>
                       <div className="overlay">
                         <div className="slide-product-info">
                           <div className="slide-product-name">{item.productName}</div>
@@ -106,7 +106,7 @@ useEffect(() => {
                   <Link to={`/producDetail/${item.productSeq}`} className="slider-link">
                     <div className="image-container">
                       <img src={`http://localhost:8070/product_images/${item.productImage}`} alt={item.productName} className="slide-product-image" />
-                      <div className="badge" style={{left: '21%'}}>{memberId}님 추천상품</div>
+                      <div className="badge" style={{left: '22%'}}>{memberId}님 추천상품</div>
                       <div className="overlay">
                         <div className="slide-product-info">
                           <div className="slide-product-name">{item.productName}</div>

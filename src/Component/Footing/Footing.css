@@ -54,20 +54,25 @@
 .footer-adimin {
     display: flex;
     align-items: center;
-    margin-top: 10px;
 }
 
 .footer-adimin a {
     text-decoration: none;
     color: #00aaff; /* 밝은 블루로 포인트 */
     font-weight: bold;
-    margin-left: 10px;
+    margin-left: 5px;
     transition: all 0.3s ease-in-out;
 }
 
 .footer-adimin a:hover {
     transform: scale(1.1);
     color: #0090e0; /* 살짝 진한 블루 */
+}
+
+.ri-admin-line{
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #ffffff
 }
 
 /* ✅ 푸터 하단 바 */
