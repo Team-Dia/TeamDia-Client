@@ -30,7 +30,7 @@ const Footing = () => {
                     
                 </div>
 
-                <div className='footer-box'>
+                <div className='footer-box' style={{marginLeft:'110px'}}>
                     <h3>ABOUT US</h3>
                     <div className='line'></div>&nbsp;
                 
@@ -38,7 +38,7 @@ const Footing = () => {
                     <p>주식회사 DIA 쇼핑몰</p>
                     {/* <a href={`${window.location.origin}:3001/admin`}> admin 로그인 페이지로 이동http://localhost:3001/admin */}
                     <a href={`http://localhost:3001/admin`}>
-                        <i className="ri-admin-line"></i> Admin
+                        <i className="ri-admin-line"></i>
                     </a>
                 </div>
                 
