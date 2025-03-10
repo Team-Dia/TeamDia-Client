@@ -711,11 +711,6 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                     }
                 </div>
             </div>
-
-
-
-
-
           <div className='product-content'>
             <span style={{ fontSize:'25px',fontWeight:'bold'}}>{product.productName}</span>
 
