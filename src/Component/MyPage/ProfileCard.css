@@ -1,286 +1,286 @@
 /* ✅ 프로필 카드 - 반응형 적용 */
 .mypage-profile-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f8f8f8;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    width: 100%; /* ✅ 화면 크기에 맞춰 조정 */
-    max-width: 1400px; /* ✅ 너무 넓지 않도록 제한 */
-    min-height: 200px;
-    height: auto;
-    flex-wrap: wrap; /* ✅ 반응형 대응 */
-    /* border: 1px solid green; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  width: 100%; /* ✅ 화면 크기에 맞춰 조정 */
+  max-width: 1400px; /* ✅ 너무 넓지 않도록 제한 */
+  min-height: 200px;
+  height: auto;
+  flex-wrap: wrap; /* ✅ 반응형 대응 */
+  /* border: 1px solid green; */
 }
 
 /* ✅ 프로필 정보 (사진 + 텍스트) */
 .profile-info {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 800px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 800px;
 }
 
 /* ✅ 프로필 이미지 */
 .profile-img {
-    width: 150px; /* ✅ 기본 크기 */
-    height: 150px;
-    border-radius: 50%;
-    margin-right: 15px;
+  width: 150px; /* ✅ 기본 크기 */
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 15px;
 }
 
 /* ✅ 프로필 텍스트 */
 .profile-text {
-    flex-grow: 1;
-    min-width: 250px;
+  flex-grow: 1;
+  min-width: 250px;
 }
 
 .profile-text h2 {
-    font-size: 28px;
-    margin: 0;
-    white-space: normal;
-    word-break: break-word;
+  font-size: 28px;
+  margin: 0;
+  white-space: normal;
+  word-break: break-word;
 }
 
 /* ✅ 프로필 통계 정보 */
 .profile-stats {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    justify-content: flex-end;
-    gap: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-content: flex-end;
+  gap: 30px;
 }
 
 /* ✅ 모바일에서 프로필 사진 + 텍스트 + 아이콘 중앙 정렬 */
 @media (max-width: 768px) {
-    .mypage-profile-card {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+  .mypage-profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
-    .profile-info {
-        flex-direction: column; /* ✅ 모바일에서 프로필 사진과 텍스트 세로 배치 */
-        align-items: center;
-        text-align: center;
-        width: 100%;
-    }
+  .profile-info {
+    flex-direction: column; /* ✅ 모바일에서 프로필 사진과 텍스트 세로 배치 */
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
 
-    .profile-img {
-        width: 120px;
-        height: 120px;
-        margin-bottom: 10px;
-        margin-right: 0; /* ✅ 왼쪽 정렬 문제 해결 */
-    }
+  .profile-img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+    margin-right: 0; /* ✅ 왼쪽 정렬 문제 해결 */
+  }
 
-    .profile-text {
-        text-align: center;
-    }
+  .profile-text {
+    text-align: center;
+  }
 
-    .profile-stats {
-        flex-direction: row; /* ✅ 가로 정렬 */
-        justify-content: center;
-        gap: 50px;
-        width: 100%;
-    }
+  .profile-stats {
+    flex-direction: row; /* ✅ 가로 정렬 */
+    justify-content: center;
+    gap: 50px;
+    width: 100%;
+  }
 
-    .profile-text h2 {
-        font-size: 20px;
-        text-align: center;
-    }
+  .profile-text h2 {
+    font-size: 20px;
+    text-align: center;
+  }
 }
 
 /* ✅ 프로필 통계 정보 */
 .profile-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  width: 50%;
 }
 
 .profile-stat .fa-icon {
-    font-size: 38px;
-    margin-bottom: 5px;
+  font-size: 38px;
+  margin-bottom: 5px;
 }
 
 .profile-stat span {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 /* 🔹 생일 입력 배너 */
 .birthdate-banner {
-    background: #f6f2ed;
-    padding: 20px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 18px;
-    font-weight: 500;
-    color: #4e3d2f;
-    width: 100%;
-    max-width: 1400px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #c8b6a6;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease-in-out;
+  background: #f6f2ed;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 500;
+  color: #4e3d2f;
+  width: 100%;
+  max-width: 1400px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #c8b6a6;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
 }
 
 /* 🎂 아이콘 스타일 */
 .birthday-icon {
-    font-size: 26px;
-    color: #7a685c;
-    margin-bottom: 6px;
+  font-size: 26px;
+  color: #7a685c;
+  margin-bottom: 6px;
 }
 
 /* 🔹 문구 스타일 */
 .birthdate-banner-text {
-    font-size: 20px;
-    font-weight: bold;
-    color: #4e3d2f;
-    text-align: center;
-    flex-grow: 1;
-    line-height: 1.5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #4e3d2f;
+  text-align: center;
+  flex-grow: 1;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .sub-text {
-    font-size: 17px;
-    color: #7a685c;
-    margin-top: 5px;
+  font-size: 17px;
+  color: #7a685c;
+  margin-top: 5px;
 }
 
 /* 🔹 CTA 버튼 */
 .birthdate-banner button {
-    background-color: #5e4633;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-    margin-left: 20px;
+  background-color: #5e4633;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
 }
 
 .birthdate-banner button:hover {
-    background-color: #735a42;
-    transform: scale(1.05);
-    box-shadow: 0px 6px 12px rgba(115, 90, 66, 0.2);
+  background-color: #735a42;
+  transform: scale(1.05);
+  box-shadow: 0px 6px 12px rgba(115, 90, 66, 0.2);
 }
 
 /* 🔹 반응형 디자인 (모바일 최적화) */
 @media (max-width: 768px) {
-    .birthdate-banner {
-        flex-direction: column;
-        text-align: center;
-        padding: 18px;
-    }
+  .birthdate-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px;
+  }
 
-    .birthdate-banner-text {
-        font-size: 19px;
-    }
+  .birthdate-banner-text {
+    font-size: 19px;
+  }
 
-    .birthdate-banner button {
-        margin-top: 12px;
-        width: 100%;
-        font-size: 19px;
-    }
+  .birthdate-banner button {
+    margin-top: 12px;
+    width: 100%;
+    font-size: 19px;
+  }
 }
 
 /* 🎂 생일 입력 모달 스타일 */
 .birthday-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .birthday-modal-content {
-    background: #fff;
-    padding: 25px;
-    width: 350px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    position: relative;
-    animation: fadeIn 0.3s ease-in-out;
+  background: #fff;
+  padding: 25px;
+  width: 350px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .birthday-close-button {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    font-size: 22px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #333;
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
 }
 
 .birthday-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #444;
-    margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
 }
 
 .birthday-description {
-    font-size: 16px;
-    color: #777;
-    margin-bottom: 20px;
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 20px;
 }
 
 .birthday-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
 }
 
 .birthday-save-button {
-    background: #ff6b81;
-    color: white;
-    padding: 10px 15px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 15px;
-    transition: background 0.3s;
+  background: #ff6b81;
+  color: white;
+  padding: 10px 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+  transition: background 0.3s;
 }
 
 .birthday-save-button:hover {
-    background: #ff4757;
+  background: #ff4757;
 }
 
 /* 모달 애니메이션 */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
