@@ -12,12 +12,28 @@ const ReviewDetail = () => {
   const [isNextDisabled, setIsNextDisabled] = useState(false);
   // 리뷰 내용이나 평점이 없다면 기본값 처리
 
+  // ✅ 기존 데이터와 S3 데이터를 구분하여 이미지 표시
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "/default-image.png"; // 기본 이미지 처리
+    // S3 URL인지 확인
+    if (imagePath.startsWith("http")) {
+      return imagePath;
+    }
+    // 기존 로컬 서버 이미지 경로를 S3 URL로 변경
+    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
+  };
+
   // 리뷰 이미지 배열 만들기
   const reviewImages = useMemo(() => {
     return reviewItem
-      ? [reviewImage, reviewItem.reviewImage1, reviewItem.reviewImage2].filter(
-          Boolean
-        )
+      ? [
+          getImageUrl(reviewImage), // S3 Url 경로로 수정됨
+          getImageUrl(reviewItem.reviewImage1),
+          getImageUrl(reviewItem.reviewImage2),
+          // reviewImage, 
+          // reviewItem.reviewImage1, 
+          // reviewItem.reviewImage2
+        ].filter(Boolean)
       : [];
   }, [reviewItem, reviewImage]);
 
@@ -55,6 +71,8 @@ const ReviewDetail = () => {
   };
 
   const slideWidth = reviewImages.length === 1 ? "90%" : "60%";
+
+  
 
   return (
     <div className="review-detail-con">
@@ -126,7 +144,8 @@ const ReviewDetail = () => {
                 style={{ width: slideWidth, flex: `0 0 ${slideWidth}` }}
               >
                 <img
-                  src={`http://localhost:8070/product_images/${image}`}
+                  src={image}
+                  // src={`http://localhost:8070/product_images/${image}`}
                   alt={`Review Image ${index + 1}`}
                   style={{ width: "100%", objectFit: "cover" }}
                 />

@@ -260,3 +260,278 @@
   margin: 5px;
   font-weight: 700;
 }
+
+@media (max-width: 1200px) {
+  .order-detail-con {
+    width: 90%;
+  }
+
+  .order-detail-header img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .order-detail-body {
+    width: 100%;
+  }
+
+  .order-detail-body h2 {
+    margin-top: 50px;
+  }
+
+  .order-detail-nav {
+    margin-top: 30px;
+  }
+
+  .order-detail-nav p {
+    font-size: 14px;
+  }
+
+  .order-detail-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-detail-container::after {
+    top: 10px;
+  }
+
+  .order-detail-image img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .order-detail-content {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .order-detail-content p {
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .detail-delivery {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .delivery-box {
+    width: 100%;
+  }
+
+  .detail-user-info {
+    width: 100%;
+  }
+
+  .detail-box {
+    width: 100%;
+    padding-left: 20px;
+  }
+
+  .detail-info-name, .detail-info-phone, .detail-info-address, .detail-info-customRequest, .detail-info-point {
+    margin-top: 10px;
+  }
+
+  .detail-info-point-earned {
+    margin-top: 10px;
+  }
+
+  .detail-info-delivery {
+    margin-top: 10px;
+  }
+
+  .detail-delivery-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .detail-header-btn {
+    flex-direction: column;
+  }
+
+  .detail-header-btn button {
+    width: 180px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-detail-con {
+    width: 95%;
+  }
+
+  .order-detail-header img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .order-detail-body h2 {
+    margin-top: 40px;
+  }
+
+  .order-detail-nav {
+    margin-top: 20px;
+  }
+
+  .order-detail-nav p {
+    font-size: 12px;
+  }
+
+  .order-detail-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-detail-container::after {
+    top: 5px;
+  }
+
+  .order-detail-image img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .order-detail-content {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .order-detail-content p {
+    text-align: left;
+    font-size: 12px;
+  }
+
+  .detail-delivery {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .delivery-box {
+    width: 100%;
+  }
+
+  .detail-user-info {
+    width: 100%;
+  }
+
+  .detail-box {
+    width: 100%;
+    padding-left: 10px;
+  }
+
+  .detail-info-name, .detail-info-phone, .detail-info-address, .detail-info-customRequest, .detail-info-point {
+    margin-top: 8px;
+  }
+
+  .detail-info-point-earned {
+    margin-top: 8px;
+  }
+
+  .detail-info-delivery {
+    margin-top: 8px;
+  }
+
+  .detail-delivery-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .detail-header-btn {
+    flex-direction: column;
+  }
+
+  .detail-header-btn button {
+    width: 150px;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-detail-con {
+    width: 100%;
+  }
+
+  .order-detail-header img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .order-detail-body h2 {
+    margin-top: 30px;
+  }
+
+  .order-detail-nav {
+    margin-top: 15px;
+  }
+
+  .order-detail-nav p {
+    font-size: 10px;
+  }
+
+  .order-detail-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-detail-container::after {
+    top: 5px;
+  }
+
+  .order-detail-image img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .order-detail-content {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .order-detail-content p {
+    text-align: left;
+    font-size: 10px;
+  }
+
+  .detail-delivery {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .delivery-box {
+    width: 100%;
+  }
+
+  .detail-user-info {
+    width: 100%;
+  }
+
+  .detail-box {
+    width: 100%;
+    padding-left: 5px;
+  }
+
+  .detail-info-name, .detail-info-phone, .detail-info-address, .detail-info-customRequest, .detail-info-point {
+    margin-top: 5px;
+  }
+
+  .detail-info-point-earned {
+    margin-top: 5px;
+  }
+
+  .detail-info-delivery {
+    margin-top: 5px;
+  }
+
+  .detail-delivery-info {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .detail-header-btn button {
+    width: 130px;
+    margin-top: 5px;
+  }
+}
+

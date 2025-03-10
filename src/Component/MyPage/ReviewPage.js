@@ -20,6 +20,17 @@ const ReviewPage = () => {
   const [error, setError] = useState(null);
   const memberId = useSelector((state) => state.user.memberId);
 
+  // ✅ 기존 데이터와 S3 데이터를 구분하여 이미지 표시
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "/default-image.png"; // 기본 이미지 처리
+    // S3 URL인지 확인
+    if (imagePath.startsWith("http")) {
+      return imagePath;
+    }
+    // 기존 로컬 서버 이미지 경로를 S3 URL로 변경
+    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
+  };
+
   // ✅ 상품 정보 가져오기
   useEffect(() => {
     console.log("🔍 ReviewPage에서 받은 productSeq:", productSeq);
@@ -145,7 +156,8 @@ const ReviewPage = () => {
                 {/* ✅ 제품명 표시 */}
                 <h3>{productInfo.name}</h3> {/* 여기서 제품 이름을 표시 */}
                 <img
-                  src={productInfo.imageUrl}
+                  src={getImageUrl(productInfo.imageUrl)} // 🔹 수정됨: S3 URL 적용
+                  // src={productInfo.imageUrl}
                   alt={productInfo.name}
                   className="product-image"
                 />
