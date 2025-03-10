@@ -61,44 +61,35 @@ const Navbar = () => {
 
   return (
     <div className={`nav-wrapper ${isDropdownOpen ? "expanded" : ""}`}>
-      <div className="nav-container">
-        <div className="nav-bar">
-          {/* 왼쪽 (로고 + 검색) */}
-          <div className="nav-left">
-            <Link to="/" id="home-link" className="logo">
-              <img src={logo} alt="logo" id="nav-logo" />
-            </Link>
-            <SearchBar />
-          </div>
+    <div className="nav-container">
+        
+      <div className="nav-bar">
+      <Link to="/" id="home-link" className="logo">
+            <img src={logo} alt="logo" id="nav-logo" />
+          </Link>
+        <div className="nav-left">
+          
+          <SearchBar />
+        </div>
 
-          {/* 중앙 (카테고리 메뉴 + 고객센터) */}
-          <div className="nav-center">
-            {/* 카테고리 메뉴 */}
-            <Link
-              id="category-link"
-              className="category-link"
-              onMouseEnter={handleMouseEnterCategory} // 카테고리 메뉴에 마우스 올리면 드롭다운 열기
-              onMouseLeave={handleMouseLeaveCategory} // 카테고리 메뉴에서 마우스 나가면 드롭다운 닫기
-            >
-              카테고리
-            </Link>
-            <Link to="/bracelet?subCategory=골드" id="menu-link">
-              골드
-            </Link>
-            <Link to="/bracelet?subCategory=실버" id="menu-link">
-              실버
-            </Link>
-            <Link to="/Customer" id="menu-link">
-              고객센터
-            </Link>
-          </div>
+        {/* 중앙 (메뉴) */}
+        <div 
+          className="nav-center"
+          onMouseEnter={handleMouseEnterCategory}
+          onMouseLeave={handleMouseLeaveCategory}
+        >
+          <Link id="category-link">카테고리</Link>
+          <Link to="/bracelet?subCategory=골드" id="menu-link">골드</Link>
+          <Link to="/bracelet?subCategory=실버" id="menu-link">실버</Link>
+          <Link to="/Customer" id="menu-link">고객센터</Link>
+        </div>
 
-          {/* 오른쪽 (로그인, 마이페이지, 장바구니) */}
-          <div className="nav-right">
-            <UserMenu />
-          </div>
+        {/* 오른쪽 (로그인, 마이페이지, 장바구니) */}
+        <div className="nav-right">
+          <UserMenu />
         </div>
       </div>
+    </div>
 
       {/* 드롭다운 전체를 감싸는 요소 */}
       <div
