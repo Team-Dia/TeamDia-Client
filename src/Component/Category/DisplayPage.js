@@ -130,24 +130,38 @@ const DisplayPage = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const newSortBy = searchParams.get("sortBy") || "";
+
+    // ✅ minPrice=0도 올바르게 인식되도록 수정
+    const minPrice = searchParams.get("minPrice") !== null ? Number(searchParams.get("minPrice")) : 0;
+    const maxPrice = searchParams.get("maxPrice") !== null ? Number(searchParams.get("maxPrice")) : Infinity;
+
     setSortBy(newSortBy);
+  
+    if (itemList.length === 0) return;
+  
+    let updatedItems = [...itemList];
+  
 
-    if (!newSortBy || itemList.length === 0) return;
-
-    let sortedItems = [...itemList];
-
+  // ✅ 가격 필터 적용 (최소값이 0원 이상, 최대값이 지정된 경우)
+  updatedItems = updatedItems.filter(
+    (item) =>
+      item.productSalePrice >= minPrice && item.productSalePrice <= maxPrice
+  );
+  
+    // ✅ 정렬 적용
     if (newSortBy === "rating") {
-      sortedItems.sort((a, b) => b.averageRating - a.averageRating);
+      updatedItems.sort((a, b) => b.averageRating - a.averageRating);
     } else if (newSortBy === "reviewCount") {
-      sortedItems.sort((a, b) => b.reviewCount - a.reviewCount);
+      updatedItems.sort((a, b) => b.reviewCount - a.reviewCount);
     } else if (newSortBy === "priceAsc") {
-      sortedItems.sort((a, b) => a.productSalePrice - b.productSalePrice);
+      updatedItems.sort((a, b) => a.productSalePrice - b.productSalePrice);
     } else if (newSortBy === "priceDesc") {
-      sortedItems.sort((a, b) => b.productSalePrice - a.productSalePrice);
+      updatedItems.sort((a, b) => b.productSalePrice - a.productSalePrice);
     }
-
-    setFilteredItems(sortedItems);
-  }, [location.search, itemList]); // ✅ URL 변경 감지
+  
+    setFilteredItems(updatedItems);
+  }, [location.search, itemList]);
+  
 
   // ⭐ 정렬 변경 시 `searchParams` 반영
   const handleSortChange = (event) => {
