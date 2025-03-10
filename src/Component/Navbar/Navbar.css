@@ -1,340 +1,333 @@
-.nav-container{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 100px;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
 }
 
 /* ✅ 네비게이션 전체 래퍼 */
 .nav-wrapper {
-    position: relative;
-    width: 100%;
-    transition: height 0.3s ease-in-out;
+  position: relative;
+  width: 100%;
+  transition: height 0.3s ease-in-out;
 }
 
 /* ✅ 드롭다운이 활성화되면 전체 높이가 늘어남 */
 .nav-wrapper.expanded {
-    height: auto; /* ✅ 드롭다운을 포함하여 자동 조정 */
+  height: auto; /* ✅ 드롭다운을 포함하여 자동 조정 */
 }
 
 .nav-wrapper:not(.expanded) {
-    height: 100px; /* ✅ 기본 네비게이션 높이 */
+  height: 100px; /* ✅ 기본 네비게이션 높이 */
 }
 
-
-.nav-bar{
-    margin: 0 auto;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap; /* 가로 정렬 유지 */
+.nav-bar {
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap; /* 가로 정렬 유지 */
 }
 
-.nav-left{
-    width: 80%;
-    display: flex;
-    justify-content: flex-start;
-    /* border: 1px solid red; */
+.nav-left {
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  /* border: 1px solid red; */
 }
-
 
 .nav-right {
-    width: 50%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.nav-center{
-    width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    /* border: 1px solid blue; */
-    margin-right: 200px;
-    flex-wrap: nowrap; /* 가로 정렬 유지 */
+.nav-center {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* border: 1px solid blue; */
+  margin-right: 200px;
+  flex-wrap: nowrap; /* 가로 정렬 유지 */
 }
 
-.nav-login{
-    width: 70%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.nav-login {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.nav-right i{
-    font-size: 34px;
-    color: black;
+.nav-right i {
+  font-size: 34px;
+  color: black;
 }
 
-#menu-link{
-    color: black;
-    font-size: 20px;
-    font-weight: 700;
+#menu-link {
+  color: black;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 #menu-link:hover {
-    color: #868e96; 
-    transform: scale(1.1); 
+  color: #868e96;
+  transform: scale(1.1);
 }
 
-#category-link{
-    color: black;
-    font-size: 20px;
-    font-weight: 700;
+#category-link {
+  color: black;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 #category-link:hover {
-    color: #868e96; 
-    transform: scale(1.1); 
+  color: #868e96;
+  transform: scale(1.1);
 }
 
-#login-link{
-    display: flex;
-    color: black;
-    font-size: 20px;
-    align-items: center;
-    transition: transform 0.3s ease;
+#login-link {
+  display: flex;
+  color: black;
+  font-size: 20px;
+  align-items: center;
+  transition: transform 0.3s ease;
 }
 
 #login-link:hover {
-    color: #868e96; 
-    transform: scale(1.1); 
+  color: #868e96;
+  transform: scale(1.1);
 }
 
-#logout-link{
-    display: flex;
-    color: black;
-    font-size: 20px;
-    align-items: center;
-    transition: transform 0.3s ease;
+#logout-link {
+  display: flex;
+  color: black;
+  font-size: 20px;
+  align-items: center;
+  transition: transform 0.3s ease;
 }
 
 #logout-link:hover {
-    color: #868e96; 
-    transform: scale(1.1); 
+  color: #868e96;
+  transform: scale(1.1);
 }
 
-#mypage-link{
-    display: flex;
-    color: black;
-    font-size: 20px;
-    align-items: center;
-    transition: transform 0.3s ease;
+#mypage-link {
+  display: flex;
+  color: black;
+  font-size: 20px;
+  align-items: center;
+  transition: transform 0.3s ease;
 }
 
 #mypage-link:hover {
-    color: #868e96; 
-    transform: scale(1.1); 
+  color: #868e96;
+  transform: scale(1.1);
 }
 
-.shoppingcart{
-    display: flex;
-    align-items: center;
-    font-size: 20px;
+.shoppingcart {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
 }
 
-#cart-link i{
-    display: flex;
-    margin-top: 3px;
-    transition: transform 0.3s ease;
+#cart-link i {
+  display: flex;
+  margin-top: 3px;
+  transition: transform 0.3s ease;
 }
 
-#cart-link:hover{
-    transform: scale(1.1);
+#cart-link:hover {
+  transform: scale(1.1);
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px; /* 로고 컨테이너 크기 */
-    height: 60px; /* 높이 설정 */
-    overflow: hidden; /* 넘치는 부분 숨김 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px; /* 로고 컨테이너 크기 */
+  height: 60px; /* 높이 설정 */
+  overflow: hidden; /* 넘치는 부분 숨김 */
 }
 
 #nav-logo {
-    width: 100%; /* 부모 요소를 가득 채움 */
-    height: 100%;
-    object-fit: cover; /* 비율 유지하면서 확대 */
+  width: 100%; /* 부모 요소를 가득 채움 */
+  height: 100%;
+  object-fit: cover; /* 비율 유지하면서 확대 */
 }
 
-
-#home-link{
-    display: flex;
-    font-weight: bold;
-    font-size: 30px;
-    color: white;
-    letter-spacing: 5px;
+#home-link {
+  display: flex;
+  font-weight: bold;
+  font-size: 30px;
+  color: white;
+  letter-spacing: 5px;
 }
 
 /* ✅ 기본 검색창 스타일 */
 .search {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 300px;
-    max-height: 80px;
-    background-color: transparent;
-    border-radius: 15px;
-    padding: 8px 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px;
+  max-height: 80px;
+  background-color: transparent;
+  border-radius: 15px;
+  padding: 8px 12px;
 }
 
 /* ✅ 입력 필드 */
 .search input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    padding: 8px 35px 8px 10px;
-    color: #333;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 8px 35px 8px 10px;
+  color: #333;
 }
 
 /* ✅ 검색 아이콘 */
 .search i {
-    position: absolute;
-    right: 50px;
-    font-size: 24px;
-    color: #666;
-    cursor: pointer;
-    transition: color 0.2s ease-in-out;
+  position: absolute;
+  right: 50px;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
 }
 
 /* ✅ 검색 아이콘 호버 효과 */
 .search i:hover {
-    color: #000;
+  color: #000;
 }
 
 /* ✅ 반응형 미디어 쿼리 */
 @media screen and (max-width: 768px) {
-    /* ✅ 검색창 크기 조정 */
-    .search {
-        width: 100%;
-        max-width: 220px;
-        padding: 6px 10px;
-    }
+  /* ✅ 검색창 크기 조정 */
+  .search {
+    width: 100%;
+    max-width: 220px;
+    padding: 6px 10px;
+  }
 
-    .search input {
-        font-size: 16px;
-        padding: 6px 30px 6px 8px;
-    }
+  .search input {
+    font-size: 16px;
+    padding: 6px 30px 6px 8px;
+  }
 
-    .search i {
-        font-size: 20px;
-    }
+  .search i {
+    font-size: 20px;
+  }
 
-    /* ✅ 네비게이션 반응형 */
-    .nav-bar {
-        flex-direction: column;
-        align-items: center;
-    }
+  /* ✅ 네비게이션 반응형 */
+  .nav-bar {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .nav-left,
-    .nav-center,
-    .nav-right {
-        width: 100%;
-        text-align: center;
-        margin: 5px 0;
-    }
+  .nav-left,
+  .nav-center,
+  .nav-right {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+  }
 
-    /* ✅ 네비게이션 아이콘 크기 조정 */
-    .nav-item i {
-        font-size: 28px;
-    }
+  /* ✅ 네비게이션 아이콘 크기 조정 */
+  .nav-item i {
+    font-size: 28px;
+  }
 }
-
-
 
 /* ✅ 아이콘 크기를 일정하게 유지 */
 .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 60px; /* ✅ 아이콘 컨테이너 크기 일정하게 유지 */
-    cursor: pointer;
-    transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px; /* ✅ 아이콘 컨테이너 크기 일정하게 유지 */
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 /* ✅ 아이콘 크기 조정 */
 .nav-item i {
-    font-size: 34px; /* ✅ 모든 아이콘 크기 동일하게 설정 */
-    color: black;
+  font-size: 34px; /* ✅ 모든 아이콘 크기 동일하게 설정 */
+  color: black;
 }
-
 
 /* ✅ 작은 화면에서 아이콘 조정 */
 @media screen and (max-width: 768px) {
-    .nav-item {
-        width: 40px;
-    }
+  .nav-item {
+    width: 40px;
+  }
 
-    .nav-item i {
-        font-size: 24px;
-    }
+  .nav-item i {
+    font-size: 24px;
+  }
 
-    .nav-center {
-        gap: 10px;
-    }
+  .nav-center {
+    gap: 10px;
+  }
 
-    .nav-right {
-        gap: 10px;
-    }
+  .nav-right {
+    gap: 10px;
+  }
 }
 
 /* ✅ 아이콘 텍스트 정렬 */
 .nav-text {
-    font-size: 14px;
-    color: #868e96;
-    margin-top: 4px;
-    text-align: center;
+  font-size: 14px;
+  color: #868e96;
+  margin-top: 4px;
+  text-align: center;
 }
 
 /* 로그인 & 로그아웃 버튼 동일한 호버 효과 */
 .nav-item:hover i {
-    color: #868e96;
-    transform: scale(1.1);
+  color: #868e96;
+  transform: scale(1.1);
 }
 
 /* ✅ 닉네임 간격 조정 */
 .nav-nickname {
-    font-size: 16px;
-    font-weight: bold;
-    color: black;
-    margin-right: 0; /* ✅ 닉네임과 아이콘 간격 유지 */
-    /* border: 1px solid blue; */
-    width: 150px;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  margin-right: 0; /* ✅ 닉네임과 아이콘 간격 유지 */
+  /* border: 1px solid blue; */
+  width: 150px;
 }
 
 /* ✅ nav-icons 내부 아이콘 간격을 일정하게 맞춤 */
 .nav-icons {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 300px; /* ✅ 아이콘 간격을 균등하게 유지하도록 설정 */
-    gap: 10px; /* ✅ 아이콘 사이의 간격을 동일하게 설정 */
-    /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 300px; /* ✅ 아이콘 간격을 균등하게 유지하도록 설정 */
+  gap: 10px; /* ✅ 아이콘 사이의 간격을 동일하게 설정 */
+  /* border: 1px solid red; */
 }
-
 
 /* 닉네임 영역이 들어가도 아이콘이 흔들리지 않도록 고정 */
 .user-nickname {
-    font-size: 16px;
-    font-weight: bold;
-    color: black;
-    width: 100px; /* ✅ 일정한 공간을 차지하도록 고정 */
-    text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  width: 100px; /* ✅ 일정한 공간을 차지하도록 고정 */
+  text-align: center;
 }
 
 /* 카테고리 전체 */
 .category-wrapper {
-    position: relative;
-    display: inline-block;
-    /* border: 1px solid green; */
+  position: relative;
+  display: inline-block;
+  /* border: 1px solid green; */
 }
 
 /* 첫 번째 드롭다운 */
@@ -388,62 +381,62 @@
 } */
 /* ✅ 반응형 - 태블릿 (768px 이하) */
 @media screen and (max-width: 768px) {
-    .logo img {
-        max-width: 160px;
-        height: 60px;
-    }
+  .logo img {
+    max-width: 160px;
+    height: 60px;
+  }
 
-    .search {
-        width: 100%;
-        max-width: 240px;
-        padding: 6px 10px;
-    }
+  .search {
+    width: 100%;
+    max-width: 240px;
+    padding: 6px 10px;
+  }
 
-    .search input {
-        font-size: 16px;
-        padding: 6px 30px 6px 8px;
-    }
+  .search input {
+    font-size: 16px;
+    padding: 6px 30px 6px 8px;
+  }
 
-    .search i {
-        font-size: 20px;
-    }
+  .search i {
+    font-size: 20px;
+  }
 
-    /* ✅ 네비게이션 아이콘 간격 조정 */
-    .nav-right {
-        gap: 10px;
-    }
+  /* ✅ 네비게이션 아이콘 간격 조정 */
+  .nav-right {
+    gap: 10px;
+  }
 
-    .nav-item i {
-        font-size: 24px;
-    }
+  .nav-item i {
+    font-size: 24px;
+  }
 }
 
 /* ✅ 반응형 - 모바일 (480px 이하) */
 @media screen and (max-width: 480px) {
-    .logo img {
-        max-width: 140px;
-        height: 50px;
-    }
+  .logo img {
+    max-width: 140px;
+    height: 50px;
+  }
 
-    .search {
-        max-width: 200px;
-        padding: 5px 8px;
-    }
+  .search {
+    max-width: 200px;
+    padding: 5px 8px;
+  }
 
-    .search input {
-        font-size: 14px;
-        padding: 5px 25px 5px 6px;
-    }
+  .search input {
+    font-size: 14px;
+    padding: 5px 25px 5px 6px;
+  }
 
-    .search i {
-        font-size: 18px;
-    }
+  .search i {
+    font-size: 18px;
+  }
 
-    .nav-right {
-        gap: 5px;
-    }
+  .nav-right {
+    gap: 5px;
+  }
 
-    .nav-item i {
-        font-size: 22px;
-    }
+  .nav-item i {
+    font-size: 22px;
+  }
 }

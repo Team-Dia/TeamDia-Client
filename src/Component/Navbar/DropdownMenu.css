@@ -1,113 +1,113 @@
 /* ✅ 드롭다운 전체 컨테이너 */
 .dropdown-wrapper {
-    width: 100%;
-    max-height: 0; /* ✅ 처음에는 높이 0 */
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, transform 0.4s ease-in-out;
-    opacity: 0;
-    transform: translateY(-10px); /* ✅ 위로 약간 올라가면서 사라짐 */
+  width: 100%;
+  max-height: 0; /* ✅ 처음에는 높이 0 */
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out,
+    transform 0.4s ease-in-out;
+  opacity: 0;
+  transform: translateY(-10px); /* ✅ 위로 약간 올라가면서 사라짐 */
 }
 
 /* ✅ 드롭다운 활성화 */
 .dropdown-wrapper.visible {
-    max-height: 320px; /* ✅ 부드럽게 확장 */
-    opacity: 1;
-    transform: translateY(0);
+  max-height: 320px; /* ✅ 부드럽게 확장 */
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ✅ 드롭다운 내부 컨테이너 */
 .category-dropdown-container {
-    width: 100%;
-    background: white;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    overflow-y: auto; /* ✅ 스크롤 가능하도록 설정 */
-    max-height: 300px;
-    scrollbar-width: thin;
-    scrollbar-color: #888 #f1f1f1;
+  width: 100%;
+  background: white;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto; /* ✅ 스크롤 가능하도록 설정 */
+  max-height: 300px;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
 }
 
 /* ✅ 드롭다운 내부 요소가 제대로 보이도록 설정 */
 .dropdown-wrapper.visible .category-dropdown-container {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ✅ 공통적인 항목 스타일 */
 .dropdown-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    max-width: 1200px;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  width: 100%;
 }
 
 /* ✅ 개별 카테고리 스타일 (중복 제거) */
 .dropdown-column {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  transition: all 0.3s ease;
 }
 
 /* ✅ 카테고리 제목 스타일 */
 .dropdown-column h4 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #222;
-    letter-spacing: 0.5px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #222;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 8px;
 }
 
 /* ✅ 공통 링크 스타일 */
 .dropdown-column a {
-    font-size: 16px;
-    color: #444;
-    text-decoration: none;
-    padding: 8px 10px;
-    transition: all 0.2s ease-in-out;
-    border-radius: 5px;
+  font-size: 16px;
+  color: #444;
+  text-decoration: none;
+  padding: 8px 10px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
 }
 
 /* ✅ 호버 효과 (재사용) */
 .dropdown-column a:hover {
-    background-color: #AFAFAF;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transform: scale(1.05);
+  background-color: #afafaf;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transform: scale(1.05);
 }
-
 
 /* ✅ 반응형 - 작은 화면에서 2컬럼으로 변경 */
 @media screen and (max-width: 1024px) {
-    .dropdown-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
+  .dropdown-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .dropdown-grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 10px;
-    }
+  .dropdown-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
 
-    .dropdown-column {
-        padding: 10px;
-    }
+  .dropdown-column {
+    padding: 10px;
+  }
 
-    .dropdown-column h4 {
-        font-size: 16px;
-    }
+  .dropdown-column h4 {
+    font-size: 16px;
+  }
 
-    .dropdown-column a {
-        font-size: 14px;
-        padding: 6px 8px;
-    }
+  .dropdown-column a {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
 }
