@@ -176,3 +176,136 @@
   height: 30px; /* 아이콘 높이 설정 */
   object-fit: contain; /* 이미지 비율 유지 */
 }
+
+/* ===================== @media for different screen sizes ===================== */
+
+/* Tablet and smaller screens */
+@media (max-width: 1024px) {
+  .newProduct-header-text {
+    transform: translate(-50%, -60%); /* 상단 텍스트 위치 조정 */
+  }
+
+  .newProduct-content {
+    margin-top: 20px; /* 여백 조정 */
+  }
+
+  .new-drop-container {
+    margin-top: 15px; /* 드롭다운 메뉴 상단 여백 조정 */
+  }
+
+  .new-item-list {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pagination {
+    margin-top: 30px;
+  }
+
+  .page-number {
+    font-size: 16px;
+  }
+
+  .index-product-image {
+    width: 100%;
+    margin-bottom: 10px; /* 이미지 간격 조정 */
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .newProduct-header-text {
+    font-size: 18px; /* 텍스트 크기 조정 */
+  }
+
+  .newProduct-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .new-drop-container {
+    justify-content: flex-start; /* 드롭다운 메뉴 왼쪽 정렬 */
+  }
+
+  .new-st-btn {
+    font-size: 14px; /* 버튼 크기 조정 */
+    padding: 5px; /* 버튼 패딩 조정 */
+  }
+
+  .new-drop-menu {
+    width: 120px; /* 드롭다운 메뉴 너비 조정 */
+  }
+
+  .new-item-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* 아이템 간격 조정 */
+  }
+
+  .like-button {
+    top: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .pagination {
+    margin-top: 40px;
+  }
+
+  .page-number {
+    font-size: 14px;
+  }
+
+  .new-dis-rating {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .newProduct-header {
+    height: 300px; /* 헤더 높이 줄이기 */
+  }
+
+  .newProduct-header-text {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px; /* 텍스트 크기 조정 */
+  }
+
+  .new-drop-container {
+    width: 100%;
+    justify-content: center; /* 드롭다운 메뉴 가운데 정렬 */
+  }
+
+  .new-st-btn {
+    font-size: 12px; /* 버튼 크기 줄이기 */
+    padding: 3px; /* 버튼 패딩 줄이기 */
+  }
+
+  .new-item-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .pagination {
+    margin-top: 50px;
+  }
+
+  .page-number {
+    font-size: 12px;
+  }
+
+  .index-product-image {
+    width: 100%;
+    margin-bottom: 5px; /* 이미지 간격 줄이기 */
+  }
+
+  .like-button {
+    width: 20px;
+    height: 20px;
+  }
+}

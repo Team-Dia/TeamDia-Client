@@ -376,3 +376,234 @@ input[type="checkbox"]:checked {
 select:focus {
   outline: none; /* 포커스 시 나타나는 테두리 제거 */
 }
+
+@media (max-width: 1200px) {
+  .order-container {
+    width: 80%;
+  }
+  
+  .order-header-right {
+    width: 60%;
+  }
+
+  .order-product-header {
+    margin-top: 30px;
+  }
+
+  .order-product-right {
+    width: 25%;
+  }
+
+  .order-product-info {
+    margin-top: 30px;
+  }
+
+  .order-image-box img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .order-info-right {
+    width: 35%;
+  }
+
+  .order-total-price {
+    margin-top: 30px;
+  }
+
+  .order-info-detail {
+    flex-direction: column;
+    margin-top: 50px;
+  }
+
+  .order-info-box {
+    width: 100%;
+  }
+
+  .order-info-box h2 {
+    font-size: 22px;
+  }
+
+  .order-delivery input {
+    padding-right: 1.5rem;
+  }
+
+  .order-delivery {
+    margin-top: 30px;
+  }
+
+  .order-final-price {
+    width: 60%;
+    margin-left: 20px;
+  }
+
+  .final-purchase {
+    margin-top: 30px;
+  }
+
+  .delivery-checkbox {
+    margin-top: 20px;
+  }
+
+  .dropdown {
+    margin-top: 20px;
+  }
+
+  .custom-input-container input {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-container {
+    width: 90%;
+  }
+
+  .order-header-right {
+    width: 70%;
+  }
+
+  .order-product-header {
+    margin-top: 20px;
+  }
+
+  .order-product-right {
+    width: 20%;
+  }
+
+  .order-product-info {
+    margin-top: 25px;
+  }
+
+  .order-image-box img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .order-info-right {
+    width: 40%;
+  }
+
+  .order-total-price {
+    margin-top: 25px;
+  }
+
+  .order-info-detail {
+    flex-direction: column;
+    margin-top: 40px;
+  }
+
+  .order-info-box h2 {
+    font-size: 20px;
+  }
+
+  .order-delivery input {
+    padding-right: 1rem;
+  }
+
+  .order-final-price {
+    width: 70%;
+    margin-left: 20px;
+  }
+
+  .final-purchase {
+    margin-top: 25px;
+  }
+
+  .delivery-checkbox {
+    margin-top: 15px;
+  }
+
+  .dropdown {
+    margin-top: 15px;
+  }
+
+  .custom-input-container input {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  button {
+    font-size: 14px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-container {
+    width: 100%;
+  }
+
+  .order-header-right {
+    width: 80%;
+  }
+
+  .order-product-header {
+    margin-top: 15px;
+  }
+
+  .order-product-right {
+    width: 15%;
+  }
+
+  .order-product-info {
+    margin-top: 20px;
+    flex-direction: column;
+  }
+
+  .order-image-box img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .order-info-right {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .order-total-price {
+    margin-top: 20px;
+  }
+
+  .order-info-detail {
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+  .order-info-box h2 {
+    font-size: 18px;
+  }
+
+  .order-delivery input {
+    padding-right: 1rem;
+  }
+
+  .order-final-price {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .final-purchase {
+    margin-top: 20px;
+  }
+
+  .delivery-checkbox {
+    margin-top: 10px;
+  }
+
+  .dropdown {
+    margin-top: 10px;
+  }
+
+  .custom-input-container input {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  button {
+    font-size: 12px;
+    height: 35px;
+  }
+}
+
