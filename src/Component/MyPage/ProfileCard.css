@@ -31,6 +31,16 @@
   margin-right: 15px;
 }
 
+.nickname {
+    display: inline-block;
+    max-width: 200px;  /* ✅ 닉네임 길이 제한 */
+    white-space: nowrap; /* ✅ 줄바꿈 방지 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* ✅ 초과 시 '...' 표시 */
+    vertical-align: middle; /* ✅ 멘트와 정렬 맞추기 */
+}
+
+
 /* ✅ 프로필 텍스트 */
 .profile-text {
   flex-grow: 1;
