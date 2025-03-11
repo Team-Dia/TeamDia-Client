@@ -56,6 +56,7 @@ const ProducDetail = () => {
     setSelectedOption(""); // ✅ 선택 후 옵션 초기화 (한 번만 추가되도록)
   };
 
+
   function ProductOptions({ categoryId, selectedOption, handleOptionChange }) {
     const options = categoryOptions[categoryId] || [];
     return (
@@ -140,7 +141,10 @@ const ProducDetail = () => {
       }));
     }
   };
+  
+
   // ------------------------------------------------------------------------------------------------------
+
   const [productImages, setProductImages] = useState([]); // 이미지 데이터를 저장할 상태
   const {productSeq} = useParams();
   const [product, setProduct] = useState({});
@@ -154,8 +158,12 @@ const ProducDetail = () => {
   const dispatch = useDispatch()
   const cookies = new Cookies();
   const sizeQuantity = quantityList[size] ?? 1; // ✅ 기본값 1로 설정
+  
   const basePrice = product.productSalePrice || 0;
+
   // ------------------------------------------------------------------------------------------------------
+
+
   // 모달 열기/닫기 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState({ title: '', content: '' });
@@ -164,13 +172,117 @@ const ProducDetail = () => {
   const openModal = (type) => {
     if (type === 'exchange') {
       setModalContent({
-        title: '교환 및 반품 정보',
-        content: '여기에는 교환 및 반품에 대한 정보가 들어갑니다.',
+        title: '배송 관련 안내',
+        content: (
+          <>
+            <div style={{ marginBottom: '20px',marginTop:'50px'}}>
+              <h3>배송비</h3>&nbsp;
+              <p>다이아몬즈는 전상품 무료배송입니다.</p>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>추가 배송비</h3>&nbsp;
+              <p>제주 및 도서산간 지역은 배송비가 별도로 부과됩니다.</p>
+              <ul>
+                <li>제주도 : 3,500원 / 그 외 도서산간 지역 : 3,500원</li>
+              </ul>
+            </div>
+  
+            <div className='modal-delivery' style={{ marginBottom: '20px' }}>
+              <h3>반품 / 교환 안내</h3>&nbsp;
+              <p>다이아몬즈의 모든 제품은 오더메이드 방식으로 진행되므로 단순변심으로 인한 교환/환불이 불가합니다.</p>
+              <p>제작되는 모든 주얼리는 수공예 실버제품 특성상 표면에 미세한 스크래치 및 자국이 존재할 수 있습니다.</p>
+              <p>진주 / 원석이 셋팅된 제품의 경우 색감, 모양, 크기 등이 다소 차이가 있을 수 있습니다.</p>
+              <p>이 점은 교환/환불의 사유가 되지 않습니다.</p>
+              <p>제품 불량으로 판단될 경우 착용하지 않은 상품에 한해 동일제품으로 교환이 가능합니다.</p>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>반품 / 교환 불가사유</h3>&nbsp;
+              <ul>
+                <li>불량교환은 제품 수령후 3일 이내에 접수해주셔야 하며, 7일 이내 제품 회수가 완료되어야 합니다. 접수하지 않고 임의로 발송시 착불로 반송됩니다.</li>
+                <li>* 제품을 착용한 흔적이 있는 경우</li>
+                <li>* 알러지 반응으로 인한 반품 (알러지 반응은 개인차 부분으로 제품하자가 아닙니다)</li>
+                <li>* 고객님 부주의로 인한 제품의 오염, 변형, 파손된 경우</li>
+                <li>* 교환 및 반품기간이 경과된 경우</li>
+                <li>* 미세한 스크래치, 이음새 땜 자국, 얼룩, 기포, 본딩자국, 작은 흠집 등 제작과정중 발생한 자연스러운 현상이므로 반품사유가 되지 않습니다.</li>
+                <li>* 침의 휘어짐 또는 연결고리 벌어짐 등 손으로 간단하게 교정이 가능한 경우</li>
+                <li>* 천연 원석, 진주 같은 경우 소재 특성상 미세한 기스 및 요철, 내포물, 사이즈, 모양, 색상의 차이</li>
+                <li>* 유화처리 된 제품의 경우 거뭇한 표현 및 일정하지 않은 색상</li>
+                <li>* 패키지 내용물 분실 및 파손 (반품시 모든 내용물 그대로 보내주셔야 합니다)</li>
+              </ul>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>반품 사유에 따른 환불정보</h3>&nbsp;
+              <ul>
+                <li><strong>단순 변심이나 구매자의 사유로 인한 반품 시</strong>: 왕복 배송비를 차감하여 환불해드립니다. (도서산간 지역의 경우, 도서산간 추가배송비 부과)</li>
+                <li><strong>제품의 하자나 기타 브랜드의 과실로 인한 반품 시</strong>: 전액 환불해드립니다.</li>
+              </ul>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>반품/교환 시 택배 발송 방법</h3>&nbsp;
+              <p>상품을 받으신 택배사/송장번호로 반품 접수 해주세요. 다른 택배사로 반품 접수하실 경우, 해당 반송 비용은 판매자가 책임지지 않습니다.</p>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>반품 / 교환 시 보내실 곳</h3>&nbsp;
+              <p>서울특별시 성동구 성수동1가 656-591번지 서울숲에이타워 1301B호</p>
+            </div>
+  
+            <div className='modal-delivery' style={{ marginBottom: '20px' }}>
+              <h3>판매자 정보</h3>&nbsp;
+              <h4><strong>상호</strong></h4><br/><p>다이아몬즈 / DIAMONDZ</p>&nbsp;
+              <h4><strong>대표자</strong></h4><br/><p>이후용</p>&nbsp;
+              <h4><strong>사업자 소재지</strong></h4><br/><p>(03473) 서울특별시 성동구 성수동1가 656-591번지</p>&nbsp;
+              <h4><strong>전화번호</strong></h4><br/><p>1644-3662</p>&nbsp;
+              <h4><strong>E-mail</strong></h4><br/><p>scott@naver.com</p>&nbsp;
+              <h4><strong>사업자 등록번호</strong></h4><br/><p>204-86-00983</p>&nbsp;
+              <h4><strong>통신판매 신고번호</strong></h4><br/><p>2021서울성동1673</p>&nbsp;
+            </div>
+          </>
+        ),
       });
     } else if (type === 'as') {
       setModalContent({
         title: 'A/S 정보',
-        content: '여기에는 A/S에 대한 정보가 들어갑니다.',
+        content: (
+          <>
+            <div style={{ marginBottom: '20px',marginTop:'50px'}}>
+              <h3>A/S 안내</h3>&nbsp;
+              <p>Q&a에 사진과 함께 문의를 남겨주세요.<br/><br/>
+              불량 제품의 경우 24시간 이내 연락바랍니다.</p>
+            </div>
+
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>착용시 주의 사항</h3>&nbsp;
+              <ul>
+                <li>* 실버925 (은제품)은 특성상 스크래치나 압력에 취약합니다. </li>
+                <li>* 미착용시에는 밀폐된 지퍼백에 보관하시고, 변색되었을 경우 은세척제 / 은 전용 폴리싱 천으로 관리합니다.</li>
+                <li>* 오픈링의 경우 늘림-줄임 여러번 반복시 끊어질 수 있습니다.</li>
+              </ul>
+            </div>
+  
+            <div style={{ marginBottom: '20px' }}>
+              <h3>품질보증 기준</h3>&nbsp;
+              <ul>
+                <li>제품구입후 30일 이내 무상 a/s 가능합니다. 제품상태에따라 추가요금이 발생할 수 있습니다. (왕복배송비 구매자 부담)</li>
+              </ul>
+            </div>
+
+            <h4><strong>제조자</strong></h4><br/><p>DIAMONDZ</p>&nbsp;
+            <h4><strong>제조국</strong></h4><br/><p>대한민국</p>
+  
+  
+            <div className='modal-delivery' style={{ marginBottom: '20px' }}>
+              <h3>고객센터</h3>&nbsp;
+              <h4><strong>고객센터 전화번호</strong></h4><br/><p>1644-3662</p>&nbsp;
+              <h4><strong>카카오톡 플러스친구</strong></h4><br/><p>DIAMONDZ</p>&nbsp;
+            </div>
+          </>
+        ),
       });
     }
     setIsModalOpen(true);
@@ -180,7 +292,9 @@ const ProducDetail = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
   // ------------------------------------------------------------------------------------------------------
+
   // 로그인 후 사용자가 좋아요한 목록을 가져오는 함수
   async function fetchUserLikes(productSeq = null) {
     if (loginUser && loginUser.memberId) {
@@ -211,6 +325,11 @@ const ProducDetail = () => {
       }
     }
   }
+
+  
+  
+  
+
   // redux에 저장된 로그인 유저 로딩
   const loginUser = useSelector(state => state.user);
     if (!loginUser || Object.keys(loginUser).length === 0) {
@@ -255,12 +374,19 @@ const ProducDetail = () => {
 
             // 로컬 상태에서 totalLikes 수를 1 감소시킴
             setTotalLikes(prevTotalLikes => prevTotalLikes - 1);
-        }      
+
+        }
+
+        
+        
     } catch (error) {
         console.error('좋아요 처리 중 오류 발생:', error);
     }
 }
+
+
   // ------------------------------------------------------------------------------------------------------
+
   // ✅ 수량 변경 시, 총 가격 업데이트
   useEffect(() => {
     let updatedPrice = basePrice;
@@ -289,8 +415,13 @@ const ProducDetail = () => {
       fetchUserLikes();  // 전체 좋아요 목록을 가져오려면 그냥 호출
     }
   }, [loginUser, productSeq]);  // loginUser나 productSeq가 변경될 때마다 실행
-      
-  // 사이즈와 수량에 따른 가격 계산 
+  
+
+  
+  
+
+  // 사이즈와 수량에 따른 가격 계산
+  
   // ✅ 총 상품 금액 계산 (모든 옵션 합산)
   useEffect(() => {
     let updatedPrice = basePrice;
@@ -300,9 +431,13 @@ const ProducDetail = () => {
 
     setTotalPrice(updatedPrice * totalQuantity);
   }, [quantityList, basePrice]);
+  
+  
 
-  // 서버에서 이미지 데이터를 받아오는 함수  
+  // 서버에서 이미지 데이터를 받아오는 함수
+  
   useEffect(() => {
+    
     axios.get(`/api/product/selectPro`, { params: { productSeq } })
       .then((result) => {
         console.log(result.data.productImages);
@@ -353,6 +488,7 @@ const ProducDetail = () => {
         setAverageRating(0); // 평균 별점 0으로 설정
       });
   }, [productSeq]); // productSeq가 변경될 때마다 호출
+  
 
   useEffect(() => {
     // 서버에서 총 좋아요 수를 받아오는 API 호출
@@ -365,15 +501,22 @@ const ProducDetail = () => {
             console.error('좋아요 수 가져오기 오류:', error);
         }
     };
+
     if (productSeq) {
         fetchLikes();
     }
 
 }, [productSeq]);  // productSeq가 변경될 때마다 호출
 
+
+
+
 console.log('Product Seq:', productSeq); // productSeq 값 확인
 console.log('Review Seq:', review); // reviewSeq 값 확인 (없을 수 있음)
 console.log('CategoryName:', categoryName);
+
+
+
 
 useEffect(() => {
   if (thumbsSwiper && productImages.length > 0) {
@@ -428,7 +571,11 @@ if (response.data.msg === "ok") {
   }
 };
 
+
+
+
 const { productId } = useParams(); // URL에서 productId 가져오기
+
   // 최근 본 상품 출력 기능
   useEffect(() => {
     if (productSeq && product?.productName) { 
@@ -444,12 +591,15 @@ const { productId } = useParams(); // URL에서 productId 가져오기
             productImage: product.productImage || "/images/default-placeholder.jpg",
             productPrice: product.productMarginPrice || 0,
         });
+
         // 🔹 최근 본 상품 최대 10개까지만 유지
         if (viewedProducts.length > 10) {
             viewedProducts.pop();
         }
+
         // 🔹 localStorage에 업데이트
         localStorage.setItem("viewedProducts", JSON.stringify(viewedProducts));
+
         // 🔹 MyPage에서 즉시 반영될 수 있도록 이벤트 발생
         window.dispatchEvent(new Event("recentlyViewedUpdated"));
     }
@@ -462,6 +612,7 @@ const { productId } = useParams(); // URL에서 productId 가져오기
       navigate('/login');
       return;
     }
+  
     if (sizeList.length === 0) {
       alert("옵션을 선택해주세요.");
       return;
@@ -487,22 +638,18 @@ const { productId } = useParams(); // URL에서 productId 가져오기
     });
   };
 
-  // ✅ 기존 데이터와 S3 데이터를 구분하여 이미지 표시
-  const getImageUrl = (imagePath) => {
-    if (!imagePath) return "/default-image.png"; // 기본 이미지 처리
-    // S3 URL인지 확인
-    if (imagePath.startsWith("http")) {
-      return imagePath;
-    }
-    // 기존 로컬 서버 이미지 경로를 S3 URL로 변경
-    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
-  };
+
+
+
 
   return (
     <>
     <div className='product-detail'>
+
       <div className='product-allcontainer'>
+
       <div className="swiper-container">
+      
         {/* 메인 이미지 Swiper */}
         <div className="swiper-wrapper">
           <Swiper
@@ -533,29 +680,25 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                   <>
                     {product.productImage && (
                     <SwiperSlide key={`${idx}-1`} className={activeIndex === idx ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage)} />{" "}
-                      {/* <img src={`http://localhost:8070/product_images/${product.productImage}`} /> */}
+                      <img src={`http://localhost:8070/product_images/${product.productImage}`} />
                     </SwiperSlide>
                   )}
 
                   {product.productImage2 && (
                     <SwiperSlide key={`${idx}-2`} className={activeIndex === idx + 1 ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage2)} />{" "}
-                      {/* <img src={`http://localhost:8070/product_images/${product.productImage2}`} /> */}
+                      <img src={`http://localhost:8070/product_images/${product.productImage2}`} />
                     </SwiperSlide>
                   )}
 
                   {product.productImage3 && (
                     <SwiperSlide key={`${idx}-3`} className={activeIndex === idx + 2 ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage3)} />{" "}
-                      {/* <img src={`http://localhost:8070/product_images/${product.productImage3}`} /> */}
+                      <img src={`http://localhost:8070/product_images/${product.productImage3}`} />
                     </SwiperSlide>
                   )}
 
                   {product.productImage4 && (
                     <SwiperSlide key={`${idx}-4`} className={activeIndex === idx + 3 ? 'active' : ''}>
-                      <img src={getImageUrl(product.productImage4)} />{" "}
-                      {/* <img src={`http://localhost:8070/product_images/${product.productImage4}`} /> */}
+                      <img src={`http://localhost:8070/product_images/${product.productImage4}`} />
                     </SwiperSlide>
                   )}
                 </>
@@ -565,10 +708,11 @@ const { productId } = useParams(); // URL에서 productId 가져오기
               )}
 
           </Swiper>
-        
+          
           {/* 화살표 버튼 */}
           <div className="swiper-button-prev" onClick={() => console.log('Prev Button Clicked')}></div>
           <div className="swiper-button-next" onClick={() => console.log('Next Button Clicked')}></div>
+
         </div>
 
         {/* 썸네일 Swiper */}
@@ -589,29 +733,25 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                   <>
                     {product.productImage && (
                       <SwiperSlide key={`${idx}-1`} className={thumbsActiveIndex === idx ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage)} /> {/* 🔹 수정됨: S3 URL 적용 */}
-                        {/* <img src={`http://localhost:8070/product_images/${product.productImage}`} /> */}
+                        <img src={`http://localhost:8070/product_images/${product.productImage}`} />
                       </SwiperSlide>
                     )}
 
                     {product.productImage2 && (
                       <SwiperSlide key={`${idx}-2`} className={thumbsActiveIndex === idx + 1 ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage2)} /> {/* 🔹 수정됨: S3 URL 적용 */}
-                        {/* <img src={`http://localhost:8070/product_images/${product.productImage2}`} /> */}
+                        <img src={`http://localhost:8070/product_images/${product.productImage2}`} />
                       </SwiperSlide>
                     )}
 
                     {product.productImage3 && (
                       <SwiperSlide key={`${idx}-3`} className={thumbsActiveIndex === idx + 2 ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage3)} /> {/* 🔹 수정됨: S3 URL 적용 */}
-                        {/* <img src={`http://localhost:8070/product_images/${product.productImage3}`} /> */}
+                        <img src={`http://localhost:8070/product_images/${product.productImage3}`} />
                       </SwiperSlide>
                     )}
 
                     {product.productImage4 && (
                       <SwiperSlide key={`${idx}-4`} className={thumbsActiveIndex === idx + 3 ? 'active' : ''} >
-                        <img src={getImageUrl(product.productImage4)} /> {/* 🔹 수정됨: S3 URL 적용 */}
-                        {/* <img src={`http://localhost:8070/product_images/${product.productImage4}`} /> */}
+                        <img src={`http://localhost:8070/product_images/${product.productImage4}`} />
                       </SwiperSlide>
                     )}
                   </>
@@ -624,9 +764,9 @@ const { productId } = useParams(); // URL에서 productId 가져오기
 
       <div className="Return-info">
         &nbsp;&nbsp;
-        <div onClick={() => openModal('exchange')}>▶ 교환 및 반품 정보</div>
+        <div style={{cursor:'pointer'}} onClick={() => openModal('exchange')}>▶ 교환 및 반품 정보</div>
         &nbsp;
-        <div onClick={() => openModal('as')}>▶ A/S 정보</div>
+        <div style={{cursor:'pointer'}} onClick={() => openModal('as')}>▶ A/S 정보</div>
       </div>
 
       {/* 모달 컴포넌트 */}
@@ -636,10 +776,13 @@ const { productId } = useParams(); // URL에서 productId 가져오기
         title={modalContent.title}
         content={modalContent.content}
       />
+
     </div>
 
       <div className='product-info'>
           <div className='brandname'>
+
+            
           <div className='interest-info'>
                 <span style={{display:'flex', justifyContent:'center', alignItems:'center', width:'65px', height:'30px', background:'black', color:'white', fontWeight:'bold', fontSize:'13px'}}>
                     무료배송
@@ -651,15 +794,13 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                     {
                         likeList.some(product_like => loginUser.memberId === product_like.memberId) ? (
                             <img
-                                src={getImageUrl("delike.png")}
-                                // src={`http://localhost:8070/product_images/delike.png`}  
+                                src={`http://localhost:8070/product_images/delike.png`}  
                                 onClick={() => { onLike() }} 
                                 alt="Like"
                             />
                         ) : (
                             <img 
-                                src={getImageUrl("like.png")}
-                                // src={`http://localhost:8070/product_images/like.png`} 
+                                src={`http://localhost:8070/product_images/like.png`} 
                                 onClick={() => { onLike() }} 
                                 alt="Like" 
                             />
@@ -667,6 +808,11 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                     }
                 </div>
             </div>
+
+
+
+
+
           <div className='product-content'>
             <span style={{ fontSize:'25px',fontWeight:'bold'}}>{product.productName}</span>
 
@@ -677,6 +823,7 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                       const isFullStar = index < Math.floor(averageRating); // 완전한 별
                       const isHalfStar = index === Math.floor(averageRating) && averageRating % 1 >= 0.5; // 반별
                       const isEmptyStar = index >= Math.ceil(averageRating); // 빈 별
+
                       return (
                         <span
                           key={index}
@@ -697,6 +844,7 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                       );
                     })}
                   </div>
+
 
                 {/* 후기 갯수와 링크 */}
                 <a
@@ -719,7 +867,9 @@ const { productId } = useParams(); // URL에서 productId 가져오기
               <span style={{ fontSize: '30px', fontWeight: 'bold' }}>
                 {new Intl.NumberFormat('ko-KR').format(product.productSalePrice)}원
               </span>
+
               </div>
+
               <div className='delivery-info'>
                 <span style={{ fontSize:'18px',fontWeight:'bold'}}>배송정보</span>
 
@@ -811,6 +961,9 @@ const { productId } = useParams(); // URL에서 productId 가져오기
               </div>
             );
           })}
+
+
+
               {/* 총 가격 표시 */}
               <div className="price-info">
                 <p style={{fontSize: '15px', fontWeight: 'bold'}}>총 상품 금액</p>
@@ -827,10 +980,13 @@ const { productId } = useParams(); // URL에서 productId 가져오기
             </div>
           </div>
           
-        </div>   
+        </div>
+        
     </div>
     </div>
-    <ProductInfoReview review={review} />        
+    <ProductInfoReview review={review} />
+    
+          
   </div>
 </>
 

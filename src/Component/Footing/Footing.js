@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import ADMIN_URL from "../../config";
 import "./Footing.css";
 
 const Footing = () => {
@@ -40,7 +41,7 @@ const Footing = () => {
           <div className="footer-adimin">
             <p>주식회사 DIA 쇼핑몰</p>
             {/* <a href={`${window.location.origin}:3001/admin`}> admin 로그인 페이지로 이동http://localhost:3001/admin */}
-            <a href={`http://localhost:3001/admin`}>
+            <a href={ADMIN_URL}>
               <i className="ri-admin-line"></i>
             </a>
           </div>
