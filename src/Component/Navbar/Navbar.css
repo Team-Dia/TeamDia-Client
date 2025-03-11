@@ -39,6 +39,7 @@
     justify-content: space-around;
     /* border: 1px solid red; */
   }
+
   
   /* ✅ 우측 네비게이션 (로그인, 마이페이지, 장바구니) */
   .nav-right {
@@ -50,11 +51,12 @@
     /* border: 1px solid red; */
   }
   
-/* ✅ 네비게이션 공통 링크 스타일 */
+/* ✅ 네비게이션 공통 링크 스타일 (호버 효과 추가) */
 .nav-link, 
 .nav-left a, 
-.nav-right a {
-    color: black !important; /* ✅ 모든 링크 색상을 검정으로 강제 적용 */
+.nav-right a, 
+.nav-center a {
+    color: black !important;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
@@ -64,15 +66,18 @@
 /* ✅ 방문한 링크에도 동일한 색상 적용 */
 .nav-link:visited, 
 .nav-left a:visited, 
-.nav-right a:visited {
-    color: black;
+.nav-right a:visited, 
+.nav-center a:visited {
+    color: black !important;
 }
 
 /* ✅ 네비게이션 링크 호버 효과 */
 .nav-link:hover, 
 .nav-left a:hover, 
-.nav-right a:hover {
-    color: #868e96;
+.nav-right a:hover, 
+.nav-center a:hover {
+    color: #868e96 !important;
+    transform: scale(1.1);
 }
 
 #category-link,
@@ -80,6 +85,7 @@
     font-size: 18px;
     color: black;
 }
+
 
 /* ✅ 닉네임 스타일 */
 .nav-nickname {
@@ -181,7 +187,7 @@
     transition: transform 0.3s ease;
 }
   .nav-item i {
-    font-size: 34px;
+    font-size: 30px;
     color: black;
   }
   
@@ -195,7 +201,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 50%;
+    width: 40%;
     gap: 10px;
     /* border: 1px solid green; */
 }
