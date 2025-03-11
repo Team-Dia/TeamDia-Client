@@ -119,7 +119,7 @@ const Index = () => {
           <p>귀걸이</p>
         </Link>
       </div>
-      <h1>&nbsp;BEST PRODUCT&nbsp;</h1>
+      <h1 className="best-title">DIAMONZ 추천 아이템</h1>
 
       <div className="itemlist">
         {bestProduct.length > 0 ? (
@@ -182,7 +182,8 @@ const Index = () => {
         )}
       </div>
 
-      <h1>&nbsp;NEW PRODUCT&nbsp;</h1>
+      <h1 className="new-title">새롭게 빛나는 신상</h1>
+
 
       <div className="itemlist">
         {Array.isArray(newProduct) && newProduct.length > 0 ? (

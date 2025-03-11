@@ -1,136 +1,180 @@
+/* ✅ 헤더 컨테이너 */
 .header {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  margin: 0 auto;
-  background-color: #f8f9fa;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  /* background-color: #ff6200; */
-  align-items: center;
-  margin: 0 auto;
-  position: relative; /* 부모 요소에 relative 추가 */
-}
-
-.header-img {
-  width: 100%;
-  height: 600px; /* 기본 높이 */
-  min-height: 50vh; /* 최소 높이 설정 */
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 0 auto;
-  margin-top: 20px;
-  overflow: hidden;
-  position: relative;
-  filter: brightness(0.4);
-  object-fit: cover;
-  transition: height 0.3s ease; /* 드롭다운 시에 이미지의 높이가 바뀔 때 부드럽게 이동 */
-}
-
-/* 📌 16인치 노트북 & 일반 데스크탑 (너비 1400px ~ 1919px) */
-@media screen and (min-width: 1400px) and (max-width: 1919px) {
-  .header-img {
-    height: 600px; /* 기본 */
-    min-height: 55vh; /* 화면 비율에 맞춰 자동 조정 */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    flex-direction: column;
+    justify-content: space-between;
   }
-}
-
-/* 📌 고해상도 QHD 모니터 (너비 1920px ~ 2559px) */
-@media screen and (min-width: 1920px) and (max-width: 2559px) {
-  .header-img {
-    height: 700px; /* 높이를 더 키움 */
-    min-height: 60vh;
+  
+  /* ✅ 헤더 콘텐츠 */
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
   }
-}
-
-/* 📌 4K(UHD) 이상의 고해상도 모니터 (너비 2560px 이상) */
-@media screen and (min-width: 2560px) {
+  
+  /* ✅ 배경 이미지 */
   .header-img {
-    height: 800px; /* 더 큰 화면에서 충분한 높이 확보 */
-    min-height: 70vh;
+    width: 100%;
+    height: 600px;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 0 auto;
+    margin-top: 20px;
+    overflow: hidden;
+    position: relative;
+    filter: brightness(0.4);
+    object-fit: cover;
+    transition: height 0.3s ease;
   }
-}
-
-/* 📌 일반 노트북 화면 (너비 1024px ~ 1399px) */
-@media screen and (max-width: 1399px) {
-  .header-img {
-    height: 500px; /* 일반 노트북은 그대로 */
+  
+  /* ✅ 배경 이미지 내부 */
+  .header-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
   }
-}
-
-/* 📌 태블릿 화면 (너비 768px ~ 1023px) */
-@media screen and (max-width: 1023px) {
-  .header-img {
-    height: 450px;
+  
+  /* ✅ 텍스트 컨테이너 */
+  .header-text {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    text-align: center;
+    color: white;
+    transition: top 0.3s ease;
+    width: 90%;
   }
-}
-
-/* 📌 모바일 화면 (너비 767px 이하) */
-@media screen and (max-width: 767px) {
-  .header-img {
-    height: 350px;
+  
+  /* ✅ 텍스트 스타일 */
+  .header-text h1 {
+    font-size: 52px;
+    font-weight: bold;
   }
-}
-
-.header-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-}
-
-.header-menu {
-  position: absolute; /* 텍스트를 이미지 위에 배치 */
-  top: 40%; /* 이미지 세로 중앙에 텍스트 배치 */
-  left: 50%; /* 이미지 가로 중앙에 텍스트 배치 */
-  transform: translate(-50%, 160%); /* 정확한 중앙 정렬 */
-}
-
-.header-text {
-  position: absolute; /* 텍스트를 이미지 위에 배치 */
-  top: 40%; /* 이미지 세로 중앙에 텍스트 배치 */
-  left: 50%; /* 이미지 가로 중앙에 텍스트 배치 */
-  transform: translate(-50%, -20%); /* 정확한 중앙 정렬 */
-  text-align: center;
-  color: white;
-  transition: top 0.3s ease; /* 드롭다운에 따라 텍스트 위치 변화 */
-}
-
-.header-text h1 {
-  font-size: 52px;
-  font-weight: bold;
-}
-
-.header-text h2 {
-  margin-top: 10px;
-  font-size: 32px;
-}
-
-#header-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 250px;
-  height: 50px;
-  color: white;
-  border: 3px solid white;
-  margin-bottom: 40px;
-  font-size: 20px;
-  font-weight: 500;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-#header-link:hover {
-  background-color: white;
-  color: #000000;
-  border-color: #000000;
-}
+  
+  .header-text h2 {
+    margin-top: 10px;
+    font-size: 32px;
+  }
+  
+  /* ✅ 버튼 */
+  #header-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    color: white;
+    border: 3px solid white;
+    margin-bottom: 40px;
+    font-size: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+  
+  #header-link:hover {
+    background-color: white;
+    color: #000000;
+    border-color: #000000;
+  }
+  
+  /* ✅ 텍스트 & 버튼 위치 */
+  .header-menu {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, 160%);
+  }
+  
+  /* 📌 💡 === [미디어 쿼리 시작] === */
+  
+  /* ✅ 4K(UHD) 이상 (너비 2560px 이상) */
+  @media screen and (min-width: 2560px) {
+    .header-img {
+      height: 800px;
+      min-height: 70vh;
+    }
+  }
+  
+  /* ✅ QHD (너비 1920px ~ 2559px) */
+  @media screen and (min-width: 1920px) and (max-width: 2559px) {
+    .header-img {
+      height: 700px;
+      min-height: 60vh;
+    }
+  }
+  
+  /* ✅ 일반 데스크탑 & 16인치 노트북 (너비 1400px ~ 1919px) */
+  @media screen and (min-width: 1400px) and (max-width: 1919px) {
+    .header-img {
+      height: 600px;
+      min-height: 55vh;
+    }
+  }
+  
+  /* ✅ 일반 노트북 (1024px ~ 1399px) */
+  @media screen and (max-width: 1399px) {
+    .header-img {
+      height: 500px;
+    }
+    .header-text h1 {
+      font-size: 45px;
+    }
+    .header-text h2 {
+      font-size: 28px;
+    }
+  }
+  
+  /* ✅ 태블릿 (768px ~ 1023px) */
+  @media screen and (max-width: 1023px) {
+    .header-img {
+      height: 450px;
+    }
+    .header-text h1 {
+      font-size: 40px;
+    }
+    .header-text h2 {
+      font-size: 24px;
+    }
+    .header-text {
+      top: 38%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  /* ✅ 모바일 (767px 이하) */
+  @media screen and (max-width: 767px) {
+    .header-img {
+      height: 350px;
+    }
+    .header-text h1 {
+      font-size: 32px;
+    }
+    .header-text h2 {
+      font-size: 20px;
+    }
+    .header-text {
+      top: 35%;
+      transform: translate(-50%, -50%);
+    }
+    #header-link {
+      width: 200px;
+      height: 45px;
+      font-size: 18px;
+    }
+  }
+  
+  /* 📌 💡 === [미디어 쿼리 끝] === */
+  

@@ -24,12 +24,21 @@ const Navbar = () => {
     const relatedTarget = event.relatedTarget;
 
     // 마우스가 카테고리 메뉴나 드롭다운 영역으로 다시 이동한 경우 드롭다운 열기 방지
+    // if (
+    //   relatedTarget?.closest(".category-link") || // 카테고리 메뉴 안에 있으면
+    //   relatedTarget?.closest(".dropdown-wrapper") // 드롭다운 안에 있으면
+    // ) {
+    //   return;
+    // }
     if (
-      relatedTarget?.closest(".category-link") || // 카테고리 메뉴 안에 있으면
-      relatedTarget?.closest(".dropdown-wrapper") // 드롭다운 안에 있으면
+        relatedTarget && (
+            relatedTarget.closest(".category-link") || 
+            relatedTarget.closest(".dropdown-wrapper")
+        )
     ) {
-      return;
+        return;
     }
+    
 
     // 드롭다운을 닫기 위한 타이머 설정
     const newTimeoutId = setTimeout(() => {
