@@ -180,11 +180,14 @@ const ProfileCard = () => {
           />
           <div className="profile-text">
             <h2>
-              {typeof loginUser?.memberName === "string"
-                ? `${loginUser.memberName} 님, 오늘도 반짝이는 하루 되세요! ✨`
-                : "사용자"}
+                <span className="nickname">
+                {typeof loginUser?.memberName === "string"
+                    ? loginUser.memberName
+                    : "사용자"}
+                </span>
+                님, 오늘도 반짝이는 하루 되세요! ✨
             </h2>
-          </div>
+            </div>
         </div>
 
         <div className="profile-stats">

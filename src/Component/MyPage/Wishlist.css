@@ -1,134 +1,163 @@
+/* ✅ 마이페이지 위시리스트 전체 스타일 */
 .mypage-wishlist {
-  text-align: left;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  max-width: 1800px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
+    text-align: left;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    position: relative;
 }
 
+/* ✅ 위시리스트 컨테이너 */
 .wishlist-container {
-  width: 100%;
-  max-width: 1400px; /* ✅ 기존 1000px → 1400px로 확장 */
-  height: auto; /* ✅ 높이를 고정하여 리스트 박스 크기 키우기 */
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    width: 100%;
+    max-width: 1400px; /* ✅ 기존 1000px → 1400px로 확장 */
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* ✅ 위시리스트 아이템을 감싸는 영역 */
 .wishlist-items-wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
-.wishlist-items-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* ✅ 한 줄에 4개씩 정렬 */
-  gap: 20px;
-  justify-content: center;
-  width: 100%;
-  max-width: 1800px; /* ✅ 최대 너비 설정 */
-  height: auto;
-  margin: 0 auto;
-  padding: 20px;
-  /* border: 1px solid purple; */
-}
-
+/* ✅ 위시리스트 아이템 박스 */
 .wishlist-item {
-  width: 100%;
-  max-width: 300px;
-  height: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border-radius: 12px;
-  /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
-  background-color: #fff;
-  overflow: hidden;
-  padding: 15px;
-  border: 1px solid #ddd;
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 3 / 4;  /* ✅ 가로 세로 비율 유지 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  /* ✅ 간격 균일하게 */
+    align-items: center;
+    text-align: center;
+    border-radius: 12px;
+    background-color: #fff;
+    overflow: hidden;
+    padding: 15px;
+    border: 1px solid #ddd;
+    position: relative; /* ✅ 하트 아이콘 위치 고정 */
 }
 
-.wishlist-image-wrapper {
-  position: relative; /* ✅ 부모 기준점 설정 */
-  width: 100%;
-  aspect-ratio: 1 / 1; /* ✅ 정사각형 비율 유지 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #fff;
+/* ✅ 위시리스트 아이템 리스트 (그리드 구조) */
+.wishlist-items-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* ✅ 기본적으로 한 줄에 4개 */
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1800px;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
 }
-
-.wishlist-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
+/* ✅ 위시리스트 상품명 */
 .wishlist-name {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 10px;
-  flex-grow: 1;
+    font-size: clamp(12px, 2vw, 16px); /* ✅ 반응형 글자 크기 */
+    font-weight: bold;
+    margin-top: 8px;
+    max-width: 90%; /* ✅ 너무 길어지지 않도록 제한 */
+    white-space: nowrap; /* ✅ 줄바꿈 방지 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* ✅ 길면 '...' 표시 */
 }
-
+/* ✅ 위시리스트 가격 */
 .wishlist-price {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  margin-top: auto;
-  margin-bottom: 10px;
+    font-size: clamp(12px, 1.8vw, 16px); /* ✅ 반응형 크기 */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
 }
 
+
+/* ✅ 위시리스트 이미지 */
+.wishlist-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* ✅ 정사각형 유지 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ✅ 위시리스트 이미지 스타일 */
+.wishlist-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* ✅ 좋아요 하트 아이콘 스타일 */
 .wishlist-heart {
-  position: absolute;
-  bottom: 5px; /* ✅ 위치 조정 */
-  right: 5px; /* ✅ 부모 기준으로 정렬 */
-  font-size: 24px; /* ✅ 크기 조정 */
-  color: #ccc;
-  cursor: pointer;
-  transition: color 0.3s ease-in-out;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
 }
 
 .wishlist-heart.liked {
-  color: red;
+    color: red;
 }
 
-/* ✅ 반응형 스타일 개선 */
+/* ✅ 화면 크기 조정 */
+@media (max-width: 1200px) {
+    .wishlist-items-list {
+        grid-template-columns: repeat(3, 1fr); /* ✅ 1200px 이하에서는 3개씩 */
+    }
+}
+
 @media (max-width: 1024px) {
-  .wishlist-items-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .wishlist-item {
-    width: calc(33.33% - 20px);
-    max-width: 260px;
-  }
+    .wishlist-items-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .wishlist-item {
+        max-width: 260px;
+    }
 }
 
 @media (max-width: 768px) {
-  .wishlist-items-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .wishlist-item {
-    width: calc(50% - 20px);
-    max-width: 240px;
-  }
+    .wishlist-items-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .wishlist-item {
+        max-width: 240px;
+    }
+    .wishlist-name {
+        font-size: clamp(12px, 2vw, 16px); /* ✅ 모바일에서는 더 작게 */
+    }
+
+    .wishlist-price {
+        font-size: clamp(12px, 1.8vw, 14px);
+    }
 }
 
 @media (max-width: 480px) {
-  .wishlist-items-list {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .wishlist-item {
-    width: 100%;
-    max-width: 100%;
-  }
+    .wishlist-items-list {
+        grid-template-columns: repeat(1, 1fr); /* ✅ 모바일에서는 1줄 */
+    }
+    .wishlist-item {
+        width: 90%; /* ✅ 박스 크기 유지 */
+        max-width: 320px;
+        aspect-ratio: 3 / 4; /* ✅ 데스크탑과 같은 비율 유지 */
+    }
+    .wishlist-name {
+        font-size: 14px; /* ✅ 모바일에서는 고정 */
+    }
+
+    .wishlist-price {
+        font-size: 13px;
+    }
 }

@@ -324,3 +324,85 @@
 .display-unliked {
   color: gray;
 }
+
+/* 💻 화면 너비 1200px 이하일 때 */
+@media (max-width: 1200px) {
+    .display-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .product-sidebar {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .display-container {
+      width: 100%;
+    }
+  
+    .display-product-list {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+  
+  /* 📱 태블릿 (768px 이하) */
+  @media (max-width: 768px) {
+    .display-wrapper {
+      gap: 10px;
+    }
+  
+    .product-sidebar {
+      display: none; /* 태블릿에서는 사이드바 숨김 */
+    }
+  
+    .display-product-list {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 15px;
+    }
+  
+    .display-product-card .display-image img {
+      height: 250px;
+    }
+  
+    .display-product-card .display-details h4 {
+      font-size: 16px;
+    }
+  
+    .display-price {
+      font-size: 14px;
+    }
+  }
+  
+  /* 📱 모바일 (480px 이하) */
+  @media (max-width: 480px) {
+    .display-sub-category-container {
+      flex-direction: column;
+      text-align: center;
+      padding: 8px;
+    }
+  
+    .display-sub-category-buttons {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+    }
+  
+    .display-product-list {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+  
+    .display-product-card .display-image img {
+      height: 200px;
+    }
+  
+    .display-product-card .display-details h4 {
+      font-size: 14px;
+    }
+  
+    .display-price {
+      font-size: 12px;
+    }
+  }
+  
