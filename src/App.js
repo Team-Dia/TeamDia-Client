@@ -61,6 +61,9 @@ import { loginAction, logoutAction } from "./store/userSlice";
 import jaxios from "./util/jwtUtil";
 import MainSlider from "./Component/MySlider/Slider"; // 맞춤형 추천 상품 슬라이더
 
+// 관리자 페이지
+import ADMIN_URL from "./config";
+
 function App() {
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.user);
@@ -396,6 +399,17 @@ function App() {
             </>
           }
         />
+        {/* ✅ 관리자 페이지 추가 */}
+        
+
+        {/* ✅ 환경에 따라 자동으로 관리자 페이지로 이동 */}
+        <Route
+          path="/go-admin"
+          element={
+            <a href={ADMIN_URL}>관리자 페이지로 이동</a>
+          }
+        />
+
       </Routes>
     </div>
   );
