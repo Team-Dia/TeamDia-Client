@@ -19,37 +19,40 @@ const Navbar = () => {
     }
   };
 
-  // 카테고리 메뉴에서 마우스 나가면 일정 시간 뒤에 드롭다운 닫기
   const handleMouseLeaveCategory = (event) => {
     const relatedTarget = event.relatedTarget;
 
-    // 마우스가 카테고리 메뉴나 드롭다운 영역으로 다시 이동한 경우 드롭다운 열기 방지
-    // if (
-    //   relatedTarget?.closest(".category-link") || // 카테고리 메뉴 안에 있으면
-    //   relatedTarget?.closest(".dropdown-wrapper") // 드롭다운 안에 있으면
-    // ) {
-    //   return;
-    // }
+    // relatedTarget이 존재하지 않으면 드롭다운을 닫기 위한 타이머 설정
+    if (!relatedTarget) {
+        const newTimeoutId = setTimeout(() => {
+            if (!isMouseOverDropdown) {
+                setIsDropdownOpen(false);
+            }
+        }, 500);
+        setTimeoutId(newTimeoutId);
+        return;
+    }
+
+    // `relatedTarget.closest`가 존재하는지 확인하고 드롭다운 내부인지 검사
     if (
-        relatedTarget && (
+        typeof relatedTarget.closest === "function" && (
             relatedTarget.closest(".category-link") || 
             relatedTarget.closest(".dropdown-wrapper")
         )
     ) {
         return;
     }
-    
 
     // 드롭다운을 닫기 위한 타이머 설정
     const newTimeoutId = setTimeout(() => {
-      if (!isMouseOverDropdown) {
-        // 드롭다운에 마우스가 없다면 닫기
-        setIsDropdownOpen(false);
-      }
-    }, 500); // 500ms 후에 닫기
+        if (!isMouseOverDropdown) {
+            setIsDropdownOpen(false);
+        }
+    }, 500);
+    
+    setTimeoutId(newTimeoutId);
+};
 
-    setTimeoutId(newTimeoutId); // 타이머 ID 저장
-  };
 
   // 드롭다운에 마우스가 들어오면 타이머 취소
   const handleMouseEnterDropdown = () => {
