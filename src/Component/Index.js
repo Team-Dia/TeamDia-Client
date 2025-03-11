@@ -23,6 +23,7 @@ const Index = () => {
     // ✅ 기존 로컬 서버 이미지 경로 지원 (product_images 디렉토리)
     return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
   };
+  console.log("환경 변수 확인:", process.env.REACT_APP_ADMIN_URL);
 
   const handleImageHover = (e, imageUrl) => {
     e.target.src = imageUrl;
@@ -119,7 +120,7 @@ const Index = () => {
           <p>귀걸이</p>
         </Link>
       </div>
-      <h1>&nbsp;BEST PRODUCT&nbsp;</h1>
+      <h1 className="best-title">DIAMONZ 추천 아이템</h1>
 
       <div className="itemlist">
         {bestProduct.length > 0 ? (
@@ -182,7 +183,8 @@ const Index = () => {
         )}
       </div>
 
-      <h1>&nbsp;NEW PRODUCT&nbsp;</h1>
+      <h1 className="new-title">새롭게 빛나는 신상</h1>
+
 
       <div className="itemlist">
         {Array.isArray(newProduct) && newProduct.length > 0 ? (
