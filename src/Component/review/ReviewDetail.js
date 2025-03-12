@@ -116,7 +116,7 @@ const ReviewDetail = () => {
 
         {/* 리뷰 상품 사이즈 */}
         <div className="review-detail-product-size">
-          <p style={{ color: "rgb(155,155,155)", marginTop: "5px" }}>13호</p>
+          <p style={{ color: "rgb(155,155,155)", marginTop: "5px" }}>호수 :&nbsp;{reviewItem.ordersDetail?.sizeValue ? reviewItem.ordersDetail.sizeValue : ""}</p>
         </div>
 
         {/* 리뷰 내용 */}

@@ -310,6 +310,12 @@ label {
   justify-content: flex-start;
 }
 
+.review-size{
+  width: 78%;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .review-text {
   width: 78%;
   display: flex;

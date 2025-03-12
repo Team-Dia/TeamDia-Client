@@ -43,6 +43,7 @@ const ProductInfoReview = ({ review }) => {
     });
   };
 
+  
   // 모달 열기
   const openModal = (reviewItem) => {
     setModalData(reviewItem); // 클릭한 리뷰 아이템을 모달에 전달
@@ -302,6 +303,8 @@ const ProductInfoReview = ({ review }) => {
                       className="modal-image"
                     />
 
+                  
+
                     <div className="modal-info">
                       {/* 리뷰 작성자 표시 */}
                       <div className="modal-name-indate">
@@ -325,6 +328,7 @@ const ProductInfoReview = ({ review }) => {
                         )}
                       </div>
 
+
                       {/* 평점 표시 */}
                       <div style={{ marginTop: "10px" }}>
                         평점:{" "}
@@ -333,6 +337,14 @@ const ProductInfoReview = ({ review }) => {
                             <i key={starIndex} className="ri-star-fill"></i>
                           )
                         )}{" "}
+                      </div>
+
+                      <div style={{ marginTop: "10px" }}>
+                        {modalData.ordersDetail?.sizeValue ? (
+                          <div>옵션:&nbsp;{modalData.ordersDetail.sizeValue}</div>
+                        ) : (
+                          <p></p> // 리뷰가 없을 경우 대체 텍스트
+                        )}
                       </div>
 
                       {/* 리뷰 내용 */}
@@ -438,6 +450,16 @@ const ProductInfoReview = ({ review }) => {
                   <span>평점 없음</span> // 평점이 없을 때
                 )}
               </div>
+
+              {/* 리뷰 사이즈내용 */}
+              <div className="review-size">
+                {item.ordersDetail?.sizeValue ? (
+                  <div>옵션&nbsp;&nbsp;&nbsp;&nbsp;{item.ordersDetail.sizeValue}</div>
+                ) : (
+                  <p></p> // 리뷰가 없을 경우 대체 텍스트
+                )}
+              </div>
+              {console.log('item', item)}
 
               {/* 리뷰 내용 */}
               <div className="review-text">
