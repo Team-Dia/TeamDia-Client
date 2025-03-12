@@ -271,10 +271,6 @@
     height: 250px;
   }
 
-  .order-detail-body {
-    width: 100%;
-  }
-
   .order-detail-body h2 {
     margin-top: 50px;
   }
@@ -534,4 +530,7 @@
     margin-top: 5px;
   }
 }
+
+
+
 

@@ -349,7 +349,7 @@ const OrderList = () => {
       <div className="cartlist-header">
   <h1>결제하기</h1>
   <div className="cartlist-header-right">
-    <p style={{ display: "flex", alignItems: "center" }}>
+    <p style={{ display: "flex", alignItems: "center" ,color: "rgb(155, 155, 155)"}}>
       장바구니&nbsp;<i className="ri-play-circle-fill"></i>
     </p>
     &nbsp;&nbsp;
