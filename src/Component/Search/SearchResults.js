@@ -152,22 +152,27 @@ const SearchResults = () => {
         </select>
       </div>
 
-      <div className="search-results-container">
-        {isLoading && <LoadingScreen />}
+     {/* 🔹 검색 결과를 감싸는 컨테이너 추가 */}
+    <div className="search-results-container">
+      {isLoading && <LoadingScreen />}
+      
+      {/* 🔹 검색 결과 제목을 별도 div로 감싸기 */}
+      <div className="search-results-title-wrapper">
         <h2 className="search-results-title">🔍 "{keyword}" 검색 결과</h2>
+      </div>
 
-        <div className="searchProduct-list">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <SearchItem key={product.productSeq} product={product} />
-            ))
-          ) : (
-            <p className="no-results-message">🔍 해당되는 상품이 없습니다.</p>
-          )}
-        </div>
+      <div className="searchProduct-list">
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <SearchItem key={product.productSeq} product={product} />
+          ))
+        ) : (
+          <p className="no-results-message">해당되는 상품이 없습니다.</p>
+        )}
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default SearchResults;
