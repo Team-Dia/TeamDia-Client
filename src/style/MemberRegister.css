@@ -113,6 +113,22 @@
   font-size: 16px; /* ✅ 모든 버튼의 글자 크기를 동일하게 설정 */
 }
 
+/* ✅ 공통 버튼 스타일 (중복 확인 버튼과 동일하게 적용) */
+.search-btn {
+    flex: 0 0 auto;
+    max-width: 150px; /* 버튼이 너무 길어지지 않도록 제한 */
+    white-space: nowrap; /* 버튼 내용이 줄바꿈되지 않도록 */
+    padding: 10px 12px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    font-size: 16px;
+}
+
+
 /* ✅ 버튼 호버 효과 */
 .check-btn:hover,
 .verification-btn:hover,
@@ -358,21 +374,48 @@
   .birthdate-banner button:hover {
     background-color: #333;
   }
+
+  .birthdate-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%; /* 부모 컨테이너 너비 지정 */
+}
+
+.register-input {
+    flex: 1; /* 입력 필드가 가능한 한 넓게 차지 */
+    padding-right: 40px; /* 삭제 버튼과 겹치지 않도록 여백 추가 */
+}
+
+.clear-birthdate-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    margin-left: 10px; /* 입력 필드와 겹치지 않도록 여백 추가 */
+    transition: color 0.3s ease-in-out;
+}
+
+.clear-birthdate-btn:hover {
+    color: #333;
+}
+
   
-  /* ✅ 우편번호 입력 필드 + 버튼 */
-  .zip-container {
+/* ✅ 우편번호 입력 필드 + 버튼 */
+.zip-container {
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  
-  .zip-input {
+    width: 100%;
+}
+
+.zip-input {
     flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
-  
+}
 
   /* ✅ 반응형 - 태블릿 (1023px 이하) */
 @media screen and (max-width: 1023px) {
