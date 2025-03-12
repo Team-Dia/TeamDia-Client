@@ -692,7 +692,6 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                   <>
                     {product.productImage && (
                     <SwiperSlide key={`${idx}-1`} className={activeIndex === idx ? 'active' : ''}>
-                      
                       <img src={getImageUrl(product.productImage)} />
                     </SwiperSlide>
                   )}
@@ -746,25 +745,25 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                   <>
                     {product.productImage && (
                       <SwiperSlide key={`${idx}-1`} className={thumbsActiveIndex === idx ? 'active' : ''} >
-                        <img src={`http://localhost:8070/product_images/${product.productImage}`} />
+                        <img src={getImageUrl(product.productImage)} />
                       </SwiperSlide>
                     )}
 
                     {product.productImage2 && (
                       <SwiperSlide key={`${idx}-2`} className={thumbsActiveIndex === idx + 1 ? 'active' : ''} >
-                        <img src={`http://localhost:8070/product_images/${product.productImage2}`} />
+                        <img src={getImageUrl(product.productImage2)} />
                       </SwiperSlide>
                     )}
 
                     {product.productImage3 && (
                       <SwiperSlide key={`${idx}-3`} className={thumbsActiveIndex === idx + 2 ? 'active' : ''} >
-                        <img src={`http://localhost:8070/product_images/${product.productImage3}`} />
+                        <img src={getImageUrl(product.productImage3)} />
                       </SwiperSlide>
                     )}
 
                     {product.productImage4 && (
                       <SwiperSlide key={`${idx}-4`} className={thumbsActiveIndex === idx + 3 ? 'active' : ''} >
-                        <img src={`http://localhost:8070/product_images/${product.productImage4}`} />
+                        <img src={getImageUrl(product.productImage4)} />
                       </SwiperSlide>
                     )}
                   </>
