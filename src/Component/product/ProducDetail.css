@@ -385,3 +385,121 @@ a {
   height: 450px;
   object-fit: cover;
 }
+
+/* 화면 너비 1024px 이하 (태블릿) */
+@media screen and (max-width: 1024px) {
+    .product-detail {
+      width: 80%;
+    }
+  
+    .product-allcontainer {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .product-info {
+      width: 100%;
+      margin-left: 0;
+    }
+  
+    .swiper-container {
+      width: 80%;
+    }
+  
+    .mySwiper {
+      width: 80%;
+    }
+  }
+  
+  /* 화면 너비 768px 이하 (모바일) */
+  @media screen and (max-width: 768px) {
+    .product-detail {
+      width: 90%;
+    }
+  
+    .swiper-container {
+      width: 100%;
+    }
+  
+    .product-info {
+      width: 100%;
+      padding: 0 10px;
+    }
+  
+    .product-content {
+      margin-top: 20px;
+    }
+  
+    .interest-info {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .size-info {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+    }
+  
+    .quantity-info {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .shopping-select {
+      flex-direction: column;
+    }
+  
+    .shopping-select button {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  
+  /* 화면 너비 480px 이하 (소형 모바일) */
+  @media screen and (max-width: 480px) {
+    .product-detail {
+      width: 100%;
+      margin-top: 40px;
+    }
+  
+    .swiper-container {
+      width: 100%;
+    }
+  
+    .swiper-wrapper {
+      width: 100%;
+    }
+  
+    .swiper-slide img {
+      width: 100%;
+    }
+  
+    .mySwiper {
+      width: 100%;
+    }
+  
+    .size-info,
+    .quantity-info {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+  
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+    }
+  
+    .shopping-select {
+      flex-direction: column;
+    }
+  
+    .shopping-select button {
+      width: 100%;
+      height: 50px;
+      margin-top: 10px;
+    }
+  }
+  
