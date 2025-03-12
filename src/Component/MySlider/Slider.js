@@ -51,7 +51,7 @@ const MainSlider = ({ isLoggedIn, memberId }) => {
       .then((response) => {
         if (response.status === 204) {
           console.log("추천할 상품이 없습니다.");
-          setRecommendedItems([]);
+          setRecommendedItems([]); // 추천 상품이 없다면 빈 배열 설정
         } else {
           console.log("추천 상품 데이터:", response.data);
           setRecommendedItems(response.data);
@@ -114,7 +114,7 @@ const MainSlider = ({ isLoggedIn, memberId }) => {
                           </div>
                         </div>
                       </div>
-                      <div className="slide-product-link">상품 바로가기</div>{" "}
+                      <div className="slide-product-link">상품 바로가기</div>
                       {/* 상품 바로가기 버튼 */}
                     </div>
                   </Link>
@@ -146,7 +146,7 @@ const MainSlider = ({ isLoggedIn, memberId }) => {
                         alt={item.productName}
                         className="slide-product-image"
                       />
-                      <div className="badge" style={{ left: "22%" }}>
+                      <div className="badge" style={{ left: "5%" }}>
                         {memberId}님 추천상품
                       </div>
                       <div className="overlay">
@@ -163,19 +163,57 @@ const MainSlider = ({ isLoggedIn, memberId }) => {
                           </div>
                         </div>
                       </div>
-                      <div className="slide-product-link">상품 바로가기</div>{" "}
+                      <div className="slide-product-link">상품 바로가기</div>
                       {/* 상품 바로가기 버튼 */}
                     </div>
                   </Link>
                 </div>
               ))
             ) : (
-              <div className="slider-item">
-                <img
-                  src="/imgs/no-recommendation.jpg"
-                  alt="No recommended products"
-                />
-              </div>
+              // 추천 상품이 없으면 인기 상품 슬라이더를 대신 보여주기
+              popularItems.length > 0 ? (
+                popularItems.map((item, index) => (
+                  <div className="slider-item" key={index}>
+                    <Link
+                      to={`/producDetail/${item.productSeq}`}
+                      className="slider-link"
+                    >
+                      <div className="image-container">
+                        <img
+                          src={getImageUrl(item.productImage)} // ✅ S3 URL 적용
+                          alt={item.productName}
+                          className="slide-product-image"
+                        />
+                        <div className="badge" style={{ marginLeft: "15px" }}>
+                          인기 상품
+                        </div>
+                        <div className="overlay">
+                          <div className="slide-product-info">
+                            <div className="slide-product-name">
+                              {item.productName}
+                            </div>
+                            <div className="slide-product-price">
+                              ₩{" "}
+                              {new Intl.NumberFormat("ko-KR").format(
+                                item.productSalePrice
+                              )}{" "}
+                              원
+                            </div>
+                          </div>
+                        </div>
+                        <div className="slide-product-link">상품 바로가기</div>
+                      </div>
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div className="slider-item">
+                  <img
+                    src="/imgs/no-popular.jpg"
+                    alt="No popular products"
+                  />
+                </div>
+              )
             )}
           </Slider>
         </div>

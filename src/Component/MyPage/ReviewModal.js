@@ -50,7 +50,7 @@ const ReviewModal = ({ isOpen, onClose, purchasedProducts, onWriteReview }) => {
 
     // ✅ UI 상태 변경 후 페이지 이동 (setTimeout으로 지연 적용)
     setTimeout(() => {
-      navigate(`/review/${detail.orderSeq}/${detail.productSeq}`);
+      navigate(`/review/${detail.orderSeq}/${detail.productSeq}/${detail.orderdetailSeq}`);
     }, 100);
   };
 

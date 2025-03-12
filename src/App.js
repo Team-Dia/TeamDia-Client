@@ -222,7 +222,7 @@ function App() {
           }
         />
         <Route
-          path="/review/:orderSeq/:productSeq"
+          path="/review/:orderSeq/:productSeq/:orderdetailSeq"
           element={
             <>
               <Navbar />
