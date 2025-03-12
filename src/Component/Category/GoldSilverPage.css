@@ -1,0 +1,215 @@
+/* ✅ 전체 페이지 레이아웃 */
+.goldSilver-page {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
+    min-height: calc(100vh - 100px); /* 🔹 화면 최소 높이 설정 (헤더 고려) */
+    display: flex;
+    flex-direction: column;
+}
+
+/* ✅ 상단 필터 바 */
+.goldSilver-filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+/* ✅ 제목 스타일 */
+.goldSilver-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* ✅ 정렬 드롭다운 스타일 */
+.goldSilver-sort-dropdown {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.goldSilver-sort-dropdown:hover {
+    border-color: #888;
+}
+
+/* ✅ 로딩 중일 때 화면 전체를 채우도록 설정 */
+.goldSilver-loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* 🔹 컨텐츠가 적을 때도 화면을 채우도록 설정 */
+    min-height: calc(100vh - 100px);
+}
+
+/* ✅ 제목 스타일 */
+.goldSilver-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.goldSilver-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* ✅ 로딩 중 메시지 스타일 */
+.goldSilver-loading {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}
+
+/* ✅ 상품 리스트 스타일 */
+.goldSilver-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    flex-grow: 1; /* 🔹 화면을 가득 채우도록 설정 */
+}
+
+/* ✅ 개별 제품 카드 */
+.goldSilver-card {
+    background: white;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.goldSilver-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ 제품 이미지 */
+.goldSilver-card .goldSilver-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* ✅ 제품 상세 정보 */
+.goldSilver-card .goldSilver-details {
+    padding: 10px;
+    text-align: center;
+}
+
+.goldSilver-card .goldSilver-details h4 {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+/* ✅ 가격 스타일 */
+.goldSilver-card .goldSilver-price {
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* ✅ 별점 스타일 */
+.goldSilver-rating {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.goldSilver-rating .star {
+    color: #ffd700;
+    font-size: 18px;
+    margin-right: 2px;
+}
+
+.goldSilver-rating .star.empty {
+    color: #ccc;
+}
+
+.goldSilver-review-count {
+    font-size: 14px;
+    color: #555;
+    margin-left: 5px;
+}
+
+/* ✅ 검색 결과 없음 메시지 */
+.goldSilver-no-results {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    margin-top: 50px;
+}
+
+/* 💻 화면 너비 1200px 이하 */
+@media (max-width: 1200px) {
+    .goldSilver-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+/* 📱 태블릿 (768px 이하) */
+@media (max-width: 768px) {
+    .goldSilver-header h2 {
+        font-size: 20px;
+    }
+
+    .goldSilver-list {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    .goldSilver-card .goldSilver-image img {
+        height: 250px;
+    }
+
+    /* ✅ 검색 필터 바 줄바꿈 방지 및 크기 축소 */
+    .goldSilver-filter-bar {
+        flex-wrap: nowrap;
+        padding: 8px;
+    }
+
+    /* ✅ 검색 필터 바 내부 요소 크기 축소 */
+    .goldSilver-sort-dropdown {
+        padding: 5px;
+        font-size: 12px;
+        width: 45%;
+    }
+}
+
+/* 📱 모바일 (480px 이하) */
+@media (max-width: 480px) {
+    .goldSilver-header h2 {
+        font-size: 18px;
+    }
+
+    .goldSilver-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .goldSilver-card .goldSilver-image img {
+        height: 200px;
+    }
+
+    /* ✅ 검색 필터 바 조정 */
+    .goldSilver-filter-bar {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+
+    .goldSilver-sort-dropdown {
+        padding: 4px;
+        font-size: 10px;
+        width: 45%;
+    }
+}

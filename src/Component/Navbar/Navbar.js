@@ -86,15 +86,19 @@ const Navbar = () => {
 
         {/* 중앙 (메뉴) */}
         <div 
-          className="nav-center"
-          onMouseEnter={handleMouseEnterCategory}
-          onMouseLeave={handleMouseLeaveCategory}
-        >
-          <Link id="category-link">카테고리</Link>
-          <Link to="/bracelet?subCategory=골드" id="menu-link">골드</Link>
-          <Link to="/bracelet?subCategory=실버" id="menu-link">실버</Link>
-          <Link to="/Customer" id="menu-link">고객센터</Link>
-        </div>
+            className="nav-center"
+            onMouseEnter={handleMouseEnterCategory}
+            onMouseLeave={handleMouseLeaveCategory}
+            >
+            <Link id="category-link">카테고리</Link>
+
+            {/* ✅ 기존 골드/실버 링크 대신 새로운 필터링 페이지로 연결 */}
+            <Link to="/gold-silver?material=골드" id="menu-link">골드</Link>
+            <Link to="/gold-silver?material=실버" id="menu-link">실버</Link>
+
+            <Link to="/Customer" id="menu-link">고객센터</Link>
+            </div>
+
 
         {/* 오른쪽 (로그인, 마이페이지, 장바구니) */}
         <div className="nav-right">
