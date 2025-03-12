@@ -73,6 +73,10 @@ const ReviewModal = ({ isOpen, onClose, purchasedProducts, onWriteReview }) => {
         <ul className="review-product-list">
           {purchasedProducts.map((detail) => {
             console.log("🔍 상품 정보:", detail);
+            console.log("📡 구매한 상품 목록 (purchasedProducts):", purchasedProducts);
+            purchasedProducts.forEach((detail) => {
+              console.log("🖼️ 변환된 이미지 URL:", detail.imageUrl);
+            });
 
             const key = `${detail.orderSeq}-${detail.productSeq}`;
             const isReviewWritten = reviewStatus[key] || false; // ✅ 리뷰 상태 가져오기
