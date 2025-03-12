@@ -202,18 +202,49 @@ const MemberRegister = () => {
     
     
 
-    // 생년월일 입력 핸들러
     const handleBirthdateChange = (e) => {
         const birthdate = e.target.value;
-        const today = new Date().toISOString().split("T")[0]; // 현재 날짜 (YYYY-MM-DD)
+        const today = new Date();
+        const birthDateObj = new Date(birthdate);
     
-        if (birthdate > today) {
-            setErrors({ ...errors, birthdate: "생년월일은 미래 날짜를 선택할 수 없습니다." });
-        } else {
-            setErrors({ ...errors, birthdate: "" });
-            setFormData({ ...formData, birthdate });
+        // ✅ 형식이 올바른지 확인
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(birthdate)) {
+            setErrors({ ...errors, birthdate: "올바른 날짜 형식(YYYY-MM-DD)으로 입력하세요." });
+            return;
         }
+    
+        // ✅ 미래 날짜 입력 방지
+        if (birthDateObj > today) {
+            setErrors({ ...errors, birthdate: "생년월일은 미래 날짜를 선택할 수 없습니다." });
+            return;
+        }
+    
+        // ✅ 만 14세 미만 가입 불가 (현재 연도 기준)
+        let age = today.getFullYear() - birthDateObj.getFullYear();
+        const monthDiff = today.getMonth() - birthDateObj.getMonth();
+        const dayDiff = today.getDate() - birthDateObj.getDate();
+    
+        // 생일이 지나지 않았다면, 나이에서 1 빼기
+        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+            age--;
+        }
+    
+        if (age < 14) {
+            setErrors({ ...errors, birthdate: "만 14세 이상만 가입할 수 있습니다." });
+            return;
+        }
+    
+        // ✅ 1920년 이전 출생년도 제한
+        if (birthDateObj.getFullYear() < 1920) {
+            setErrors({ ...errors, birthdate: "너무 오래된 연도를 입력하셨습니다. 1920년 이후 연도를 입력하세요." });
+            return;
+        }
+    
+        // 🔥 모든 검증 통과 후, 오류 메시지 제거 및 상태 업데이트
+        setErrors({ ...errors, birthdate: "" });
+        setFormData({ ...formData, birthdate });
     };
+    
     
     // 이메일 아이디 변경 핸들러
     const handleEmailIdChange = (e) => {
@@ -547,17 +578,27 @@ const handleSubmit = async (e) => {
                     </div>
                     {errors.memberPhone && <p className="register-error">{errors.memberPhone}</p>}
 
-                    <div>
-                        <label htmlFor="memberBirthdate" className="member-register-label">생년월일</label>
+                    <div className="birthdate-container">
                         <input 
-                        type="date" 
-                        name="birthdate" 
-                        value={formData.birthdate} 
-                        onChange={handleBirthdateChange} 
-                        min="1920-01-01" max={new Date().toISOString().split("T")[0]} className="register-input" 
+                            type="date" 
+                            name="birthdate" 
+                            value={formData.birthdate || ""}  
+                            onChange={handleBirthdateChange} 
+                            min="1920-01-01" 
+                            max={new Date().toISOString().split("T")[0]} 
+                            className="register-input"
                         />
-                        <p className="birthdate-info">생년월일 입력 시 최초 1회 5000P가 지급됩니다.</p>
+                        {formData.birthdate && (
+                            <button 
+                                type="button" 
+                                className="clear-birthdate-btn" 
+                                onClick={() => setFormData({ ...formData, birthdate: "" })}
+                            >
+                                ❌
+                            </button>
+                        )}
                     </div>
+                    <p className="birthdate-info">생년월일 입력 시 최초 1회 5000P가 지급됩니다.</p>
                     {errors.birthdate && <p className="register-error">{errors.birthdate}</p>}
 
                     <div>

@@ -207,7 +207,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 15px;
     position: relative;
   }
   
@@ -349,6 +348,12 @@
   /* 포커스 효과 */
   select:focus {
     outline: none;
+  }
+
+  .order-btn{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
   
   /* 화면 너비 1200px 이하 */

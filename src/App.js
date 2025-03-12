@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Cookies } from "react-cookie";
@@ -43,6 +43,7 @@ import WriteQna from "./Component/Customer/WriteQna";
 // import BraceletPage from "./Component/Category/BraceletPage";
 import DisplayPage from "./Component/Category/DisplayPage";
 import SearchResults from "./Component/Search/SearchResults";
+import GoldSilverPage from "./Component/Category/GoldSilverPage";
 
 // 제품 상세
 import ProducDetail from "./Component/product/ProducDetail";
@@ -67,6 +68,7 @@ import ADMIN_URL from "./config";
 function App() {
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.user);
+  const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
     console.log("🟢 [App.js] 애플리케이션 실행 시 로그인 정보 확인");
 
@@ -256,20 +258,20 @@ function App() {
           element={
             <>
               <Navbar />
-              <DisplayPage />
+              <DisplayPage setFilteredItems={setAllProducts} />
               <Footing />
             </>
           }
         />
-
-        {/* 반지 제품 카테고리 페이지*/}
-        {/* <Route path="/ring" element={<><Navbar/><RingPage /><Footing/></>} /> */}
-        {/* 목걸이 제품 카테고리 페이지*/}
-        {/* <Route path="/necklace" element={<><Navbar/><NecklacePage /><Footing/></>} /> */}
-        {/* 귀걸이 제품 카테고리 페이지*/}
-        {/* <Route path="/earRing" element={<><Navbar/><EarRingPage /><Footing/></>} />  */}
-        {/* 팔찌 제품 카테고리 페이지*/}
-        {/* <Route path="/bracelet" element={<><Navbar/><BraceletPage /><Footing/></>} /> */}
+        <Route 
+        path="/gold-silver" 
+        element={
+            <>
+              <Navbar /><GoldSilverPage allProducts={allProducts} />
+              <Footing />
+            </>
+          }
+        />
         {/* 검색 결과 페이지 */}
         <Route
           path="/search"
