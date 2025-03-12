@@ -12,6 +12,8 @@ const MyReviewDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [review, setReview] = useState(location.state?.review || null);
+  console.log("📢 URL에서 받은 review:", review);
+
 
   console.log("📢 URL에서 받은 reviewSeq:", reviewSeq);
   console.log("📢 location.state 값:", location.state);
@@ -89,14 +91,24 @@ const MyReviewDetail = () => {
               </div>
             </div>
 
+            {/* 🔹 리뷰 상품명 */}
+            
+            <p className="review-productname" style={{fontSize:'18px',marginTop:'15px'}}>상품 : &nbsp;{review.product.productName}</p>
+            
+
             {/* 🔹 리뷰 평점 */}
             <div className="review-rating">
+              <p style={{color:'#1a1a1a',marginTop:'5px'}}>별점 :</p>&nbsp;
               {"⭐".repeat(review.reviewRating)}
             </div>
 
+            {/* 🔹 리뷰 상품 사이즈 */}
+            
+            <p className="review-product-size" style={{marginTop:'10px',fontSize:'18px'}}>옵션 : &nbsp;{review.ordersDetail.sizeValue}</p>
+
             {/* 🔹 리뷰 내용 */}
             <div className="review-content-box">
-              <p className="review-text">{review.reviewContent}</p>
+              <p className="myreview-text">{review.reviewContent}</p>
             </div>
 
             {/* ✅ 리뷰 이미지 슬라이더 추가 */}
