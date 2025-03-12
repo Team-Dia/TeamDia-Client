@@ -80,14 +80,15 @@ const ReviewModal = ({ isOpen, onClose, purchasedProducts, onWriteReview }) => {
 
             const key = `${detail.orderSeq}-${detail.productSeq}`;
             const isReviewWritten = reviewStatus[key] || false; // ✅ 리뷰 상태 가져오기
-
+            console.log("📡 최종 렌더링되는 이미지 URL:", `"${detail.imageUrl}"`);
             return (
               <li key={key} className="review-product-item">
+                
                 {/* ✅ 상품 이미지 추가 */}
                 <img
-                  src={getImageUrl(detail.productImage)} // 🔹 수정됨: S3 URL 적용
+                  src={detail.imageUrl} // 🔹 수정됨: S3 URL 적용
                   // src={getImageUrl(detail)}
-                  alt={detail.productName || "상품 이미지"}
+                  alt={detail.imageUrl || "상품 이미지"}
                   className="review-product-image"
                 />
                 <span>{detail.productName || "상품명 없음"}</span>
