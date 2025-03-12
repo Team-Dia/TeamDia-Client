@@ -1,239 +1,363 @@
-/* 회원정보 수정 페이지 전체 레이아웃 */
+/* ✅ 회원정보 수정 페이지 전체 레이아웃 */
 .edit-profile-section {
-  background: none; /* 배경색 제거 */
-  padding: 30px;
-  width: 100%; /* 컨테이너 크기와 일치 */
-  max-width: none; /* 최대 너비 제한 없음 */
-  margin: 0 auto;
-  /* border: 1px solid green; */
-}
-
-/* 제목 스타일 */
-.edit-profile-section h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* 폼 요소 그룹 */
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
-
-/* 입력 필드 스타일 */
-.form-input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 18px;
-}
-
-/* ✅ 버튼 컨테이너 */
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-/* 📌 수정 버튼 (회원정보 수정) */
-.mypage-button {
-  width: 100%;
-  padding: 12px 20px;
-  font-size: 18px;
-  background-color: #1a1a1a;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 44px;
-  margin-top: 20px;
-}
-
-.mypage-button:hover {
-  background-color: #333;
-}
-
-/* ✅ 취소하기 버튼 */
-.cancel-button {
-  padding: 12px 20px;
-  font-size: 18px;
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 44px;
-  margin-top: 20px;
-  width: 48%;
-}
-
-.cancel-button:hover {
-  background-color: #5a6268;
-}
-
-/* ✅ 생일 입력란과 삭제 버튼을 같은 줄에 배치 */
-.birthdate-container {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* 입력 필드와 버튼 간격 */
-  width: 100%;
-}
-
-/* ✅ 생일 입력 필드 스타일 */
-.birthdate-container .form-input {
-  flex: 1; /* 입력 필드가 가로 공간을 차지하도록 설정 */
-  min-width: 200px;
-}
-
-/* ✅ 삭제 버튼 스타일 */
-.delete-birthdate-btn {
-  padding: 12px 20px;
-  font-size: 18px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  min-width: 100px;
-  height: 44px; /* 입력 필드 높이와 동일하게 조정 */
-  transition: background 0.3s;
-}
-
-.delete-birthdate-btn:hover {
-  background-color: #c82333;
-}
-
-/* 📌 이메일 입력 컨테이너 */
-.email-input-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  flex-wrap: nowrap;
-}
-
-/* 📌 이메일 입력칸 (다른 입력란과 동일한 스타일 적용) */
-.email-id,
-.email-select,
-.email-custom {
-  flex: 1;
-  min-width: 200px;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 18px;
-  background-color: white;
-}
-
-/* 📌 이메일 인증 요청 버튼 */
-.verification-btn {
-  padding: 12px 20px;
-  font-size: 18px;
-  background-color: #1a1a1a;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  min-width: 150px;
-  height: 44px;
-}
-
-.verification-btn:disabled {
-  background-color: #ccc;
-}
-
-/* 📌 이메일 인증 코드 입력란 (다른 입력란과 동일한 스타일 적용) */
-.email-verification-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  width: 100%;
-  flex-wrap: nowrap;
-}
-
-/* 📌 인증 코드 입력 필드 */
-.email-code {
-  flex: 1;
-  min-width: 200px;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 18px;
-}
-
-/* 이메일 인증 확인 버튼 */
-.confirm-verification-btn {
-  padding: 12px 20px;
-  font-size: 18px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  min-width: 150px;
-  height: 44px;
-}
-
-.confirm-verification-btn:disabled {
-  background-color: #ccc;
-}
-
-/* 주소 검색 버튼 정렬 */
-.address-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* 주소 입력란 */
-.address-input {
-  flex: 1;
-  min-width: 200px;
-}
-
-/* 주소 검색 버튼 */
-.search-btn {
-  padding: 12px 20px;
-  font-size: 18px;
-  background-color: #1a1a1a;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  min-width: 150px;
-  height: 44px;
-}
-
-.search-btn:hover {
-  background-color: #333;
-}
-
-/* 비밀번호 오류 메시지 */
-.error-text {
-  color: red;
-  font-size: 16px;
-  margin-top: 5px;
-}
-
-/* 회원 탈퇴 버튼 스타일 */
-.withdraw-button {
-  background: none;
-  border: none;
-  color: #999;
-  font-size: 16px;
-  cursor: pointer;
-  transition: color 0.2s ease-in-out;
-  text-decoration: underline;
-  margin-top: 50px;
-}
-
-.withdraw-button:hover {
-  color: #333;
-}
+    background: none; /* 배경색 제거 */
+    width: 100%;
+    max-width: none; /* 최대 너비 제한 없음 */
+    padding: 30px;
+    margin: 0 auto;
+  }
+  
+  /* ✅ 제목 스타일 */
+  .edit-profile-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* ✅ 폼 요소 그룹 */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  /* ✅ 입력 필드 스타일 */
+  .form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  
+  /* ✅ 버튼 컨테이너 */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  /* ✅ 수정 버튼 */
+  .mypage-button {
+    width: 100%;
+    height: 44px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .mypage-button:hover {
+    background-color: #333;
+  }
+  
+  /* ✅ 취소하기 버튼 */
+  .cancel-button {
+    width: 48%;
+    height: 44px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .cancel-button:hover {
+    background-color: #5a6268;
+  }
+  
+  /* ✅ 생일 입력란과 삭제 버튼을 같은 줄에 배치 */
+  .birthdate-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  /* ✅ 생일 입력 필드 */
+  .birthdate-container .form-input {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  /* ✅ 삭제 버튼 */
+  .delete-birthdate-btn {
+    min-width: 100px;
+    height: 44px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .delete-birthdate-btn:hover {
+    background-color: #c82333;
+  }
+  
+  /* ✅ 이메일 입력 컨테이너 */
+  .email-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+  
+  /* ✅ 이메일 입력 필드 */
+  .email-id,
+  .email-select,
+  .email-custom {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: white;
+  }
+  
+  /* ✅ 이메일 인증 요청 버튼 */
+  .verification-btn {
+    min-width: 150px;
+    height: 44px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .verification-btn:disabled {
+    background-color: #ccc;
+  }
+  
+  /* ✅ 이메일 인증 코드 입력란 */
+  .email-verification-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+    flex-wrap: nowrap;
+  }
+  
+  /* ✅ 인증 코드 입력 필드 */
+  .email-code {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  
+  /* ✅ 이메일 인증 확인 버튼 */
+  .confirm-verification-btn {
+    min-width: 150px;
+    height: 44px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .confirm-verification-btn:disabled {
+    background-color: #ccc;
+  }
+  
+  /* ✅ 주소 검색 버튼 정렬 */
+  .address-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  /* ✅ 주소 입력란 */
+  .address-input {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  /* ✅ 주소 검색 버튼 */
+  .search-btn {
+    min-width: 150px;
+    height: 44px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .search-btn:hover {
+    background-color: #333;
+  }
+  
+  /* ✅ 비밀번호 오류 메시지 */
+  .error-text {
+    color: red;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  
+  /* ✅ 회원 탈퇴 버튼 */
+  .withdraw-button {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 50px;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .withdraw-button:hover {
+    color: #333;
+  }
+  
+ 
+  /* ✅ 작은 데스크탑 (1024px 이하) */
+@media (max-width: 1024px) {
+    .edit-profile-section {
+      padding: 20px;
+    }
+  
+    .email-input-container,
+    .email-verification-container,
+    .address-container {
+      flex-wrap: wrap;
+    }
+  
+    .verification-btn,
+    .confirm-verification-btn,
+    .search-btn {
+      min-width: 130px;
+      font-size: 16px;
+    }
+  }
+  
+  /* ✅ 태블릿 (768px 이하) */
+  @media (max-width: 768px) {
+    .edit-profile-section {
+      padding: 15px;
+    }
+  
+    .form-input,
+    .email-id,
+    .email-select,
+    .email-custom,
+    .email-code,
+    .address-input {
+      min-width: 180px;
+      font-size: 16px;
+      padding: 10px;
+    }
+  
+    .verification-btn,
+    .confirm-verification-btn,
+    .delete-birthdate-btn,
+    .search-btn {
+      min-width: 120px;
+      font-size: 16px;
+      height: 40px;
+      padding: 10px 15px;
+    }
+  
+    .mypage-button,
+    .cancel-button {
+      font-size: 16px;
+      height: 40px;
+      padding: 10px 15px;
+    }
+  
+    .withdraw-button {
+      font-size: 14px;
+    }
+  }
+  
+  /* ✅ 작은 모바일 (600px 이하) */
+  @media (max-width: 600px) {
+    .email-input-container,
+    .email-verification-container,
+    .address-container {
+      flex-direction: column;
+      gap: 5px;
+    }
+  
+    .verification-btn,
+    .confirm-verification-btn,
+    .search-btn,
+    .delete-birthdate-btn {
+      width: 100%;
+    }
+  
+    .mypage-button,
+    .cancel-button {
+      width: 100%;
+    }
+  
+    .withdraw-button {
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+  
+  /* ✅ 초소형 화면 (400px 이하) */
+  @media (max-width: 400px) {
+    .edit-profile-section {
+      padding: 10px;
+    }
+  
+    .form-input,
+    .email-id,
+    .email-select,
+    .email-custom,
+    .email-code,
+    .address-input {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .verification-btn,
+    .confirm-verification-btn,
+    .delete-birthdate-btn,
+    .search-btn {
+      font-size: 14px;
+      height: 38px;
+      padding: 8px 12px;
+    }
+  
+    .mypage-button,
+    .cancel-button {
+      font-size: 14px;
+      height: 38px;
+      padding: 8px 12px;
+    }
+  
+    .withdraw-button {
+      font-size: 12px;
+    }
+  }
+  

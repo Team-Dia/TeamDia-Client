@@ -366,7 +366,7 @@ const BestProduct = () => {
                         onLike(product.productSeq); // 좋아요 기능 수행
                       }}
                     >
-                      <img
+                      {/* <img
                         src={`http://localhost:8070/product_images/${
                           likeList.some(
                             (product_like) =>
@@ -384,7 +384,7 @@ const BestProduct = () => {
                             : "Like"
                         }
                         className="like-icon"
-                      />
+                      /> */}
                     </div>
                   </div>
                   {/* 마우스 오버 시 상품 바로가기 텍스트 */}

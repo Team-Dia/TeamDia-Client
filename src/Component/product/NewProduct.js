@@ -346,7 +346,7 @@ const NewProduct = () => {
                 </Link>
                 
                 {/* 좋아요 버튼을 이미지 위에 절대 위치로 배치 */}
-                <div 
+                {/* <div 
                   className="like-button" 
                   onClick={(e) => { 
                     e.stopPropagation();  // Link 클릭을 막아서 상세페이지로 이동하지 않게 함
@@ -362,7 +362,7 @@ const NewProduct = () => {
                     alt={likeList.some(product_like => product_like.productSeq === product.productSeq) ? 'Liked' : 'Like'}
                     className="like-icon"
                   />
-                </div>
+                </div> */}
               </div>
   
               {/* 마우스 오버 시 상품 바로가기 텍스트 */}

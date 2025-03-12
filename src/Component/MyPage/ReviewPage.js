@@ -8,7 +8,7 @@ import "./ReviewPage.css";
 import jaxios from "../../util/jwtUtil";
 
 const ReviewPage = () => {
-  const { orderSeq, productSeq } = useParams();
+  const { orderSeq, productSeq, orderdetailSeq } = useParams();
   console.log("✅ useParams()에서 가져온 orderSeq:", orderSeq);
   console.log("✅ useParams()에서 가져온 productSeq:", productSeq);
   const navigate = useNavigate();
@@ -87,6 +87,7 @@ const ReviewPage = () => {
     formData.append("reviewContent", reviewContent.trim());
     formData.append("reviewRating", Number(reviewRating));
     formData.append("memberId", String(memberId));
+    formData.append("orderdetailSeq",orderdetailSeq)
 
     // 이미지 파일들 추가
     reviewImages.forEach((file) => {

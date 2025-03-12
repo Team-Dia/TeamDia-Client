@@ -1,114 +1,266 @@
 /* ✅ 전체 레이아웃 조정 */
 .search-results-page {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px 0;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 0;
 }
 
 /* ✅ 검색 필터 바 (상단 필터) */
 .search-filter-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 20px; /* 필터 아래 여백 추가 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* 🔹 화면이 작아지면 자동 줄바꿈 */
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 
 .search-filter-bar select {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: white;
-  cursor: pointer;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
 }
 
-/* ✅ 검색 결과 리스트 */
+/* ✅ 검색 결과 컨테이너 - 중앙 정렬 유지 */
+.search-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* 🔹 기본적으로 검색 결과는 위에서부터 정렬 */
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px;
+    min-height: calc(100vh - 300px);
+}
+
+/* ✅ 검색 결과 없을 때 메시지 중앙 정렬 */
+.no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.no-results-message {
+    font-size: 18px;
+    color: #777;
+    text-align: center;
+    margin-top: 50px; /* 🔹 검색 결과 리스트와 적절한 간격 유지 */
+}
+
+/* ✅ 검색 결과 리스트 정렬 - 일정한 공백 유지 */
 .searchProduct-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  justify-content: center;
-  max-width: 100%;
-  margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding-top: 30px; /* 🔹 검색 결과 위 여백 고정 */
+}
+
+/* ✅ 검색 결과가 없을 때 리스트 숨김 */
+.no-results .searchProduct-list {
+    display: none;
 }
 
 /* ✅ 제품 카드 스타일 */
 .searchProduct-card {
-  background: white;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .searchProduct-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* ✅ 제품 이미지 스타일 */
 .searchProduct-card .searchImage-container img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
 }
 
 /* ✅ 제품 상세 정보 */
 .searchProduct-card .product-details {
-  padding: 10px;
-  text-align: center;
+    padding: 10px;
+    text-align: center;
 }
 
 .searchProduct-card .product-details h4 {
-  font-size: 18px;
-  margin: 5px 0;
+    font-size: 18px;
+    margin: 5px 0;
 }
 
 .searchProduct-card .product-price {
-  color: #d32f2f;
-  font-weight: bold;
-  font-size: 16px;
+    color: #d32f2f;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 /* ✅ 정렬 드롭다운 스타일 */
 .sort-dropdown {
-  background: white;
-  border: 1px solid #ddd;
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 15px;
-  transition: border 0.3s ease;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: border 0.3s ease;
 }
 
 .sort-dropdown:hover {
-  border-color: #888;
+    border-color: #888;
 }
 
 /* ✅ 별점 스타일 */
 .display-rating {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  margin-top: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 5px;
 }
 
 .display-rating .star {
-  color: #ffd700;
-  font-size: 18px;
-  margin-right: 2px;
+    color: #ffd700;
+    font-size: 18px;
+    margin-right: 2px;
 }
 
 .display-rating .star.empty {
-  color: #ccc;
+    color: #ccc;
 }
 
 .review-count {
-  font-size: 14px;
-  color: #555;
-  margin-left: 5px;
+    font-size: 14px;
+    color: #555;
+    margin-left: 5px;
+}
+
+/* ✅ 검색 결과 제목 정렬 */
+.search-results-title-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-results-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+/* 💻 화면 너비 1200px 이하 */
+@media (max-width: 1200px) {
+    .search-results-page {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-filter-bar {
+        width: 100%;
+        text-align: center;
+    }
+
+    .searchProduct-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+/* 📱 태블릿 (768px 이하) */
+@media (max-width: 768px) {
+    .search-results-page {
+        gap: 10px;
+    }
+
+    .search-results-title {
+        font-size: 20px;
+    }
+
+    /* 🔹 검색 필터 바 줄바꿈 방지 및 크기 축소 */
+    .search-filter-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap; /* 🔹 자동 줄바꿈 방지 */
+        padding: 8px;
+    }
+
+    /* 🔹 검색 필터 바 내부 요소 크기 축소 */
+    .search-filter-bar select {
+        padding: 5px; /* 드롭다운 크기 줄이기 */
+        font-size: 12px;
+        width: 45%; /* 🔹 너비 조정하여 가로 정렬 유지 */
+    }
+
+    /* 🔹 검색 결과 리스트 조정 */
+    .searchProduct-list {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+        padding-top: 20px;
+    }
+
+    .searchProduct-card .searchImage-container img {
+        height: 250px;
+    }
+
+    .searchProduct-card .product-details h4 {
+        font-size: 16px;
+    }
+
+    .searchProduct-card .product-price {
+        font-size: 14px;
+    }
+}
+
+/* 📱 모바일 (480px 이하) */
+@media (max-width: 480px) {
+    .search-results-title {
+        font-size: 18px;
+    }
+
+    /* 🔹 검색 필터 바 줄바꿈 방지 및 크기 축소 */
+    .search-filter-bar {
+        padding: 4px 8px;
+        font-size: 10px;
+        flex-wrap: nowrap; /* 🔹 자동 줄바꿈 방지 */
+    }
+
+    .search-filter-bar select {
+        padding: 4px;
+        font-size: 10px;
+        width: 45%; /* 🔹 드롭다운 너비 조정 */
+    }
+
+    /* 🔹 검색 결과 리스트 조정 */
+    .searchProduct-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+        padding-top: 15px;
+    }
+
+    .searchProduct-card .searchImage-container img {
+        height: 200px;
+    }
+
+    .searchProduct-card .product-details h4 {
+        font-size: 14px;
+    }
+
+    .searchProduct-card .product-price {
+        font-size: 12px;
+    }
 }
