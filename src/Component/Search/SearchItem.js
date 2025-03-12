@@ -29,30 +29,6 @@ const SearchItem = ({ product }) => {
     setIsLiked(product.isLiked || false);
   }, [product]);
 
-  const handleLikeToggle = async () => {
-    if (!user?.memberId) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-      return;
-    }
-
-    try {
-      if (isLiked) {
-        await jaxios.delete(
-          `/api/post/removeLike?memberId=${user.memberId}&productSeq=${product.productSeq}`
-        );
-      } else {
-        await jaxios.post(`/api/post/addLike`, {
-          memberId: user.memberId,
-          productSeq: product.productSeq,
-        });
-      }
-      setIsLiked(!isLiked);
-      console.log(`❤️ 좋아요 변경: ${product.productName} | 상태: ${!isLiked}`);
-    } catch (error) {
-      console.error("❌ 좋아요 처리 중 오류 발생:", error);
-    }
-  };
 
   return (
     <div
@@ -62,24 +38,11 @@ const SearchItem = ({ product }) => {
       <div className="display-image">
         <img
           src={getImageUrl(product.productImage)} // 🔹 수정됨: S3 URL 적용
-          // src={
-          //   product.productImage
-          //     ? `http://localhost:8070/product_images/${product.productImage}`
-          //     : defaultPlaceholder
-          // }
           alt={product.productName}
           className="display-image"
         />
       </div>
 
-      {/* 좋아요 버튼 */}
-      <FaHeart
-        className={`product-like-heart ${isLiked ? "liked" : ""}`}
-        onClick={(e) => {
-          e.stopPropagation();
-          handleLikeToggle();
-        }}
-      />
 
       <div className="display-details">
         {/* ⭐ 별점 및 리뷰 개수 표시 */}
