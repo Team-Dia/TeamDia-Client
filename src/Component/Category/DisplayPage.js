@@ -51,6 +51,7 @@ const DisplayPage = () => {
   const loginUser = useSelector((state) => state.user);
 
   const categoryData = categoryConfig[category];
+  
 
   // ✅ 기존 데이터와 S3 데이터를 구분하여 이미지 표시
   const getImageUrl = (imagePath) => {
@@ -156,7 +157,10 @@ const DisplayPage = () => {
     newSearchParams.delete(filterKey);
     navigate(`/${category}?${newSearchParams.toString()}`);
   };
+  // ✅ getProductList 함수 추가 (파일 하단에 위치)
 
+  
+  
   return (
     <div className="display-wrapper">
       <ProductSidebar setPrevCategory={setPrevCategory} />
@@ -287,3 +291,4 @@ const DisplayPage = () => {
 };
 
 export default DisplayPage;
+
