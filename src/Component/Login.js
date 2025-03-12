@@ -20,7 +20,7 @@ const Login = () => {
   console.log("🟢 [Login.js] Redux 로그인 상태 확인:", loginUser);
 
   const KAKAO_AUTH_URL =
-    "https://kauth.kakao.com/oauth/authorize?client_id=6ee1731553a983102257108c54fe99bc&redirect_uri=http://43.201.136.44:3000/login&response_type=code";
+    "https://kauth.kakao.com/oauth/authorize?client_id=6ee1731553a983102257108c54fe99bc&redirect_uri=http://43.201.136.44/login&response_type=code";
 
   const handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
