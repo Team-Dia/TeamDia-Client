@@ -34,6 +34,18 @@ const ProducDetail = () => {
     3: ["옐로우골드", "로즈골드", "화이트골드"], // 귀걸이 (category_id: 3)
     4: ["17cm", "18cm", "19cm"] // 팔찌 (category_id: 4)
   };
+
+  // ✅  기존 데이터와 S3 데이터를 구분하여 이미지 표시
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return "/images/no-image.png"; // 기본 이미지 처리
+  
+    // ✅ S3 URL인지 확인
+    if (imagePath.startsWith("http")) {
+      return imagePath;
+    }
+    // ✅ 기존 로컬 서버 이미지 경로 지원 (product_images 디렉토리)
+    return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
+  };
   
   const handleOptionChange = (e) => {
     const option = e.target.value;
