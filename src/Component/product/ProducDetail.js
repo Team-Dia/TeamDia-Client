@@ -680,25 +680,26 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                   <>
                     {product.productImage && (
                     <SwiperSlide key={`${idx}-1`} className={activeIndex === idx ? 'active' : ''}>
-                      <img src={`http://localhost:8070/product_images/${product.productImage}`} />
+                      
+                      <img src={getImageUrl(product.productImage)} />
                     </SwiperSlide>
                   )}
 
                   {product.productImage2 && (
                     <SwiperSlide key={`${idx}-2`} className={activeIndex === idx + 1 ? 'active' : ''}>
-                      <img src={`http://localhost:8070/product_images/${product.productImage2}`} />
+                      <img src={getImageUrl(product.productImage2)} />
                     </SwiperSlide>
                   )}
 
                   {product.productImage3 && (
                     <SwiperSlide key={`${idx}-3`} className={activeIndex === idx + 2 ? 'active' : ''}>
-                      <img src={`http://localhost:8070/product_images/${product.productImage3}`} />
+                      <img src={getImageUrl(product.productImage3)} />
                     </SwiperSlide>
                   )}
 
                   {product.productImage4 && (
                     <SwiperSlide key={`${idx}-4`} className={activeIndex === idx + 3 ? 'active' : ''}>
-                      <img src={`http://localhost:8070/product_images/${product.productImage4}`} />
+                      <img src={getImageUrl(product.productImage4)} />
                     </SwiperSlide>
                   )}
                 </>
@@ -794,13 +795,13 @@ const { productId } = useParams(); // URL에서 productId 가져오기
                     {
                         likeList.some(product_like => loginUser.memberId === product_like.memberId) ? (
                             <img
-                                src={`http://localhost:8070/product_images/delike.png`}  
+                                src= {`https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/delike.png`} 
                                 onClick={() => { onLike() }} 
                                 alt="Like"
                             />
                         ) : (
                             <img 
-                                src={`http://localhost:8070/product_images/like.png`} 
+                                src= {`https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/like.png`} 
                                 onClick={() => { onLike() }} 
                                 alt="Like" 
                             />
