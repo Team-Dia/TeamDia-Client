@@ -48,8 +48,6 @@ const DisplayPage = () => {
   const [sortBy, setSortBy] = useState(searchParams.get("sortBy") || "");
   const [isLoading, setIsLoading] = useState(false);
   const [prevCategory, setPrevCategory] = useState(category); // ✅ 이전 카테고리 저장
-  const [likeList, setLikeList] = useState([]); // ✅ 찜한 상품 목록
-
   const loginUser = useSelector((state) => state.user);
 
   const categoryData = categoryConfig[category];
@@ -66,20 +64,6 @@ const DisplayPage = () => {
     return `https://teamdia-file.s3.ap-northeast-2.amazonaws.com/product_images/${imagePath}`;
   };
 
-  // ✅ 로그인한 사용자의 찜 목록 불러오기
-  useEffect(() => {
-    if (loginUser && loginUser.memberId) {
-      axios
-        .get(`/api/post/getUserLikes`, {
-          params: { memberId: loginUser.memberId },
-        })
-        .then((response) => {
-          setLikeList(response.data.map((item) => item.productSeq));
-        })
-        .catch((error) => console.error("좋아요 목록 불러오기 오류:", error));
-    }
-  }, [loginUser]);
-
   useEffect(() => {
     setIsLoading(true);
     const searchParams = new URLSearchParams(location.search);
@@ -92,7 +76,7 @@ const DisplayPage = () => {
           params: {
             categoryId: categoryData.id,
             subCategory:
-              subCategoryFromURL !== "전체" ? subCategoryFromURL : undefined, // ✅ "전체"이면 필터링 없이 가져오기
+              subCategoryFromURL !== "전체" ? subCategoryFromURL : undefined,
           },
         })
         .then((result) => {
@@ -131,7 +115,6 @@ const DisplayPage = () => {
     const searchParams = new URLSearchParams(location.search);
     const newSortBy = searchParams.get("sortBy") || "";
 
-    // ✅ minPrice=0도 올바르게 인식되도록 수정
     const minPrice = searchParams.get("minPrice") !== null ? Number(searchParams.get("minPrice")) : 0;
     const maxPrice = searchParams.get("maxPrice") !== null ? Number(searchParams.get("maxPrice")) : Infinity;
 
@@ -141,14 +124,11 @@ const DisplayPage = () => {
   
     let updatedItems = [...itemList];
   
-
-  // ✅ 가격 필터 적용 (최소값이 0원 이상, 최대값이 지정된 경우)
   updatedItems = updatedItems.filter(
     (item) =>
       item.productSalePrice >= minPrice && item.productSalePrice <= maxPrice
   );
   
-    // ✅ 정렬 적용
     if (newSortBy === "rating") {
       updatedItems.sort((a, b) => b.averageRating - a.averageRating);
     } else if (newSortBy === "reviewCount") {
@@ -162,8 +142,6 @@ const DisplayPage = () => {
     setFilteredItems(updatedItems);
   }, [location.search, itemList]);
   
-
-  // ⭐ 정렬 변경 시 `searchParams` 반영
   const handleSortChange = (event) => {
     const sortOption = event.target.value;
     setSortBy(sortOption);
@@ -175,21 +153,19 @@ const DisplayPage = () => {
 
   const removeFilter = (filterKey) => {
     const newSearchParams = new URLSearchParams(location.search);
-    newSearchParams.delete(filterKey); // 해당 필터 삭제
+    newSearchParams.delete(filterKey);
     navigate(`/${category}?${newSearchParams.toString()}`);
   };
 
   return (
     <div className="display-wrapper">
-      {/* ✅ 이전 카테고리를 저장하도록 `setPrevCategory` 전달 */}
       <ProductSidebar setPrevCategory={setPrevCategory} />
-
       <div className="display-container">
         {isLoading ? (
           <LoadingScreen
             onCancel={() => {
               if (prevCategory) {
-                navigate(`/${prevCategory}`); // ✅ 취소 시 이전 카테고리로 복귀
+                navigate(`/${prevCategory}`);
               }
               setIsLoading(false);
             }}
@@ -203,7 +179,6 @@ const DisplayPage = () => {
             </div>
 
             <div className="display-filter-box">
-              {/* <h3 className="display-filter-title">선택된 필터:</h3> */}
               {/* ✅ 카테고리 필터 */}
               <div className="display-filter-item">
                 <span className="display-filter-label">카테고리:</span>
@@ -214,7 +189,6 @@ const DisplayPage = () => {
                   onClick={() => removeFilter("subCategory")}
                 />
               </div>
-
               {/* ✅ 가격 필터 */}
               {searchParams.get("minPrice") && searchParams.get("maxPrice") && (
                 <div className="display-filter-item">
@@ -230,7 +204,6 @@ const DisplayPage = () => {
                   />
                 </div>
               )}
-
               {/* ✅ 정렬 필터 */}
               {sortBy && (
                 <div className="display-filter-item">
@@ -256,7 +229,6 @@ const DisplayPage = () => {
                 </div>
               )}
             </div>
-
             <div className="display-product-list">
               {filteredItems.length > 0 ? (
                 filteredItems.map((product) => (
@@ -293,7 +265,6 @@ const DisplayPage = () => {
                           ({product.reviewCount})
                         </span>
 
-                       
                       </div>
                       <h4>{product.productName}</h4>
                       <p className="display-price">
