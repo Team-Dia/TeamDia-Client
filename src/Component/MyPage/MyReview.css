@@ -162,6 +162,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /* 🔹 작성자 아바타 */
@@ -194,18 +195,26 @@
 
 /* 🔹 리뷰 평점 */
 .review-rating {
+  display: flex;
+  align-items: center;
   font-size: 18px;
   color: #ffcc00;
+  margin-top: 5px;
 }
 
 /* 🔹 리뷰 내용 */
 .review-content-box {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
   padding: 15px;
   background-color: #f8f8f8;
   border-radius: 8px;
+  margin-top: 15px;
 }
 
-.review-text {
+.myreview-text {
   font-size: 16px;
   color: #333;
   line-height: 1.5;
