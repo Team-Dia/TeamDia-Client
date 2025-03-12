@@ -179,37 +179,6 @@ const DisplayPage = () => {
     navigate(`/${category}?${newSearchParams.toString()}`);
   };
 
-  // ✅ 찜(좋아요) 추가/취소 기능
-  const toggleLike = async (productSeq) => {
-    if (!loginUser || !loginUser.memberId) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-      return;
-    }
-
-    try {
-      if (likeList.includes(productSeq)) {
-        // ✅ 좋아요 취소
-        await axios.delete(`/api/post/removeLike`, {
-          params: {
-            memberId: loginUser.memberId,
-            productSeq: productSeq,
-          },
-        });
-        setLikeList(likeList.filter((id) => id !== productSeq));
-      } else {
-        // ✅ 좋아요 추가
-        await axios.post(`/api/post/addLike`, {
-          memberId: loginUser.memberId,
-          productSeq: productSeq,
-        });
-        setLikeList([...likeList, productSeq]);
-      }
-    } catch (error) {
-      console.error("좋아요 처리 오류:", error);
-    }
-  };
-
   return (
     <div className="display-wrapper">
       {/* ✅ 이전 카테고리를 저장하도록 `setPrevCategory` 전달 */}
@@ -324,20 +293,7 @@ const DisplayPage = () => {
                           ({product.reviewCount})
                         </span>
 
-                        {/* ✅ 리뷰 개수 오른편에 찜(하트) 버튼 추가 */}
-                        <span
-                          className="display-like-icon"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleLike(product.productSeq);
-                          }}
-                        >
-                          {likeList.includes(product.productSeq) ? (
-                            <FaHeart className="display-liked" />
-                          ) : (
-                            <FaRegHeart className="display-unliked" />
-                          )}
-                        </span>
+                       
                       </div>
                       <h4>{product.productName}</h4>
                       <p className="display-price">

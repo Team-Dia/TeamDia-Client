@@ -1,59 +1,66 @@
+/* 주문 페이지 컨테이너 */
 .order-container {
-  display: flex;
-  width: 50%;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin: 50px auto 0;
+  }
+  /* 기본 h1 스타일 (주문 페이지에서만 적용) */
+.order-container h1 {
+    font-size: 24px; /* 기본 크기 */
+    font-weight: bold;
 }
-
-.order-header {
+  
+  .cartlist-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  
+  .cartlist-header::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+  }
+  
+  .cartlist-header-right {
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .cartlist-header-right p {
+    font-weight: bold;
+  }
+  
+  
+ .cartlist-product-header {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  margin: 30px 0 20px;
 }
 
-.order-header::after {
+.cartlist-product-header::after {
   content: "";
   position: absolute;
-  bottom: -30px; /* 3px 아래로 위치 조정 */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: black; /* 선 색 */
-}
-
-.order-header-right {
-  display: flex;
-  width: 50%;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.order-header-right p {
-  font-weight: bold;
-}
-
-.order-product-header {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
-}
-
-.order-product-header::after {
-  content: "";
-  position: absolute;
-  bottom: -10px; /* 3px 아래로 위치 조정 */
+  bottom: -10px;
   left: 0;
   width: 100%;
   height: 1px;
   background-color: rgba(125, 125, 125, 0.1);
 }
 
-.order-product-right {
+.cartlist-product-right {
   width: 30%;
   display: flex;
   justify-content: space-between;
@@ -61,549 +68,490 @@
   margin-right: 40px;
 }
 
-.order-product-right p {
+.cartlist-product-right p {
   font-weight: bold;
   font-size: 17px;
 }
 
-.order-product-info {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
-}
-
-.order-product-info::after {
-  content: "";
-  position: absolute;
-  bottom: -30px; /* 3px 아래로 위치 조정 */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: rgba(125, 125, 125, 0.1);
-}
-
-.order-image-box {
-  display: flex;
-  width: 50%;
-  justify-content: flex-start;
-  /* align-items: center; */
-}
-
-.order-image-box img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
-
-.order-product-detail {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-  gap: 10px;
-}
-
-.order-info-right {
-  width: 30%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 33px;
-}
-
-.order-total-price {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 45px;
-}
-
-.order-info-detail {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 100px;
-  /* border: 1px solid red; */
-}
-
-.order-info-box {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
-.order-info-box::after {
-  content: "";
-  position: absolute;
-  top: -15px; /* 3px 아래로 위치 조정 */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: black;
-}
-
-.order-info-box h2 {
-  position: relative;
-  font-size: 27px;
-  font-weight: bold;
-}
-
-.order-info-box h2::after {
-  content: "";
-  position: absolute;
-  bottom: -10px; /* 3px 아래로 위치 조정 */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: rgba(125, 125, 125, 0.2);
-}
-
-.order-info-box p {
-  margin-top: 15px;
-  font-weight: 500;
-}
-
-.order-delivery {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  margin-top: 40px;
-}
-
-.input-wrapper-box {
-  display: flex;
-  position: relative;
-  width: 100%;
-  justify-content: space-between;
-  flex-direction: column;
-  /* border: 1px solid red; */
-}
-
-.input-delivery-box {
-  display: flex;
-  position: relative;
-  width: 100%;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 15px;
-  /* border: 1px solid red; */
-}
-
-.order-btn {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.input-wrapper-box button {
-  width: 50px;
-  height: 30px;
-  border: 1px solid black;
-  outline: none;
-  background: none;
-}
-
-.order-delivery h2::after {
-  content: "";
-  position: absolute;
-  top: -15px; /* 3px 아래로 위치 조정 */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: black;
-}
-
-.order-delivery input {
-  border: none;
-  outline: none;
-}
-
-.input-wrapper-box::after {
-  content: "";
-  position: absolute;
-  bottom: -15px; /* 3px 아래로 위치 조정 */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: rgba(125, 125, 125, 0.2);
-  transition: background-color 0.3s ease; /* 부드럽게 색상 전환 */
-}
-
-#input-info {
-  position: relative;
-  display: flex;
-  font-weight: bold;
-}
-
-#input-info::after {
-  content: "";
-  position: absolute;
-  top: -30px; /* 3px 아래로 위치 조정 */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: rgba(125, 125, 125, 0.2);
-}
-
-.order-final-price {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  height: 350px;
-  border: 1px solid black;
-  margin-left: 30px;
-  padding: 20px;
-}
-
-.order-final-price h3 {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.final-info {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
-}
-
-.final-detail {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.final-purchase {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
-}
-
-.final-purchase::after {
-  content: "";
-  position: absolute;
-  top: -20px; /* 3px 아래로 위치 조정 */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: rgba(125, 125, 125, 0.2);
-}
-
-.order-final-price h3 {
-  position: relative;
-  width: 100%;
-}
-
-.order-final-price h3::after {
-  content: "";
-  position: absolute;
-  bottom: -20px; /* 3px 아래로 위치 조정 */
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: black;
-}
-
-.delivery-checkbox {
-  position: relative;
-  display: flex;
-  align-items: center;
-  /* justify-content: space-between; */
-  margin-top: 30px;
-}
-
-/* 기본 체크박스 스타일 변경 */
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 1px solid rgb(229, 229, 229);
-  appearance: none;
-  outline: none;
-  cursor: pointer;
-  margin-right: 10px;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-  margin-top: 8px;
-}
-
-/* 체크박스를 선택했을 때의 스타일 */
-input[type="checkbox"]:checked {
-  background-color: #ca64f4;
-  border-color: #ca64f4;
-}
-
-.delivery-request-container {
-  width: 100%;
-}
-
-.dropdown {
-  padding: 10px;
-  margin: 10px 0;
-  width: 100%;
-  margin-top: 30px;
-  border: 1px solid rgba(125, 125, 125, 0.2);
-}
-
-.custom-input-container {
-  margin-top: 10px;
-}
-
-.custom-input-container input {
-  padding: 8px;
-  width: 100%;
-  max-width: 400px;
-}
-
-.selected-request {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-select:focus {
-  outline: none; /* 포커스 시 나타나는 테두리 제거 */
-}
-
-@media (max-width: 1200px) {
-  .order-container {
-    width: 80%;
-  }
-  
-  .order-header-right {
-    width: 60%;
-  }
-
-  .order-product-header {
-    margin-top: 30px;
-  }
-
-  .order-product-right {
-    width: 25%;
-  }
-
+  /* 상품 정보 */
   .order-product-info {
-    margin-top: 30px;
-  }
-
-  .order-image-box img {
-    width: 80px;
-    height: 80px;
-  }
-
-  .order-info-right {
-    width: 35%;
-  }
-
-  .order-total-price {
-    margin-top: 30px;
-  }
-
-  .order-info-detail {
-    flex-direction: column;
-    margin-top: 50px;
-  }
-
-  .order-info-box {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-  }
-
-  .order-info-box h2 {
-    font-size: 22px;
-  }
-
-  .order-delivery input {
-    padding-right: 1.5rem;
-  }
-
-  .order-delivery {
-    margin-top: 30px;
-  }
-
-  .order-final-price {
-    width: 60%;
-    margin-left: 20px;
-  }
-
-  .final-purchase {
-    margin-top: 30px;
-  }
-
-  .delivery-checkbox {
-    margin-top: 20px;
-  }
-
-  .dropdown {
-    margin-top: 20px;
-  }
-
-  .custom-input-container input {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-
-@media (max-width: 768px) {
-  .order-container {
-    width: 90%;
-  }
-
-  .order-header-right {
-    width: 70%;
-  }
-
-  .order-product-header {
-    margin-top: 20px;
-  }
-
-  .order-product-right {
-    width: 20%;
-  }
-
-  .order-product-info {
-    margin-top: 25px;
-  }
-
-  .order-image-box img {
-    width: 70px;
-    height: 70px;
-  }
-
-  .order-info-right {
-    width: 40%;
-  }
-
-  .order-total-price {
-    margin-top: 25px;
-  }
-
-  .order-info-detail {
-    flex-direction: column;
     margin-top: 40px;
   }
-
-  .order-info-box h2 {
-    font-size: 20px;
-  }
-
-  .order-delivery input {
-    padding-right: 1rem;
-  }
-
-  .order-final-price {
-    width: 70%;
-    margin-left: 20px;
-  }
-
-  .final-purchase {
-    margin-top: 25px;
-  }
-
-  .delivery-checkbox {
-    margin-top: 15px;
-  }
-
-  .dropdown {
-    margin-top: 15px;
-  }
-
-  .custom-input-container input {
+  
+  .order-product-info::after {
+    content: "";
+    position: absolute;
+    bottom: -30px;
+    left: 0;
     width: 100%;
-    max-width: 250px;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.1);
   }
-
-  button {
-    font-size: 14px;
-    height: 40px;
+  
+  /* 상품 이미지 */
+  .order-image-box {
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
   }
-}
-
-@media (max-width: 480px) {
-  .order-container {
-    width: 100%;
-  }
-
-  .order-header-right {
-    width: 80%;
-  }
-
-  .order-product-header {
-    margin-top: 15px;
-  }
-
-  .order-product-right {
-    width: 15%;
-  }
-
-  .order-product-info {
-    margin-top: 20px;
-    flex-direction: column;
-  }
-
+  
   .order-image-box img {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
   }
-
-  .order-info-right {
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .order-total-price {
-    margin-top: 20px;
-  }
-
-  .order-info-detail {
+  
+  /* 상품 상세 정보 */
+  .order-product-detail {
+    display: flex;
     flex-direction: column;
+    width: 100%;
+    margin-left: 20px;
+    gap: 10px;
+  }
+  
+  .order-info-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    margin-right: 33px;
+  }
+  
+  /* 총 주문 금액 */
+  .order-total-price {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 45px;
+  }
+  
+  /* 주문 정보 */
+  .order-info-detail {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 100px;
+  }
+  
+  .order-info-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .order-info-box::after {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+  }
+  
+  .order-info-box h2 {
+    position: relative;
+    font-size: 27px;
+    font-weight: bold;
+  }
+  
+  .order-info-box h2::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.2);
+  }
+  
+  .order-info-box p {
+    margin-top: 15px;
+    font-weight: 500;
+  }
+  
+  /* 배송 정보 */
+  .order-delivery {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 40px;
+  }
+  
+  .order-delivery h2::after {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+  }
+  
+  .order-delivery input {
+    border: none;
+    outline: none;
+  }
+  
+  /* 입력 박스 */
+  .input-wrapper-box,
+  .input-delivery-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    position: relative;
+  }
+  
+  .input-wrapper-box::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .input-wrapper-box button {
+    width: 50px;
+    height: 30px;
+    border: 1px solid black;
+    background: none;
+    outline: none;
+  }
+  
+  /* 최종 주문 가격 */
+  .order-final-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    height: 350px;
+    padding: 20px;
+    border: 1px solid black;
+    margin-left: 30px;
+  }
+  
+  .order-final-price h3 {
+    font-size: 22px;
+    font-weight: bold;
+    position: relative;
+    width: 100%;
+  }
+  
+  .order-final-price h3::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+  }
+  
+  /* 결제 정보 */
+  .final-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 40px;
+  }
+  
+  .final-detail {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  .final-purchase {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+    position: relative;
+  }
+  
+  .final-purchase::after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(125, 125, 125, 0.2);
+  }
+  
+  /* 체크박스 스타일 */
+  .delivery-checkbox {
+    display: flex;
+    align-items: center;
     margin-top: 30px;
   }
-
-  .order-info-box h2 {
-    font-size: 18px;
+  
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgb(229, 229, 229);
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    margin: 8px 10px 0 0;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
-
-  .order-delivery input {
-    padding-right: 1rem;
+  
+  input[type="checkbox"]:checked {
+    background-color: #ca64f4;
+    border-color: #ca64f4;
   }
-
-  .order-final-price {
+  
+  /* 배송 요청 사항 */
+  .delivery-request-container {
     width: 100%;
-    margin-left: 0;
   }
-
-  .final-purchase {
-    margin-top: 20px;
-  }
-
-  .delivery-checkbox {
-    margin-top: 10px;
-  }
-
+  
   .dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-top: 30px;
+    border: 1px solid rgba(125, 125, 125, 0.2);
+  }
+  
+  .custom-input-container {
     margin-top: 10px;
   }
-
+  
   .custom-input-container input {
     width: 100%;
-    max-width: 200px;
+    max-width: 400px;
+    padding: 8px;
   }
-
-  button {
-    font-size: 12px;
-    height: 35px;
+  
+  .selected-request {
+    margin-top: 10px;
+    font-weight: bold;
   }
-}
-
+  
+  /* 포커스 효과 */
+  select:focus {
+    outline: none;
+  }
+  
+  /* 화면 너비 1200px 이하 */
+@media (max-width: 1200px) {
+    .order-container {
+      width: 80%;
+    }
+  
+    .order-header-right {
+      width: 60%;
+    }
+  
+    .order-product-header {
+      margin-top: 30px;
+    }
+  
+    .order-product-right {
+      width: 25%;
+    }
+  
+    .order-product-info {
+      margin-top: 30px;
+    }
+  
+    .order-image-box img {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .order-info-right {
+      width: 35%;
+    }
+  
+    .order-total-price {
+      margin-top: 30px;
+    }
+  
+    .order-info-detail {
+      flex-direction: column;
+      margin-top: 50px;
+    }
+  
+    .order-info-box h2 {
+      font-size: 22px;
+    }
+  
+    .order-delivery {
+      margin-top: 30px;
+    }
+  
+    .order-final-price {
+      width: 60%;
+      margin-left: 20px;
+    }
+  
+    .final-purchase {
+      margin-top: 30px;
+    }
+  
+    .delivery-checkbox {
+      margin-top: 20px;
+    }
+  
+    .dropdown {
+      margin-top: 20px;
+    }
+  
+    .custom-input-container input {
+      max-width: 300px;
+    }
+  }
+  
+  /* 화면 너비 768px 이하 */
+  @media (max-width: 768px) {
+    .order-container {
+      width: 90%;
+    }
+  
+    .order-header-right {
+      width: 70%;
+    }
+  
+    .order-product-header {
+      margin-top: 20px;
+    }
+  
+    .order-product-right {
+      width: 20%;
+    }
+  
+    .order-product-info {
+      margin-top: 25px;
+    }
+  
+    .order-image-box img {
+      width: 70px;
+      height: 70px;
+    }
+  
+    .order-info-right {
+      width: 40%;
+    }
+  
+    .order-total-price {
+      margin-top: 25px;
+    }
+  
+    .order-info-box h2 {
+      font-size: 20px;
+    }
+  
+    .order-final-price {
+      width: 70%;
+      margin-left: 20px;
+    }
+  
+    .final-purchase {
+      margin-top: 25px;
+    }
+  
+    .delivery-checkbox {
+      margin-top: 15px;
+    }
+  
+    .dropdown {
+      margin-top: 15px;
+    }
+  
+    .custom-input-container input {
+      max-width: 250px;
+    }
+  
+    button {
+      font-size: 14px;
+      height: 40px;
+    }
+  }
+  
+  /* 화면 너비 480px 이하 */
+  @media (max-width: 480px) {
+    .order-container {
+      width: 100%;
+    }
+  
+    .order-header-right {
+      width: 80%;
+    }
+  
+    .order-product-header {
+      margin-top: 15px;
+    }
+  
+    .order-product-right {
+      width: 15%;
+    }
+  
+    .order-product-info {
+      margin-top: 20px;
+      flex-direction: column;
+    }
+  
+    .order-image-box img {
+      width: 60px;
+      height: 60px;
+    }
+  
+    .order-info-right {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    .order-total-price {
+      margin-top: 20px;
+    }
+  
+    .order-info-box h2 {
+      font-size: 18px;
+    }
+  
+    .order-final-price {
+      width: 100%;
+      margin-left: 0;
+    }
+  
+    .final-purchase {
+      margin-top: 20px;
+    }
+  
+    .delivery-checkbox {
+      margin-top: 10px;
+    }
+  
+    .dropdown {
+      margin-top: 10px;
+    }
+  
+    .custom-input-container input {
+      max-width: 200px;
+    }
+  
+    button {
+      font-size: 12px;
+      height: 35px;
+    }
+  }
+  

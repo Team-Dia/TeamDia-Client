@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import jaxios from "../../util/jwtUtil";
 import "./OrderList.css";
 
+
 const OrderList = () => {
   const [formData, setFormData] = useState({
     memberAddress1: "",
@@ -345,38 +346,33 @@ const OrderList = () => {
 
   return (
     <div className="order-container">
-      <div className="order-header">
-        <h1>결제하기</h1>
-        <div className="order-header-right">
-          <p
-            style={{
-              display: "flex",
-              alignItems: "center",
-              color: " rgb(155, 155, 155)",
-            }}
-          >
-            장바구니&nbsp;<i className="ri-play-circle-fill"></i>
-          </p>
-          &nbsp;&nbsp;
-          <p style={{ display: "flex", alignItems: "center" }}>
-            결제하기&nbsp;<i className="ri-play-circle-fill"></i>
-          </p>
-          &nbsp;&nbsp;
-          <p style={{ color: " rgb(155, 155, 155)" }}>주문완료</p>
-        </div>
-      </div>
+      <div className="cartlist-header">
+  <h1>결제하기</h1>
+  <div className="cartlist-header-right">
+    <p style={{ display: "flex", alignItems: "center" }}>
+      장바구니&nbsp;<i className="ri-play-circle-fill"></i>
+    </p>
+    &nbsp;&nbsp;
+    <p style={{ display: "flex", alignItems: "center", color: "black" }}>
+      결제하기&nbsp;<i className="ri-play-circle-fill"></i>
+    </p>
+    &nbsp;&nbsp;
+    <p style={{ color: "rgb(155, 155, 155)" }}>주문완료</p>
+  </div>
+</div>
 
       {isLoading && <p>주문을 처리하는 중...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <div className="order-product-header">
-        <p style={{ fontSize: "25px", fontWeight: "bold" }}>구매 상품</p>
-        <div className="order-product-right">
-          <p>수량</p>
-          <p>할인혜택</p>
-          <p>주문금액</p>
+      <div className="cartlist-product-header">
+        <p style={{ fontSize: "22px", fontWeight: "bold" }}>상품 정보</p>
+        <div className="cartlist-product-right">
+            <p>수량</p>
+            <p>할인혜택</p>
+            <p>주문금액</p>
         </div>
-      </div>
+        </div>
+
 
       {orderItems.map((item, index) => (
         <div className="order-product-info" key={index}>

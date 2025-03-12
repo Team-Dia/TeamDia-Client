@@ -18,6 +18,7 @@
     margin-bottom: 50px;
   }
   
+  
   .cartlist-header::after {
     content: "";
     position: absolute;
