@@ -29,7 +29,7 @@ const MemberRegister = () => {
     });
     // 이메일 인증 및 카카오 로그인
     const BASE_URL = process.env.NODE_ENV === "production" 
-    ? "http://43.201.136.44:8070"  // ✅ AWS 배포 환경에서 백엔드 API 주소
+    ? "http://43.201.136.44"  // ✅ AWS 배포 환경에서 백엔드 API 주소
     : "http://localhost:8070"; // ✅ 로컬 개발 환경
 
     const REDIRECT_URI = `${BASE_URL}/member/kakaoLogin`; // 기존 내용 유지하면서 새 URI 추가
