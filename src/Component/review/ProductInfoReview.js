@@ -298,7 +298,7 @@ const ProductInfoReview = ({ review }) => {
                   <div className="modal-container">
                     {/* 이미지 표시 */}
                     <img
-                      src={`http://localhost:8070/product_images/${modalData.reviewImage}`}
+                      src={getImageUrl(modalData.reviewImage, "review")}
                       alt="Modal Image"
                       className="modal-image"
                     />
