@@ -729,7 +729,7 @@ const handleSubmit = async (e) => {
                     <button type="submit" id="register-button">
                         회원가입
                     </button>
-                    <p className="sns-login-text">카카오 계정으로 간편하게 회원가입하세요</p>
+                    {/* <p className="sns-login-text">카카오 계정으로 간편하게 회원가입하세요</p>
                     <div className="login-page-sns">
                         <img
                             src={kakaoLoginImage}  // 기존 이미지 유지
@@ -737,7 +737,7 @@ const handleSubmit = async (e) => {
                             className="kakao-button"
                             onClick={handleKakaoLogin} // 변경된 로그인 요청 함수 적용
                         />
-                    </div>
+                    </div> */}
                 </form>
             </article>
         </main>
