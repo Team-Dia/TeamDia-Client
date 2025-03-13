@@ -99,16 +99,6 @@ const Sidebar = () => {
                 문의 내역
               </div>
             </li>
-            <li>
-              <div
-                className={`sidebar-link ${
-                  location.pathname === "/notice" ? "active" : ""
-                }`}
-                onClick={() => navigate("/notice")}
-              >
-                공지 사항
-              </div>
-            </li>
           </ul>
         </div>
 
