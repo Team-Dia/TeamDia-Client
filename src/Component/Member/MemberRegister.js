@@ -27,8 +27,18 @@ const MemberRegister = () => {
         zipNum: "",
         birthdate: "",
     });
+    // 이메일 인증 및 카카오 로그인
+    const BASE_URL = process.env.NODE_ENV === "production" 
+    ? "http://43.201.136.44:8070"  // ✅ AWS 배포 환경에서 백엔드 API 주소
+    : "http://localhost:8070"; // ✅ 로컬 개발 환경
 
-    const KAKAO_AUTH_URL = "https://kauth.kakao.com/oauth/authorize?client_id=6ee1731553a983102257108c54fe99bc&redirect_uri=http://43.201.136.44/login&response_type=code";
+    const REDIRECT_URI = `${BASE_URL}/member/kakaoLogin`; // 기존 내용 유지하면서 새 URI 추가
+
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=6ee1731553a983102257108c54fe99bc&redirect_uri=${encodeURIComponent(
+    REDIRECT_URI
+    )}&response_type=code`;
+
+    // const KAKAO_AUTH_URL = "https://kauth.kakao.com/oauth/authorize?client_id=6ee1731553a983102257108c54fe99bc&redirect_uri=http://43.201.136.44/login&response_type=code";
 
     const handleKakaoLogin = () => {
         window.location.href = KAKAO_AUTH_URL;
@@ -281,10 +291,8 @@ const MemberRegister = () => {
     
     
     // 이메일 인증 요청
+    
 
-    const BASE_URL = process.env.NODE_ENV === "production" 
-    ? "http://43.201.136.44:8070"  // ✅ AWS 배포 환경에서 백엔드 API 주소
-    : "http://localhost:8070"; // ✅ 로컬 개발 환경
    
 
     const requestEmailVerification = async () => {
